@@ -1,9 +1,11 @@
-"""Gera planta.svg a partir de planta.json."""
+"""Gera <nome>.svg a partir de <nome>.json (padrão: planta). Uso: python3 gerar_svg.py [planta|reforma]"""
 import json
 import pathlib
+import sys
 
 aqui = pathlib.Path(__file__).parent
-d = json.loads((aqui / "planta.json").read_text())
+nome = sys.argv[1] if len(sys.argv) > 1 else "planta"
+d = json.loads((aqui / f"{nome}.json").read_text())
 S, M = 50, 70  # px por metro, margem
 W, H = d["dimensoes_totais"]["largura"], d["dimensoes_totais"]["profundidade"]
 
@@ -26,11 +28,18 @@ def cota(x1, y1, x2, y2, texto, tx, ty, anchor="middle"):
 o = [
     f'<svg xmlns="http://www.w3.org/2000/svg" width="{W*S+2*M}" height="{H*S+2*M+30}" font-family="Helvetica,Arial,sans-serif">',
     '<rect width="100%" height="100%" fill="#fff"/>',
-    f'<text x="{M}" y="30" font-size="18" font-weight="bold">Planta baixa — {fmt(W)} m × {fmt(H)} m</text>',
+    f'<text x="{M}" y="30" font-size="18" font-weight="bold">{d.get("titulo", "Planta baixa")} — {fmt(W)} m × {fmt(H)} m</text>',
 ]
 for c in d["comodos"]:
     x, y, w, h = M + c["x"] * S, M + c["y"] * S, c["largura"] * S, c["profundidade"] * S
-    fill = "#eef3e6" if c.get("externo") else ("#fbf7ee" if c["medida"] == "estimada" else "#f4f4f4")
+    if c.get("externo"):
+        fill = "#eef3e6"
+    elif c.get("status") == "reformado":
+        fill = "#e6eff8"
+    elif c.get("medida") == "estimada":
+        fill = "#fbf7ee"
+    else:
+        fill = "#f4f4f4"
     dash = ' stroke-dasharray="6 4"' if c.get("externo") else ""
     o.append(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" fill="{fill}" stroke="#222" stroke-width="3"{dash}/>')
     cx, cy = x + w / 2, y + h / 2
@@ -43,6 +52,12 @@ for c in d["comodos"]:
     for i, ln in enumerate(linhas):
         o.append(f'<text x="{cx}" y="{cy+9+i*12}" font-size="{fs-1}" text-anchor="middle" fill="#555">{ln}</text>')
 
+# paredes removidas: cobre a linha e marca tracejado fino
+for i in d.get("integracoes", []):
+    x1, y1, x2, y2 = (M + i[k] * S for k in ("x1", "y1", "x2", "y2"))
+    o.append(f'<line x1="{x1}" y1="{y1+2}" x2="{x2}" y2="{y2-2}" stroke="#e6eff8" stroke-width="5"/>')
+    o.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#7a8aa0" stroke-width="1" stroke-dasharray="4 4"/>')
+
 for c in d["comodos"]:
     if c["y"] == 0:
         x1, x2 = M + c["x"] * S, M + (c["x"] + c["largura"]) * S
@@ -52,9 +67,20 @@ for y0, h in sorted({(c["y"], c["profundidade"]) for c in d["comodos"] if c["x"]
     o += cota(M - 15, y1, M - 15, y2, fmt(h), M - 22, (y1 + y2) / 2 + 4, "end")
 
 ly = M + H * S + 30
-o.append(f'<rect x="{M}" y="{ly-10}" width="12" height="12" fill="#fbf7ee" stroke="#222"/>')
-o.append(f'<text x="{M+18}" y="{ly}" font-size="11">medida estimada (sem cota no esboço)</text>')
-o.append(f'<rect x="{M+260}" y="{ly-10}" width="12" height="12" fill="#eef3e6" stroke="#222" stroke-dasharray="3 2"/>')
-o.append(f'<text x="{M+278}" y="{ly}" font-size="11">área externa / muro</text>')
+cs = d["comodos"]
+legenda = [
+    ("#fbf7ee", "", "medida estimada (sem cota no esboço)", any(c.get("medida") == "estimada" for c in cs)),
+    ("#e6eff8", "", "cômodo novo / reformado", any(c.get("status") == "reformado" for c in cs)),
+    ("#eef3e6", ' stroke-dasharray="3 2"', "área externa / muro", any(c.get("externo") for c in cs)),
+]
+lx = M
+for cor, dash, texto, usar in legenda:
+    if usar:
+        o.append(f'<rect x="{lx}" y="{ly-10}" width="12" height="12" fill="{cor}" stroke="#222"{dash}/>')
+        o.append(f'<text x="{lx+18}" y="{ly}" font-size="11">{texto}</text>')
+        lx += 260
+if d.get("integracoes"):
+    o.append(f'<line x1="{lx}" y1="{ly-4}" x2="{lx+12}" y2="{ly-4}" stroke="#7a8aa0" stroke-dasharray="4 4"/>')
+    o.append(f'<text x="{lx+18}" y="{ly}" font-size="11">ambiente integrado (sem parede)</text>')
 o.append("</svg>")
-(aqui / "planta.svg").write_text("\n".join(o) + "\n")
+(aqui / f"{nome}.svg").write_text("\n".join(o) + "\n")
