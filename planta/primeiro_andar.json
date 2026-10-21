@@ -1,28 +1,124 @@
 {
   "titulo": "Sobrado — 1º andar",
   "descricao": "Opção com primeiro andar: pavimento superior. Mesmo sistema de coordenadas de planta.json; o contorno tracejado é o térreo.",
-  "dimensoes_totais": { "largura": 15, "profundidade": 8 },
+  "dimensoes_totais": {
+    "largura": 15,
+    "profundidade": 8
+  },
   "contorno": true,
   "comodos": [
-    { "nome": "Varanda",          "x": 3,     "y": 0,   "largura": 3,    "profundidade": 8,   "status": "reformado", "externo": true },
-    { "nome": "Escada em U",      "x": 6,     "y": 0,   "largura": 2.5,  "profundidade": 3,   "status": "reformado" },
-    { "nome": "Quarto visitas 1", "x": 8.5,   "y": 0,   "largura": 3.25, "profundidade": 3,   "status": "reformado" },
-    { "nome": "Quarto visitas 2", "x": 11.75, "y": 0,   "largura": 3.25, "profundidade": 3,   "status": "reformado" },
-    { "nome": "Corredor",         "x": 6,     "y": 3,   "largura": 9,    "profundidade": 1.2, "status": "reformado" },
-    { "nome": "Suíte",            "x": 6,     "y": 4.2, "largura": 4,    "profundidade": 3.8, "status": "reformado" },
-    { "nome": "Closet",           "x": 10,    "y": 4.2, "largura": 1.5,  "profundidade": 3.8, "status": "reformado" },
-    { "nome": "Banho suíte",      "x": 11.5,  "y": 4.2, "largura": 1.5,  "profundidade": 3.8, "status": "reformado" },
-    { "nome": "Banheiro",         "x": 13,    "y": 4.2, "largura": 2,    "profundidade": 3.8, "status": "reformado" }
+    {
+      "nome": "Varanda",
+      "x": 3,
+      "y": 0,
+      "largura": 3,
+      "profundidade": 8,
+      "status": "reformado",
+      "externo": true
+    },
+    {
+      "nome": "Escada em U",
+      "x": 6,
+      "y": 0,
+      "largura": 2.5,
+      "profundidade": 3,
+      "status": "reformado"
+    },
+    {
+      "nome": "Quarto visitas 1",
+      "x": 8.5,
+      "y": 0,
+      "largura": 3.25,
+      "profundidade": 3,
+      "status": "reformado"
+    },
+    {
+      "nome": "Quarto visitas 2",
+      "x": 11.75,
+      "y": 0,
+      "largura": 3.25,
+      "profundidade": 3,
+      "status": "reformado"
+    },
+    {
+      "nome": "Corredor",
+      "x": 6,
+      "y": 3,
+      "largura": 9,
+      "profundidade": 1.2,
+      "status": "reformado"
+    },
+    {
+      "nome": "Suíte",
+      "x": 6,
+      "y": 4.2,
+      "largura": 4,
+      "profundidade": 3.8,
+      "status": "reformado"
+    },
+    {
+      "nome": "Closet",
+      "x": 10,
+      "y": 4.2,
+      "largura": 1.5,
+      "profundidade": 3.8,
+      "status": "reformado"
+    },
+    {
+      "nome": "Banho suíte",
+      "x": 11.5,
+      "y": 4.2,
+      "largura": 1.5,
+      "profundidade": 3.8,
+      "status": "reformado"
+    },
+    {
+      "nome": "Banheiro",
+      "x": 13,
+      "y": 4.2,
+      "largura": 2,
+      "profundidade": 3.8,
+      "status": "reformado"
+    }
   ],
   "integracoes": [
-    { "x1": 6, "y1": 4.2, "x2": 6, "y2": 8, "nota": "Suíte abre para a varanda (porta de vidro)" }
+    {
+      "x1": 6,
+      "y1": 4.2,
+      "x2": 6,
+      "y2": 8,
+      "nota": "Suíte abre para a varanda (porta de vidro)"
+    }
   ],
   "muros": [
-    { "x1": -1, "y1": 0, "x2": -1, "y2": 8, "nome": "Muro / portão" }
+    {
+      "x1": -1,
+      "y1": 0,
+      "x2": -1,
+      "y2": 8,
+      "nome": "Muro / portão"
+    }
   ],
-  "pilares": [[3, 0], [3, 4], [3, 8], [15, 0]],
+  "pilares": [
+    [
+      3,
+      0
+    ],
+    [
+      3,
+      4
+    ],
+    [
+      3,
+      8
+    ],
+    [
+      15,
+      0
+    ]
+  ],
   "observacoes": [
-    "Pavimento em retângulo único de 9 × 8 m sobre a parte coberta da casa, inclusive por cima do corredor externo (precisa de pilar junto ao muro dos fundos).",
+    "Pavimento em retângulo único de 9 × 8 m sobre a parte coberta da casa, inclusive por cima da área de serviço (precisa de pilar junto ao muro dos fundos; a área de serviço é triangular — forma final com o engenheiro).",
     "Varanda de lateral a lateral (3 × 8 m) sobre a área gourmet e a garagem, terminando 4 m antes do muro do portão; borda externa apoiada na linha de pilares x = 3 m.",
     "Corredor reto de 1,2 m ligando escada, quartos de visitas, suíte e banheiro.",
     "Suíte: quarto 4 × 3,8 m aberto para a varanda, closet de passagem e banheiro da suíte.",

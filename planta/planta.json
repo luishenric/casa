@@ -46,7 +46,7 @@
       "medida": "lida"
     },
     {
-      "nome": "Corredor",
+      "nome": "Área de serviço",
       "x": 13,
       "y": 0,
       "largura": 2,
@@ -84,6 +84,16 @@
     "Garagem com o mesmo tamanho do Quarto 1 (6 × 4 m), conforme confirmado; a linha de baixo inteira passa a ter 4 m de fundo.",
     "Larguras de Sala e Sala de Jantar não têm cota no papel; foram estimadas pela proporção do desenho.",
     "Anotações '4m 1.5 2 2' e '6 x 8' no topo do papel não ficaram claras e não foram aplicadas.",
-    "Sala e Sala de Jantar parecem integradas (a parede entre elas não chega até a circulação)."
+    "Sala e Sala de Jantar parecem integradas (a parede entre elas não chega até a circulação).",
+    "Área de serviço externa junto ao muro dos fundos; na realidade tem formato triangular (desenhada como retângulo de 2 × 4 m), forma final a definir com o engenheiro."
+  ],
+  "muros": [
+    {
+      "x1": -1,
+      "y1": 0,
+      "x2": -1,
+      "y2": 8,
+      "nome": "Muro / portão"
+    }
   ]
 }

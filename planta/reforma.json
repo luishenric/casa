@@ -1,24 +1,124 @@
 {
   "titulo": "Reforma (térreo)",
   "descricao": "Proposta de reforma sem primeiro andar. Mesmo sistema de coordenadas de planta.json.",
-  "dimensoes_totais": { "largura": 15, "profundidade": 8 },
+  "dimensoes_totais": {
+    "largura": 15,
+    "profundidade": 8
+  },
   "comodos": [
-    { "nome": "Quarto",          "x": 0,    "y": 0,   "largura": 4.5, "profundidade": 4,   "status": "reformado" },
-    { "nome": "Banheiro suíte",  "x": 4.5,  "y": 0,   "largura": 3,   "profundidade": 1.5, "status": "reformado" },
-    { "nome": "Closet",          "x": 4.5,  "y": 1.5, "largura": 1.5, "profundidade": 2.5, "status": "reformado" },
-    { "nome": "Circulação",      "x": 6,    "y": 1.5, "largura": 1.5, "profundidade": 2.5, "status": "mantido" },
-    { "nome": "Escritório",      "x": 7.5,  "y": 0,   "largura": 2.5, "profundidade": 4,   "status": "reformado" },
-    { "nome": "Banheiro",        "x": 10,   "y": 0,   "largura": 1.5, "profundidade": 4,   "status": "reformado" },
-    { "nome": "Despensa",        "x": 11.5, "y": 0,   "largura": 1.5, "profundidade": 4,   "status": "reformado" },
-    { "nome": "Corredor",        "x": 13,   "y": 0,   "largura": 2,   "profundidade": 4,   "status": "mantido", "externo": true },
-    { "nome": "Garagem",         "x": 0,    "y": 4,   "largura": 6,   "profundidade": 4,   "status": "mantido" },
-    { "nome": "Sala de TV",      "x": 6,    "y": 4,   "largura": 3.5, "profundidade": 4,   "status": "reformado" },
-    { "nome": "Jantar",          "x": 9.5,  "y": 4,   "largura": 2.5, "profundidade": 4,   "status": "reformado" },
-    { "nome": "Cozinha",         "x": 12,   "y": 4,   "largura": 3,   "profundidade": 4,   "status": "reformado" }
+    {
+      "nome": "Quarto",
+      "x": 0,
+      "y": 0,
+      "largura": 4.5,
+      "profundidade": 4,
+      "status": "reformado"
+    },
+    {
+      "nome": "Banheiro suíte",
+      "x": 4.5,
+      "y": 0,
+      "largura": 3,
+      "profundidade": 1.5,
+      "status": "reformado"
+    },
+    {
+      "nome": "Closet",
+      "x": 4.5,
+      "y": 1.5,
+      "largura": 1.5,
+      "profundidade": 2.5,
+      "status": "reformado"
+    },
+    {
+      "nome": "Circulação",
+      "x": 6,
+      "y": 1.5,
+      "largura": 1.5,
+      "profundidade": 2.5,
+      "status": "mantido"
+    },
+    {
+      "nome": "Escritório",
+      "x": 7.5,
+      "y": 0,
+      "largura": 2.5,
+      "profundidade": 4,
+      "status": "reformado"
+    },
+    {
+      "nome": "Banheiro",
+      "x": 10,
+      "y": 0,
+      "largura": 1.5,
+      "profundidade": 4,
+      "status": "reformado"
+    },
+    {
+      "nome": "Despensa",
+      "x": 11.5,
+      "y": 0,
+      "largura": 1.5,
+      "profundidade": 4,
+      "status": "reformado"
+    },
+    {
+      "nome": "Área de serviço",
+      "x": 13,
+      "y": 0,
+      "largura": 2,
+      "profundidade": 4,
+      "status": "mantido",
+      "externo": true
+    },
+    {
+      "nome": "Garagem",
+      "x": 0,
+      "y": 4,
+      "largura": 6,
+      "profundidade": 4,
+      "status": "mantido"
+    },
+    {
+      "nome": "Sala de TV",
+      "x": 6,
+      "y": 4,
+      "largura": 3.5,
+      "profundidade": 4,
+      "status": "reformado"
+    },
+    {
+      "nome": "Jantar",
+      "x": 9.5,
+      "y": 4,
+      "largura": 2.5,
+      "profundidade": 4,
+      "status": "reformado"
+    },
+    {
+      "nome": "Cozinha",
+      "x": 12,
+      "y": 4,
+      "largura": 3,
+      "profundidade": 4,
+      "status": "reformado"
+    }
   ],
   "integracoes": [
-    { "x1": 9.5, "y1": 4, "x2": 9.5, "y2": 8, "nota": "Sala de TV aberta para o Jantar" },
-    { "x1": 12,  "y1": 4, "x2": 12,  "y2": 8, "nota": "Cozinha aberta para o Jantar" }
+    {
+      "x1": 9.5,
+      "y1": 4,
+      "x2": 9.5,
+      "y2": 8,
+      "nota": "Sala de TV aberta para o Jantar"
+    },
+    {
+      "x1": 12,
+      "y1": 4,
+      "x2": 12,
+      "y2": 8,
+      "nota": "Cozinha aberta para o Jantar"
+    }
   ],
   "observacoes": [
     "Suíte: o Quarto 1 (6 × 4 m) vira Quarto (4,5 × 4 m) + Closet; o banheiro existente cresce para dentro do quarto e vira o banheiro da suíte (3 × 1,5 m).",
@@ -26,6 +126,16 @@
     "Antiga Cozinha (3 × 4 m) dividida em Banheiro social e Despensa, ambos abrindo para a área de Cozinha/Jantar.",
     "Antiga Sala de Jantar vira Cozinha + Jantar, integrada com a Sala de TV (sem paredes entre elas).",
     "A antiga Cozinha já tem ponto de água e esgoto, o que facilita o novo banheiro; a nova cozinha precisa de ponto novo de água, esgoto e gás.",
-    "Paredes que forem removidas (sala/jantar, quarto) precisam ser liberadas pelo engenheiro, caso sejam estruturais."
+    "Paredes que forem removidas (sala/jantar, quarto) precisam ser liberadas pelo engenheiro, caso sejam estruturais.",
+    "Área de serviço externa junto ao muro dos fundos; na realidade tem formato triangular (desenhada como retângulo de 2 × 4 m), forma final a definir com o engenheiro."
+  ],
+  "muros": [
+    {
+      "x1": -1,
+      "y1": 0,
+      "x2": -1,
+      "y2": 8,
+      "nome": "Muro / portão"
+    }
   ]
 }

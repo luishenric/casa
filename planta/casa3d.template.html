@@ -1,0 +1,376 @@
+<title>Casa 3D</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Figtree:wght@400;500;600&display=swap">
+<style>
+/* Layout: título e controles em cima; cena 3D ocupa o resto, com a lista de cômodos ao lado (desktop) ou embaixo (celular) */
+:root {
+  --bg: #eceeea;
+  --surface: #f9faf8;
+  --fg: #1c2220;
+  --muted: #5b6561;
+  --line: #d2d7d2;
+  --accent: #1f6a64;
+  --accent-fg: #ffffff;
+  --scene: #e2e6e1;
+  --font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Figtree", ui-sans-serif, system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #131816; --surface: #1b211f; --fg: #e6ebe8; --muted: #98a39e; --line: #2d3532;
+    --accent: #5fb2a9; --accent-fg: #0c1412; --scene: #1a201e; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #131816; --surface: #1b211f; --fg: #e6ebe8; --muted: #98a39e; --line: #2d3532;
+  --accent: #5fb2a9; --accent-fg: #0c1412; --scene: #1a201e; color-scheme: dark;
+}
+html, body { height: 100%; }
+body {
+  background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 14px;
+  box-sizing: border-box; display: flex; flex-direction: column; gap: 12px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 14px;
+}
+header > *, .controles > * { min-width: 0; }
+header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 14px; }
+h1 { font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; margin: 0; text-wrap: balance; }
+.sub { color: var(--muted); }
+.controles { display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: center; }
+.grupo { display: flex; align-items: center; gap: 8px; }
+.grupo > span { font-size: 11px; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--surface); }
+.seg button { font: inherit; border: 0; background: transparent; color: var(--fg); padding: 6px 12px; cursor: pointer; }
+.seg button + button { border-left: 1px solid var(--line); }
+.seg button[aria-pressed="true"] { background: var(--accent); color: var(--accent-fg); }
+.seg button:disabled { color: var(--muted); cursor: default; opacity: .5; }
+.seg button:focus-visible, .chk input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.chk { display: inline-flex; gap: 6px; align-items: center; color: var(--fg); cursor: pointer; }
+.chk input { accent-color: var(--accent); margin: 0; }
+main { flex: 1; min-height: 0; display: grid; grid-template-columns: minmax(0, 1fr) 250px; gap: 12px; }
+#cena { position: relative; min-height: 0; border-radius: 10px; overflow: hidden; background: var(--scene); border: 1px solid var(--line); }
+#cena canvas { display: block; width: 100%; height: 100%; touch-action: none; }
+.dica { position: absolute; left: 10px; bottom: 8px; font-size: 12px; color: var(--muted); pointer-events: none; }
+aside { min-width: 0; overflow: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; }
+aside h2 { font-size: 11px; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); margin: 10px 0 6px; font-weight: 600; }
+aside h2:first-child { margin-top: 0; }
+ul { list-style: none; margin: 0; padding: 0; }
+li { display: flex; justify-content: space-between; gap: 8px; padding: 5px 0; border-bottom: 1px solid var(--line); font-variant-numeric: tabular-nums; }
+li .nome { display: flex; align-items: center; gap: 7px; min-width: 0; }
+li .cor { flex: none; width: 10px; height: 10px; border-radius: 2px; border: 1px solid var(--line); }
+li.total { font-weight: 600; border-bottom: 0; }
+.nota { color: var(--muted); font-size: 12px; line-height: 1.45; margin: 12px 0 0; }
+@media (max-width: 760px) {
+  html, body { height: auto; min-height: 100%; }
+  main { grid-template-columns: minmax(0, 1fr); grid-template-rows: 62vh auto; }
+}
+</style>
+
+<header>
+  <h1>Casa 3D</h1>
+  <span class="sub">Lote 15 × 8 m · gire, aproxime e compare as opções</span>
+</header>
+
+<div class="controles">
+  <div class="grupo"><span>Opção</span>
+    <div class="seg" id="cenarios">
+      <button id="c-atual" data-c="atual">Hoje</button>
+      <button id="c-reforma" data-c="reforma">Reforma</button>
+      <button id="c-sobrado" data-c="sobrado">Sobrado</button>
+    </div>
+  </div>
+  <div class="grupo"><span>Andar</span>
+    <div class="seg" id="andares">
+      <button id="a-todos" data-a="todos">Todos</button>
+      <button id="a-0" data-a="0">Térreo</button>
+      <button id="a-1" data-a="1">1º andar</button>
+    </div>
+  </div>
+  <label class="chk"><input type="checkbox" id="separar"> Separar andares</label>
+  <label class="chk"><input type="checkbox" id="baixas"> Paredes baixas</label>
+  <label class="chk"><input type="checkbox" id="rotulos" checked> Nomes</label>
+</div>
+
+<main>
+  <div id="cena"><span class="dica">Arraste para girar · pinça ou roda para zoom</span></div>
+  <aside id="lista"></aside>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+const DADOS = /*DADOS*/null;
+
+const PE_DIREITO = 2.8, ESPESSURA = 0.15, LAJE = 0.12, PAREDE_BAIXA = 1.2;
+const CENARIOS = {
+  atual:   [DADOS.planta],
+  reforma: [DADOS.reforma],
+  sobrado: [DADOS.terreo_sobrado, DADOS.primeiro_andar],
+};
+const NOME_ANDAR = ["Térreo", "1º andar"];
+const COR = {
+  externo: 0xc5d9b2, reformado: 0xd6e5f2, existente: 0xe8e4dc,
+  parede: 0xf6f4ef, laje: 0xcfcbc3, pilar: 0x3b403e, muro: 0xb5b1a8, portao: 0x4d5355,
+  terreno: 0x9fbb86, guarda: 0x8fc0d6,
+};
+const hex = n => "#" + n.toString(16).padStart(6, "0");
+
+const estado = { cenario: "sobrado", andar: "todos", separar: false, baixas: false, rotulos: true };
+
+// ---------- cena ----------
+const cena = document.getElementById("cena");
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+cena.prepend(renderer.domElement);
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 200);
+const DIRECAO_CAMERA = new THREE.Vector3(-0.55, 0.62, 0.56).normalize();
+const controls = new THREE.OrbitControls(camera, renderer.domElement);
+controls.target.set(7, 1, 4);
+controls.enableDamping = true;
+controls.maxPolarAngle = Math.PI / 2 - 0.05;
+controls.minDistance = 4;
+controls.maxDistance = 60;
+controls.update();
+
+scene.add(new THREE.HemisphereLight(0xffffff, 0x7d8279, 0.55));
+const sol = new THREE.DirectionalLight(0xffffff, 0.55);
+sol.position.set(-6, 18, 12);
+sol.target.position.set(7, 0, 4);
+sol.castShadow = true;
+sol.shadow.mapSize.set(2048, 2048);
+Object.assign(sol.shadow.camera, { left: -14, right: 14, top: 14, bottom: -14, near: 1, far: 50 });
+scene.add(sol, sol.target);
+
+const terreno = new THREE.Mesh(new THREE.PlaneGeometry(20, 12), new THREE.MeshLambertMaterial({ color: COR.terreno }));
+terreno.rotation.x = -Math.PI / 2;
+terreno.position.set(7, -0.02, 4);
+terreno.receiveShadow = true;
+scene.add(terreno);
+
+let grupo = new THREE.Group();
+scene.add(grupo);
+
+function corFundo() {
+  scene.background = new THREE.Color(getComputedStyle(document.documentElement).getPropertyValue("--scene").trim() || "#e2e6e1");
+}
+corFundo();
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", corFundo);
+new MutationObserver(corFundo).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+
+// ---------- geometria ----------
+const materiais = {};
+function mat(cor, opts = {}) {
+  const k = cor + JSON.stringify(opts);
+  return materiais[k] || (materiais[k] = new THREE.MeshLambertMaterial({ color: cor, ...opts }));
+}
+// caixa em coordenadas da planta: x → x, y da planta → z, altura → y
+function caixa(x0, x1, z0, z1, y0, y1, cor, opts) {
+  const m = new THREE.Mesh(new THREE.BoxGeometry(x1 - x0, y1 - y0, z1 - z0), mat(cor, opts));
+  m.position.set((x0 + x1) / 2, (y0 + y1) / 2, (z0 + z1) / 2);
+  m.castShadow = !opts; m.receiveShadow = true;
+  grupo.add(m);
+  return m;
+}
+
+function corPiso(c) {
+  if (c.externo) return COR.externo;
+  return c.status === "reformado" ? COR.reformado : COR.existente;
+}
+
+function juntar(iv) {
+  iv = iv.map(p => [Math.min(...p), Math.max(...p)]).sort((a, b) => a[0] - b[0]);
+  const out = [];
+  for (const [a, b] of iv) {
+    const u = out[out.length - 1];
+    if (u && a <= u[1] + 1e-6) u[1] = Math.max(u[1], b); else out.push([a, b]);
+  }
+  return out;
+}
+function tirar(iv, [c0, c1]) {
+  const out = [];
+  for (const [a, b] of iv) {
+    if (b <= c0 || a >= c1) { out.push([a, b]); continue; }
+    if (a < c0) out.push([a, c0]);
+    if (b > c1) out.push([c1, b]);
+  }
+  return out;
+}
+
+// paredes = bordas dos cômodos internos, sem duplicar as compartilhadas e sem as integrações
+function paredes(nivel) {
+  const linhas = new Map(), cortes = new Map();
+  const add = (mapa, k, a, b) => (mapa.get(k) || mapa.set(k, []).get(k)).push([a, b]);
+  for (const c of nivel.comodos) {
+    if (c.externo) continue;
+    const x1 = c.x + c.largura, y1 = c.y + c.profundidade;
+    add(linhas, "h|" + c.y, c.x, x1); add(linhas, "h|" + y1, c.x, x1);
+    add(linhas, "v|" + c.x, c.y, y1); add(linhas, "v|" + x1, c.y, y1);
+  }
+  for (const i of nivel.integracoes || []) {
+    if (i.x1 === i.x2) add(cortes, "v|" + i.x1, Math.min(i.y1, i.y2), Math.max(i.y1, i.y2));
+    else add(cortes, "h|" + i.y1, Math.min(i.x1, i.x2), Math.max(i.x1, i.x2));
+  }
+  const out = [];
+  for (const [k, iv] of linhas) {
+    let m = juntar(iv);
+    for (const c of cortes.get(k) || []) m = tirar(m, c);
+    const [o, v] = k.split("|");
+    for (const [a, b] of m) if (b - a > 1e-6) out.push({ o, v: +v, a, b });
+  }
+  return out;
+}
+
+function parede(s, base, altura, cor, opts, esp = ESPESSURA) {
+  const h = esp / 2;
+  if (s.o === "h") caixa(s.a - h, s.b + h, s.v - h, s.v + h, base, base + altura, cor, opts);
+  else caixa(s.v - h, s.v + h, s.a - h, s.b + h, base, base + altura, cor, opts);
+}
+
+function rotulo(texto, sub, x, y, z) {
+  const esc = 2, cv = document.createElement("canvas"), g = cv.getContext("2d");
+  const f1 = `600 ${26 * esc}px Figtree, system-ui, sans-serif`, f2 = `500 ${20 * esc}px Figtree, system-ui, sans-serif`;
+  g.font = f1; const w1 = g.measureText(texto).width;
+  g.font = f2; const w2 = g.measureText(sub).width;
+  cv.width = Math.ceil(Math.max(w1, w2) + 28 * esc); cv.height = 64 * esc;
+  g.fillStyle = "rgba(255,255,255,0.88)";
+  g.beginPath(); g.roundRect ? g.roundRect(0, 0, cv.width, cv.height, 10 * esc) : g.rect(0, 0, cv.width, cv.height); g.fill();
+  g.textAlign = "center"; g.fillStyle = "#1c2220"; g.font = f1; g.fillText(texto, cv.width / 2, 28 * esc);
+  g.fillStyle = "#4f5955"; g.font = f2; g.fillText(sub, cv.width / 2, 53 * esc);
+  const tex = new THREE.CanvasTexture(cv);
+  tex.anisotropy = 4;
+  const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, depthTest: false }));
+  const alt = 0.85;
+  sp.scale.set(alt * cv.width / cv.height, alt, 1);
+  sp.position.set(x, y, z);
+  sp.renderOrder = 10;
+  grupo.add(sp);
+}
+
+const fmt = v => String(+v.toFixed(2)).replace(".", ",");
+
+function construir() {
+  scene.remove(grupo);
+  grupo.traverse(o => { if (o.geometry) o.geometry.dispose(); if (o.material && o.material.map) { o.material.map.dispose(); o.material.dispose(); } });
+  grupo = new THREE.Group();
+  scene.add(grupo);
+
+  const niveis = CENARIOS[estado.cenario];
+  const visiveis = niveis.map((_, i) => estado.andar === "todos" || +estado.andar === i);
+  const ultimoVisivel = visiveis.lastIndexOf(true);
+  const altura = estado.baixas ? PAREDE_BAIXA : PE_DIREITO;
+
+  niveis.forEach((nivel, i) => {
+    if (!visiveis[i]) return;
+    const base = i * (PE_DIREITO + LAJE) + (estado.separar ? i * 3 : 0);
+
+    for (const c of nivel.comodos) {
+      const x1 = c.x + c.largura, z1 = c.y + c.profundidade;
+      if (i > 0) caixa(c.x, x1, c.y, z1, base - LAJE, base, COR.laje);
+      caixa(c.x, x1, c.y, z1, base, base + 0.02, corPiso(c));
+      if (i > 0 && c.externo) {
+        for (const s of [{ o: "h", v: c.y, a: c.x, b: x1 }, { o: "h", v: z1, a: c.x, b: x1 }, { o: "v", v: c.x, a: c.y, b: z1 }, { o: "v", v: x1, a: c.y, b: z1 }])
+          parede(s, base, 1.1, COR.guarda, { transparent: true, opacity: 0.45 }, 0.05);
+      }
+    }
+    for (const s of paredes(nivel)) parede(s, base, altura, COR.parede);
+
+    if (i === 0) {
+      for (const m of nivel.muros || []) {
+        const portao = [4.5, 7.5];  // trecho do portão em frente à garagem (ilustrativo)
+        const s = { o: m.x1 === m.x2 ? "v" : "h", v: m.x1 === m.x2 ? m.x1 : m.y1, a: Math.min(m.y1, m.y2), b: Math.max(m.y1, m.y2) };
+        for (const [a, b] of tirar([[s.a, s.b]], portao)) parede({ ...s, a, b }, 0, 1.8, COR.muro);
+        parede({ ...s, a: portao[0], b: portao[1] }, 0, 1.8, COR.portao, undefined, 0.08);
+      }
+      for (const [px, pz] of nivel.pilares || []) caixa(px - 0.13, px + 0.13, pz - 0.13, pz + 0.13, 0, PE_DIREITO, COR.pilar);
+    }
+
+    // nomes: só do andar de cima quando os andares estão empilhados (os de baixo ficariam escondidos)
+    if (estado.rotulos && (i === ultimoVisivel || estado.separar)) {
+      for (const c of nivel.comodos) {
+        const area = c.largura * c.profundidade;
+        rotulo(c.nome, `${fmt(c.largura)} × ${fmt(c.profundidade)} m · ${fmt(area)} m²`,
+               c.x + c.largura / 2, base + altura + 0.45, c.y + c.profundidade / 2);
+      }
+    }
+  });
+  lista(niveis, visiveis);
+}
+
+// ---------- lista de cômodos ----------
+function lista(niveis, visiveis) {
+  const el = document.getElementById("lista");
+  let html = "";
+  niveis.forEach((nivel, i) => {
+    if (!visiveis[i]) return;
+    const titulo = niveis.length > 1 ? NOME_ANDAR[i] : (nivel.titulo || "Planta atual");
+    let total = 0;
+    html += `<h2>${titulo}</h2><ul>`;
+    for (const c of nivel.comodos) {
+      const a = c.largura * c.profundidade;
+      if (!c.externo) total += a;
+      html += `<li><span class="nome"><span class="cor" style="background:${hex(corPiso(c))}"></span>${c.nome}</span><span>${fmt(a)} m²</span></li>`;
+    }
+    html += `<li class="total"><span>Área interna</span><span>${fmt(total)} m²</span></li></ul>`;
+  });
+  html += `<p class="nota">Paredes desenhadas sem portas e janelas. Cômodos azuis são novos ou reformados; verdes são áreas externas. A área de serviço aparece retangular, mas é triangular.</p>`;
+  el.innerHTML = html;
+}
+
+// ---------- controles ----------
+function sincronizar() {
+  for (const b of document.querySelectorAll("#cenarios button")) b.setAttribute("aria-pressed", b.dataset.c === estado.cenario);
+  const temAndar = CENARIOS[estado.cenario].length > 1;
+  if (!temAndar) estado.andar = "todos";
+  for (const b of document.querySelectorAll("#andares button")) {
+    b.disabled = !temAndar && b.dataset.a !== "todos";
+    b.setAttribute("aria-pressed", b.dataset.a === estado.andar);
+  }
+  document.getElementById("separar").disabled = !temAndar;
+  construir();
+}
+document.getElementById("cenarios").addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  estado.cenario = b.dataset.c; sincronizar();
+});
+document.getElementById("andares").addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b || b.disabled) return;
+  estado.andar = b.dataset.a; sincronizar();
+});
+for (const id of ["separar", "baixas", "rotulos"]) {
+  const el = document.getElementById(id);
+  el.addEventListener("change", () => { estado[id] = el.checked; construir(); });
+}
+
+let enquadrado = false;
+function redimensionar() {
+  const { clientWidth: w, clientHeight: h } = cena;
+  if (!w || !h) return;
+  renderer.setSize(w, h, false);
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+  if (!enquadrado) {  // enquadra a casa uma vez; depois a câmera é do usuário
+    const dist = 22 * Math.max(1, 1.25 / camera.aspect);
+    camera.position.copy(controls.target).addScaledVector(DIRECAO_CAMERA, dist);
+    controls.update();
+    enquadrado = true;
+  }
+}
+new ResizeObserver(redimensionar).observe(cena);
+redimensionar();
+
+(function animar() {
+  requestAnimationFrame(animar);
+  controls.update();
+  renderer.render(scene, camera);
+})();
+
+sincronizar();
+(document.fonts ? document.fonts.ready : Promise.resolve()).then(construir);
+</script>
