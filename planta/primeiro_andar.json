@@ -1,27 +1,32 @@
 {
   "titulo": "Sobrado — 1º andar",
-  "descricao": "Opção com primeiro andar: pavimento superior. Mesmo sistema de coordenadas de planta.json; o contorno tracejado é o terreno/térreo.",
+  "descricao": "Opção com primeiro andar: pavimento superior. Mesmo sistema de coordenadas de planta.json; o contorno tracejado é o térreo.",
   "dimensoes_totais": { "largura": 15, "profundidade": 8 },
   "contorno": true,
   "comodos": [
-    { "nome": "Escada",           "x": 6,    "y": 0,   "largura": 1.5, "profundidade": 4,   "status": "reformado" },
-    { "nome": "Quarto visitas 1", "x": 7.5,  "y": 0,   "largura": 3,   "profundidade": 2.8, "status": "reformado" },
-    { "nome": "Banheiro",         "x": 10.5, "y": 0,   "largura": 2.5, "profundidade": 2.8, "status": "reformado" },
-    { "nome": "Corredor",         "x": 7.5,  "y": 2.8, "largura": 5.5, "profundidade": 1.2, "status": "reformado" },
-    { "nome": "Suíte",            "x": 6,    "y": 4,   "largura": 4,   "profundidade": 4,   "status": "reformado" },
-    { "nome": "Banho suíte",      "x": 10,   "y": 4,   "largura": 2,   "profundidade": 2,   "status": "reformado" },
-    { "nome": "Closet",           "x": 10,   "y": 6,   "largura": 2,   "profundidade": 2,   "status": "reformado" },
-    { "nome": "Quarto visitas 2", "x": 12,   "y": 4,   "largura": 3,   "profundidade": 4,   "status": "reformado" },
-    { "nome": "Varanda",          "x": 3,    "y": 2,   "largura": 3,   "profundidade": 5,   "status": "reformado", "externo": true }
+    { "nome": "Varanda",          "x": 3,     "y": 0,   "largura": 3,    "profundidade": 8,   "status": "reformado", "externo": true },
+    { "nome": "Escada em U",      "x": 6,     "y": 0,   "largura": 2.5,  "profundidade": 3,   "status": "reformado" },
+    { "nome": "Quarto visitas 1", "x": 8.5,   "y": 0,   "largura": 3.25, "profundidade": 3,   "status": "reformado" },
+    { "nome": "Quarto visitas 2", "x": 11.75, "y": 0,   "largura": 3.25, "profundidade": 3,   "status": "reformado" },
+    { "nome": "Corredor",         "x": 6,     "y": 3,   "largura": 9,    "profundidade": 1.2, "status": "reformado" },
+    { "nome": "Suíte",            "x": 6,     "y": 4.2, "largura": 4,    "profundidade": 3.8, "status": "reformado" },
+    { "nome": "Closet",           "x": 10,    "y": 4.2, "largura": 1.5,  "profundidade": 3.8, "status": "reformado" },
+    { "nome": "Banho suíte",      "x": 11.5,  "y": 4.2, "largura": 1.5,  "profundidade": 3.8, "status": "reformado" },
+    { "nome": "Banheiro",         "x": 13,    "y": 4.2, "largura": 2,    "profundidade": 3.8, "status": "reformado" }
   ],
   "integracoes": [
-    { "x1": 6, "y1": 4, "x2": 6, "y2": 7, "nota": "Suíte abre para a varanda (porta de vidro)" }
+    { "x1": 6, "y1": 4.2, "x2": 6, "y2": 8, "nota": "Suíte abre para a varanda (porta de vidro)" }
   ],
+  "muros": [
+    { "x1": -1, "y1": 0, "x2": -1, "y2": 8, "nome": "Muro / portão" }
+  ],
+  "pilares": [[3, 0], [3, 4], [3, 8], [15, 0]],
   "observacoes": [
-    "Pavimento superior só sobre a parte coberta da casa (x 6–15); o corredor externo junto ao muro não recebe andar.",
-    "Banheiro social em cima do banheiro/despensa do térreo, aproveitando a prumada de água e esgoto.",
-    "Quarto de visitas 2 é opcional: sem ele, a suíte pode crescer ou vira um segundo escritório/sala íntima.",
-    "Varanda suspensa (3 × 5 m) sobre área gourmet e garagem, recuada 1 m do muro do portão. Tamanho e recuo estimados — depende de onde fica o portão e da estrutura (balanço ou pilares no quintal), a definir com o engenheiro.",
-    "Quarto de visitas 1 tem 3 × 2,8 m (8,4 m²); conferir área mínima exigida pelo código de obras da cidade."
+    "Pavimento em retângulo único de 9 × 8 m sobre a parte coberta da casa, inclusive por cima do corredor externo (precisa de pilar junto ao muro dos fundos).",
+    "Varanda de lateral a lateral (3 × 8 m) sobre a área gourmet e a garagem, terminando 4 m antes do muro do portão; borda externa apoiada na linha de pilares x = 3 m.",
+    "Corredor reto de 1,2 m ligando escada, quartos de visitas, suíte e banheiro.",
+    "Suíte: quarto 4 × 3,8 m aberto para a varanda, closet de passagem e banheiro da suíte.",
+    "Banho da suíte e banheiro social lado a lado, sobre a cozinha do térreo, dividindo a mesma prumada de água e esgoto.",
+    "Quartos de visitas com 3,25 × 3 m (9,75 m²) cada."
   ]
 }

@@ -1,14 +1,14 @@
 {
   "titulo": "Sobrado — térreo",
-  "descricao": "Opção com primeiro andar: térreo. Mesmo sistema de coordenadas de planta.json.",
+  "descricao": "Opção com primeiro andar: térreo. Mesmo sistema de coordenadas de planta.json; a frente (portão) fica à esquerda.",
   "dimensoes_totais": { "largura": 15, "profundidade": 8 },
   "comodos": [
     { "nome": "Área gourmet",    "x": 0,    "y": 0,   "largura": 6,   "profundidade": 4,   "status": "reformado", "externo": true },
     { "nome": "Garagem aberta",  "x": 0,    "y": 4,   "largura": 6,   "profundidade": 4,   "status": "reformado", "externo": true },
-    { "nome": "Escada",          "x": 6,    "y": 0,   "largura": 1.5, "profundidade": 4,   "status": "reformado" },
-    { "nome": "Escritório",      "x": 7.5,  "y": 0,   "largura": 2.5, "profundidade": 4,   "status": "reformado" },
-    { "nome": "Banheiro",        "x": 10,   "y": 0,   "largura": 1.5, "profundidade": 4,   "status": "reformado" },
-    { "nome": "Despensa",        "x": 11.5, "y": 0,   "largura": 1.5, "profundidade": 4,   "status": "reformado" },
+    { "nome": "Escada em U",     "x": 6,    "y": 0,   "largura": 2.5, "profundidade": 3,   "status": "reformado" },
+    { "nome": "Hall",            "x": 6,    "y": 3,   "largura": 2.5, "profundidade": 1,   "status": "reformado" },
+    { "nome": "Escritório",      "x": 8.5,  "y": 0,   "largura": 2.5, "profundidade": 4,   "status": "reformado" },
+    { "nome": "Banheiro",        "x": 11,   "y": 0,   "largura": 2,   "profundidade": 4,   "status": "reformado" },
     { "nome": "Corredor",        "x": 13,   "y": 0,   "largura": 2,   "profundidade": 4,   "status": "mantido", "externo": true },
     { "nome": "Sala de TV",      "x": 6,    "y": 4,   "largura": 3.5, "profundidade": 4,   "status": "mantido" },
     { "nome": "Jantar",          "x": 9.5,  "y": 4,   "largura": 2.5, "profundidade": 4,   "status": "reformado" },
@@ -16,13 +16,18 @@
   ],
   "integracoes": [
     { "x1": 0,   "y1": 4, "x2": 6,   "y2": 4, "nota": "Quintal: área gourmet e garagem abertas entre si" },
+    { "x1": 6,   "y1": 4, "x2": 8.5, "y2": 4, "nota": "Hall da escada aberto para a Sala de TV" },
     { "x1": 9.5, "y1": 4, "x2": 9.5, "y2": 8, "nota": "Sala de TV aberta para o Jantar" },
     { "x1": 12,  "y1": 4, "x2": 12,  "y2": 8, "nota": "Cozinha aberta para o Jantar" }
   ],
+  "muros": [
+    { "x1": -1, "y1": 0, "x2": -1, "y2": 8, "nome": "Muro / portão" }
+  ],
+  "pilares": [[3, 0], [3, 4], [3, 8], [15, 0]],
   "observacoes": [
-    "Quarto 1 e Garagem são demolidos e viram quintal: área gourmet (6 × 4 m) e garagem aberta (6 × 4 m).",
-    "Escada no lugar do banheiro + circulação (1,5 × 4 m). Uma escada reta para ~2,8 m de pé-direito precisa de ~4,5 m de comprimento; em 1,5 × 4 m fica justa — avaliar escada em L, com degraus em leque ou caracol.",
-    "Escritório passa a ter acesso pela Sala de TV, já que a circulação vira escada.",
-    "Restante igual à reforma sem primeiro andar: banheiro e despensa na antiga cozinha; cozinha + jantar integrados à sala de TV."
+    "Portão no muro da frente, 1 m antes da área gourmet/garagem.",
+    "Escada em U (2,5 × 3 m) ocupando o antigo banheiro, a circulação e uma faixa do Quarto 2; a despensa vai para baixo da escada, com acesso pelo hall.",
+    "Escritório (2,5 × 4 m) desloca 1 m para a direita; o banheiro da antiga cozinha fica com 2 × 4 m.",
+    "Pilares propostos (quadrados pretos): linha x = 3 m na área gourmet/garagem para apoiar a borda da varanda, e um junto ao muro dos fundos para o 1º andar que passa por cima do corredor externo. Posição e quantidade a definir com o engenheiro."
   ]
 }

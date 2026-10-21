@@ -45,7 +45,7 @@ for c in d["comodos"]:
     dash = ' stroke-dasharray="6 4"' if c.get("externo") else ""
     o.append(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" fill="{fill}" stroke="#222" stroke-width="3"{dash}/>')
     cx, cy = x + w / 2, y + h / 2
-    estreito = w < 100
+    estreito = w <= 100
     fs = 10 if estreito else 14
     area = fmt(round(c["largura"] * c["profundidade"], 2))
     dims = f'{fmt(c["largura"])}×{fmt(c["profundidade"])}'
@@ -56,9 +56,22 @@ for c in d["comodos"]:
 
 # paredes removidas: cobre a linha e marca tracejado fino
 for i in d.get("integracoes", []):
+    mx, my = (i["x1"] + i["x2"]) / 2, (i["y1"] + i["y2"]) / 2
+    externo = all(c.get("externo") for c in d["comodos"]
+                  if c["x"] <= mx <= c["x"] + c["largura"] and c["y"] <= my <= c["y"] + c["profundidade"])
     x1, y1, x2, y2 = (M + i[k] * S for k in ("x1", "y1", "x2", "y2"))
-    o.append(f'<line x1="{x1}" y1="{y1+2}" x2="{x2}" y2="{y2-2}" stroke="#e6eff8" stroke-width="5"/>')
+    vert = x1 == x2
+    a, b = (0, 2) if vert else (2, 0)
+    o.append(f'<line x1="{x1+a}" y1="{y1+b}" x2="{x2-a}" y2="{y2-b}" stroke="{"#eef3e6" if externo else "#e6eff8"}" stroke-width="5"/>')
     o.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#7a8aa0" stroke-width="1" stroke-dasharray="4 4"/>')
+
+for m in d.get("muros", []):
+    x1, y1, x2, y2 = (M + m[k] * S for k in ("x1", "y1", "x2", "y2"))
+    o.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#777" stroke-width="5"/>')
+    tx, ty = x1 - 8, (y1 + y2) / 2
+    o.append(f'<text x="{tx}" y="{ty}" font-size="11" fill="#555" text-anchor="middle" transform="rotate(-90 {tx} {ty})">{m["nome"]}</text>')
+for px, py in d.get("pilares", []):
+    o.append(f'<rect x="{M+px*S-6}" y="{M+py*S-6}" width="12" height="12" fill="#222"/>')
 
 for c in d["comodos"]:
     if c["y"] == 0:
@@ -82,9 +95,13 @@ for cor, dash, texto, usar in legenda:
     if usar:
         o.append(f'<rect x="{lx}" y="{ly-10}" width="12" height="12" fill="{cor}" stroke="#222"{dash}/>')
         o.append(f'<text x="{lx+18}" y="{ly}" font-size="11">{texto}</text>')
-        lx += 260
+        lx += 40 + len(texto) * 6
 if d.get("integracoes"):
     o.append(f'<line x1="{lx}" y1="{ly-4}" x2="{lx+12}" y2="{ly-4}" stroke="#7a8aa0" stroke-dasharray="4 4"/>')
     o.append(f'<text x="{lx+18}" y="{ly}" font-size="11">ambiente integrado (sem parede)</text>')
+    lx += 40 + len("ambiente integrado (sem parede)") * 6
+if d.get("pilares"):
+    o.append(f'<rect x="{lx}" y="{ly-10}" width="12" height="12" fill="#222"/>')
+    o.append(f'<text x="{lx+18}" y="{ly}" font-size="11">pilar proposto</text>')
 o.append("</svg>")
 (aqui / f"{nome}.svg").write_text("\n".join(o) + "\n")
