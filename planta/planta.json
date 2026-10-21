@@ -1,20 +1,87 @@
 {
   "descricao": "Planta baixa térrea transcrita do esboço à mão. Medidas em metros; origem (0,0) no canto superior esquerdo, x para a direita, y para baixo.",
-  "dimensoes_totais": { "largura": 15, "profundidade": 10 },
+  "dimensoes_totais": {
+    "largura": 15,
+    "profundidade": 8
+  },
   "comodos": [
-    { "nome": "Quarto 1",        "x": 0,    "y": 0,   "largura": 6,   "profundidade": 4,   "medida": "lida" },
-    { "nome": "Banheiro",        "x": 6,    "y": 0,   "largura": 1.5, "profundidade": 1.5, "medida": "lida" },
-    { "nome": "Circulação",      "x": 6,    "y": 1.5, "largura": 1.5, "profundidade": 2.5, "medida": "estimada" },
-    { "nome": "Quarto 2",        "x": 7.5,  "y": 0,   "largura": 2.5, "profundidade": 4,   "medida": "lida" },
-    { "nome": "Cozinha",         "x": 10,   "y": 0,   "largura": 3,   "profundidade": 4,   "medida": "lida" },
-    { "nome": "Corredor", "x": 13, "y": 0, "largura": 2, "profundidade": 4, "medida": "lida", "externo": true },
-    { "nome": "Garagem",         "x": 0,    "y": 4,   "largura": 6,   "profundidade": 6,   "medida": "lida/estimada" },
-    { "nome": "Sala",            "x": 6,    "y": 4,   "largura": 3.5, "profundidade": 6,   "medida": "estimada" },
-    { "nome": "Sala de Jantar",  "x": 9.5,  "y": 4,   "largura": 5.5, "profundidade": 6,   "medida": "estimada" }
+    {
+      "nome": "Quarto 1",
+      "x": 0,
+      "y": 0,
+      "largura": 6,
+      "profundidade": 4,
+      "medida": "lida"
+    },
+    {
+      "nome": "Banheiro",
+      "x": 6,
+      "y": 0,
+      "largura": 1.5,
+      "profundidade": 1.5,
+      "medida": "lida"
+    },
+    {
+      "nome": "Circulação",
+      "x": 6,
+      "y": 1.5,
+      "largura": 1.5,
+      "profundidade": 2.5,
+      "medida": "estimada"
+    },
+    {
+      "nome": "Quarto 2",
+      "x": 7.5,
+      "y": 0,
+      "largura": 2.5,
+      "profundidade": 4,
+      "medida": "lida"
+    },
+    {
+      "nome": "Cozinha",
+      "x": 10,
+      "y": 0,
+      "largura": 3,
+      "profundidade": 4,
+      "medida": "lida"
+    },
+    {
+      "nome": "Corredor",
+      "x": 13,
+      "y": 0,
+      "largura": 2,
+      "profundidade": 4,
+      "medida": "lida",
+      "externo": true
+    },
+    {
+      "nome": "Garagem",
+      "x": 0,
+      "y": 4,
+      "largura": 6,
+      "profundidade": 4,
+      "medida": "lida"
+    },
+    {
+      "nome": "Sala",
+      "x": 6,
+      "y": 4,
+      "largura": 3.5,
+      "profundidade": 4,
+      "medida": "estimada"
+    },
+    {
+      "nome": "Sala de Jantar",
+      "x": 9.5,
+      "y": 4,
+      "largura": 5.5,
+      "profundidade": 4,
+      "medida": "estimada"
+    }
   ],
   "observacoes": [
     "Larguras da linha de cima (6 / 1,5 / 2,5 / 3 / 2) foram lidas das cotas do desenho.",
-    "Profundidade de 6 m da linha de baixo vem da cota '6m' na lateral esquerda.",
+    "Garagem com o mesmo tamanho do Quarto 1 (6 × 4 m), conforme confirmado; a linha de baixo inteira passa a ter 4 m de fundo.",
     "Larguras de Sala e Sala de Jantar não têm cota no papel; foram estimadas pela proporção do desenho.",
     "Anotações '4m 1.5 2 2' e '6 x 8' no topo do papel não ficaram claras e não foram aplicadas.",
     "Sala e Sala de Jantar parecem integradas (a parede entre elas não chega até a circulação)."

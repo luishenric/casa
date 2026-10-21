@@ -47,7 +47,7 @@ for c in d["comodos"]:
     if c["y"] == 0:
         x1, x2 = M + c["x"] * S, M + (c["x"] + c["largura"]) * S
         o += cota(x1, M - 15, x2, M - 15, fmt(c["largura"]), (x1 + x2) / 2, M - 20)
-for y0, h in ((0, 4), (4, 6)):
+for y0, h in sorted({(c["y"], c["profundidade"]) for c in d["comodos"] if c["x"] == 0}):
     y1, y2 = M + y0 * S, M + (y0 + h) * S
     o += cota(M - 15, y1, M - 15, y2, fmt(h), M - 22, (y1 + y2) / 2 + 4, "end")
 
