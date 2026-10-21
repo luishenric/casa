@@ -1,4 +1,4 @@
-"""Gera <nome>.svg a partir de <nome>.json (padrão: planta). Uso: python3 gerar_svg.py [planta|reforma]"""
+"""Gera <nome>.svg a partir de <nome>.json (padrão: planta). Uso: python3 gerar_svg.py [planta|reforma|terreo_sobrado|primeiro_andar]"""
 import json
 import pathlib
 import sys
@@ -30,6 +30,8 @@ o = [
     '<rect width="100%" height="100%" fill="#fff"/>',
     f'<text x="{M}" y="30" font-size="18" font-weight="bold">{d.get("titulo", "Planta baixa")} — {fmt(W)} m × {fmt(H)} m</text>',
 ]
+if d.get("contorno"):
+    o.append(f'<rect x="{M}" y="{M}" width="{W*S}" height="{H*S}" fill="none" stroke="#bbb" stroke-width="1.5" stroke-dasharray="8 6"/>')
 for c in d["comodos"]:
     x, y, w, h = M + c["x"] * S, M + c["y"] * S, c["largura"] * S, c["profundidade"] * S
     if c.get("externo"):
@@ -62,9 +64,11 @@ for c in d["comodos"]:
     if c["y"] == 0:
         x1, x2 = M + c["x"] * S, M + (c["x"] + c["largura"]) * S
         o += cota(x1, M - 15, x2, M - 15, fmt(c["largura"]), (x1 + x2) / 2, M - 20)
-for y0, h in sorted({(c["y"], c["profundidade"]) for c in d["comodos"] if c["x"] == 0}):
+x_min = min(c["x"] for c in d["comodos"])
+for y0, h in sorted({(c["y"], c["profundidade"]) for c in d["comodos"] if c["x"] == x_min}):
     y1, y2 = M + y0 * S, M + (y0 + h) * S
-    o += cota(M - 15, y1, M - 15, y2, fmt(h), M - 22, (y1 + y2) / 2 + 4, "end")
+    xc = M + x_min * S - 15
+    o += cota(xc, y1, xc, y2, fmt(h), xc - 7, (y1 + y2) / 2 + 4, "end")
 
 ly = M + H * S + 30
 cs = d["comodos"]
