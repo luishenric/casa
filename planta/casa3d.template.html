@@ -76,7 +76,7 @@ dd { margin: 2px 0 0; color: var(--muted); line-height: 1.4; }
 
 <header>
   <h1>Casa 3D</h1>
-  <span class="sub">Lote 15 × 8 m · colonial pernambucano com linhas de hoje</span>
+  <span class="sub">Lote 15 × 8 m · moderno nordestino: sombra, ventilação e cobogó</span>
 </header>
 
 <div class="controles">
@@ -94,7 +94,13 @@ dd { margin: 2px 0 0; color: var(--muted); line-height: 1.4; }
       <button id="a-1" data-a="1">1º andar</button>
     </div>
   </div>
-  <div class="grupo"><span>Fachada</span>
+  <div class="grupo"><span>Estilo</span>
+    <div class="seg" id="estilos">
+      <button id="e-moderno" data-e="moderno">Moderno</button>
+      <button id="e-colonial" data-e="colonial">Colonial</button>
+    </div>
+  </div>
+  <div class="grupo"><span>Cor</span>
     <div class="seg" id="fachadas"></div>
   </div>
   <label class="chk"><input type="checkbox" id="telhado" checked> Telhado</label>
@@ -122,11 +128,21 @@ const CENARIOS = {
   sobrado: [DADOS.terreo_sobrado, DADOS.primeiro_andar],
 };
 const NOME_ANDAR = ["Térreo", "1º andar"];
-const FACHADAS = {
-  olinda:   { nome: "Amarelo Olinda", parede: 0xe0b04c, esquadria: 0x22507c },
-  colonial: { nome: "Azul colonial",  parede: 0x6b98bf, esquadria: 0xf3efe6 },
-  recife:   { nome: "Rosa Recife",    parede: 0xd8918a, esquadria: 0x2e6a4f },
-  cal:      { nome: "Cal e anil",     parede: 0xf1ece2, esquadria: 0x22507c },
+// moderno: volumes brancos, um volume de destaque, laje com platibanda e grandes avanços de sombra
+// colonial: a versão anterior, com telha aparente, fachada colorida e azulejo
+const ESTILOS = {
+  moderno: { cores: {
+    terracota: { nome: "Terracota",     destaque: 0xb4643f },
+    petroleo:  { nome: "Azul petróleo", destaque: 0x2e5d63 },
+    grafite:   { nome: "Grafite",       destaque: 0x4b4f52 },
+    branco:    { nome: "Todo branco",   destaque: 0xeeebe5 },
+  } },
+  colonial: { cores: {
+    olinda:   { nome: "Amarelo Olinda", parede: 0xe0b04c, esquadria: 0x22507c },
+    colonial: { nome: "Azul colonial",  parede: 0x6b98bf, esquadria: 0xf3efe6 },
+    recife:   { nome: "Rosa Recife",    parede: 0xd8918a, esquadria: 0x2e6a4f },
+    cal:      { nome: "Cal e anil",     parede: 0xf1ece2, esquadria: 0x22507c },
+  } },
 };
 // medidas de cada tipo de abertura: peitoril e altura (m)
 const ABERTURA = {
@@ -138,10 +154,11 @@ const COR = {
   externo: 0xc5d9b2, reformado: 0xd6e5f2, existente: 0xe8e4dc,
   cal: 0xf3efe7, moldura: 0xfaf8f3, laje: 0xe9e4da, madeira: 0x8a5a32, madeiraClara: 0xa9784a,
   vidro: 0x9cc7d8, terreno: 0x93b57a, pilar: 0xf3efe7, telhaCumeeira: 0x8e3f22, bancada: 0x55524c, tijolo: 0xa4523a,
+  concreto: 0xefede8, branco: 0xf1efea, grafite: 0x2b2e30, telhaMetal: 0x8f9497, madeiraModerna: 0xb88a5c, concretoEscuro: 0x6f6c68,
 };
 const hex = n => "#" + n.toString(16).padStart(6, "0");
 
-const estado = { cenario: "sobrado", andar: "todos", fachada: "olinda", telhado: true, moveis: true, separar: false, baixas: false, rotulos: false, cores: false };
+const estado = { cenario: "sobrado", andar: "todos", estilo: "moderno", cor: { moderno: "terracota", colonial: "olinda" }, telhado: true, moveis: true, separar: false, baixas: false, rotulos: false, cores: false };
 
 // ---------- texturas desenhadas no canvas (1 imagem = 1 metro, salvo indicação) ----------
 function tela(px, desenhar) {
@@ -231,6 +248,24 @@ const IMAGENS = {
     g.fillStyle = "#d8cbb6"; g.fillRect(0, 0, n, n);
     for (let i = 0; i < 3; i++) for (let j = 0; j < 3; j++) { g.fillStyle = variar(0xb4613f, 0.12); g.fillRect(i * t + 2, j * t + 2, t - 4, t - 4); }
   }) },
+  porcelanato: { m: 1.8, cv: tela(256, (g, n) => {
+    g.fillStyle = "#e3e0da"; g.fillRect(0, 0, n, n);
+    for (let k = 0; k < 500; k++) { g.fillStyle = "rgba(120,110,100,0.05)"; g.fillRect(Math.random() * n, Math.random() * n, 3, 3); }
+    g.fillStyle = "rgba(90,85,80,0.35)"; g.fillRect(0, 0, n, 1); g.fillRect(0, n / 2, n, 1); g.fillRect(0, 0, 1, n); g.fillRect(n / 2, 0, 1, n);
+  }) },
+  tabua: { m: 1.2, cv: tela(256, (g, n) => {
+    const l = n / 6;
+    for (let i = 0; i < 6; i++) {
+      const off = (i * 97) % n;
+      for (const y0 of [-off, n - off]) { g.fillStyle = variar(0xb88d5f, 0.08); g.fillRect(i * l, y0, l, n); }
+      g.fillStyle = "rgba(60,35,15,0.35)"; g.fillRect(i * l, 0, 1, n); g.fillRect(i * l, n - off, l, 1);
+    }
+  }) },
+  deck: { m: 1, cv: tela(256, (g, n) => {
+    g.fillStyle = "#3b2a1c"; g.fillRect(0, 0, n, n);
+    const l = n / 7;
+    for (let i = 0; i < 7; i++) { g.fillStyle = variar(0x9a6a43, 0.1); g.fillRect(i * l + 2, 0, l - 4, n); }
+  }) },
   cimento: { m: 1, cv: tela(128, (g, n) => {
     g.fillStyle = "#a9a7a1"; g.fillRect(0, 0, n, n);
     for (let k = 0; k < 900; k++) { g.fillStyle = `rgba(${Math.random() < .5 ? "0,0,0" : "255,255,255"},0.06)`; g.fillRect(Math.random() * n, Math.random() * n, 2, 2); }
@@ -315,7 +350,14 @@ function matTex(nome, larg, alt, cor = 0xffffff, opts = {}) {
   return (cache[k] = new THREE.MeshLambertMaterial({ map: tex, color: cor, ...opts }));
 }
 const vidro = () => mat(COR.vidro, { transparent: true, opacity: 0.35 });
-const fachada = () => FACHADAS[estado.fachada];
+const moderno = () => estado.estilo === "moderno";
+function fachada() {
+  const c = ESTILOS[estado.estilo].cores[estado.cor[estado.estilo]];
+  return moderno() ? { parede: COR.branco, destaque: c.destaque, esquadria: COR.grafite }
+                   : { parede: c.parede, destaque: c.parede, esquadria: c.esquadria };
+}
+// cor do reboco externo por andar: no moderno o andar de cima é o volume de destaque
+const pele = i => moderno() && i > 0 ? fachada().destaque : fachada().parede;
 
 // ---------- geometria básica ----------
 function addMesh(geo, material, sombra = true) {
@@ -391,11 +433,13 @@ function ladoExterno(nivel, s) {
 
 function medidas(ab, externo) {
   const t = ABERTURA[ab.tipo] || ABERTURA.porta;
-  // porta externa ganha bandeira de vidro em cima, como nos sobrados antigos
-  return ab.tipo === "porta" && externo ? { p: 0, h: 2.55, bandeira: 2.1 } : t;
+  if (ab.tipo !== "porta" || !externo) return t;
+  // porta externa: pivotante alta no moderno; com bandeira de vidro no colonial
+  return moderno() ? { p: 0, h: 2.4 } : { p: 0, h: 2.55, bandeira: 2.1 };
 }
 
 function moldura(s, a, b, y0, y1, lado, base, peitoril) {
+  if (moderno()) return;
   const off = lado * (ESPESSURA / 2 + 0.035), m = mat(COR.moldura), w = 0.11;
   naLinha(s.o, s.v, a - w, a, base + y0, base + y1 + w, off, 0.06, m);
   naLinha(s.o, s.v, b, b + w, base + y0, base + y1 + w, off, 0.06, m);
@@ -422,12 +466,15 @@ function preencherAbertura(ab, s, lado, base) {
   const ext = !!lado;
   switch (ab.tipo) {
     case "porta":
-      if (ext) {
+      if (ext && moderno()) {
+        naLinha(s.o, s.v, a + 0.02, b - 0.02, base, base + h, 0, 0.06, matTex("regua", larg, h, COR.madeiraModerna));
+        naLinha(s.o, s.v, b - 0.2, b - 0.17, base + 0.6, base + 1.8, lado * 0.05, 0.03, mat(COR.grafite));
+      } else if (ext) {
         naLinha(s.o, s.v, a + 0.02, b - 0.02, base, base + bandeira, 0, 0.05, matTex("regua", larg, bandeira, esq));
         caixilho(s, a, b, bandeira, h, base, esq, 2);
         moldura(s, a, b, 0, h, lado, base, false);
       } else {
-        naLinha(s.o, s.v, a + 0.02, b - 0.02, base, base + h, 0, 0.04, mat(COR.madeira));
+        naLinha(s.o, s.v, a + 0.02, b - 0.02, base, base + h, 0, 0.04, mat(moderno() ? 0xd9c3a3 : COR.madeira));
       }
       break;
     case "porta-vidro":
@@ -439,7 +486,7 @@ function preencherAbertura(ab, s, lado, base) {
       caixilho(s, a, b, p, p + h, base, esq, ab.tipo === "janela" ? 2 : 1);
       if (ext) {
         moldura(s, a, b, p, p + h, lado, base, true);
-        if (ab.tipo === "janela") {  // folhas de veneziana abertas rentes à fachada
+        if (ab.tipo === "janela" && !moderno()) {  // folhas de veneziana abertas rentes à fachada
           const f = larg / 2, off = lado * (ESPESSURA / 2 + 0.03), mv = matTex("veneziana", f, h, esq);
           naLinha(s.o, s.v, a - 0.11 - f, a - 0.11, base + p, base + p + h, off, 0.03, mv);
           naLinha(s.o, s.v, b + 0.11, b + 0.11 + f, base + p, base + p + h, off, 0.03, mv);
@@ -452,14 +499,14 @@ function preencherAbertura(ab, s, lado, base) {
       if (ext) moldura(s, a, b, p, p + h, lado, base, false);
       break;
     case "portao-garagem":
-      naLinha(s.o, s.v, a, b, base, base + h, 0, 0.06, matTex("regua", larg, h, esq));
+      naLinha(s.o, s.v, a, b, base, base + h, 0, 0.06, moderno() ? matTex("veneziana", larg, h, COR.madeiraModerna) : matTex("regua", larg, h, esq));
       if (ext) moldura(s, a, b, 0, h, lado, base, false);
       break;
   }
 }
 
-// uma parede com seus vãos: núcleo caiado + reboco colorido do lado de fora, barrado de azulejo e cimalha
-function construirParede(nivel, s, base, altura, aberturas, terreo) {
+// uma parede com seus vãos: núcleo branco + reboco externo na cor do andar (no colonial, barrado de azulejo e cimalha)
+function construirParede(nivel, s, base, altura, aberturas, idx) {
   const lado = ladoExterno(nivel, s);
   const pecas = [];
   let cheio = [[s.a, s.b]];
@@ -481,11 +528,11 @@ function construirParede(nivel, s, base, altura, aberturas, terreo) {
     naLinha(s.o, s.v, a, b, base + y0, base + y1, 0, ESPESSURA, cal);
     if (!lado) continue;
     const off = lado * (ESPESSURA / 2 + 0.012);
-    const corte = terreo ? Math.min(Math.max(BARRADO, y0), y1) : y0;
+    const corte = idx === 0 && !moderno() ? Math.min(Math.max(BARRADO, y0), y1) : y0;
     if (corte > y0) naLinha(s.o, s.v, a, b, base + y0, base + corte, off, 0.024, matTex("azulejo", b - a, corte - y0));
-    if (y1 > corte) naLinha(s.o, s.v, a, b, base + corte, base + y1, off, 0.024, mat(fachada().parede));
+    if (y1 > corte) naLinha(s.o, s.v, a, b, base + corte, base + y1, off, 0.024, mat(pele(idx)));
   }
-  if (lado && !estado.baixas) {  // cimalha branca no alto da fachada
+  if (lado && !estado.baixas && !moderno()) {  // cimalha branca no alto da fachada
     naLinha(s.o, s.v, s.a - ESPESSURA / 2, s.b + ESPESSURA / 2, base + altura - 0.22, base + altura, lado * (ESPESSURA / 2 + 0.05), 0.1, mat(COR.moldura));
   }
 }
@@ -506,7 +553,21 @@ function triangulo(pts, material) {
   g.computeVertexNormals();
   return addMesh(g, material);
 }
+// cobertura moderna: laje com platibanda escondendo a telha termoacústica, e um avanço grande que faz sombra
+function laje(t, base) {
+  const topo = base + PE_DIREITO, [a0, a1] = t.avanco_moderno || [0.6, 0.3], porY = t.cumeeira === "y";
+  const x0 = porY ? t.x - a0 : t.x, x1 = porY ? t.x + t.largura + a1 : t.x + t.largura;
+  const z0 = porY ? t.y : t.y - a0, z1 = porY ? t.y + t.profundidade : t.y + t.profundidade + a1;
+  const branco = mat(COR.concreto), e = 0.12, y = topo + 0.2, hp = 0.55;
+  caixa(x0, x1, z0, z1, topo, y, branco);
+  caixa(x0, x1, z0, z0 + e, y, y + hp, branco);
+  caixa(x0, x1, z1 - e, z1, y, y + hp, branco);
+  caixa(x0, x0 + e, z0 + e, z1 - e, y, y + hp, branco);
+  caixa(x1 - e, x1, z0 + e, z1 - e, y, y + hp, branco);
+  caixa(x0 + e, x1 - e, z0 + e, z1 - e, y, y + 0.08, mat(COR.telhaMetal));
+}
 function telhado(t, base) {
+  if (moderno()) return laje(t, base);
   const inc = t.inclinacao, [b0, b1] = t.beiral, topo = base + PE_DIREITO;
   const porY = t.cumeeira === "y";
   // s = eixo do vão (cai a água), u = eixo da cumeeira
@@ -571,6 +632,11 @@ function alturaTelhado(t, base, x, y) {
   return hb + Math.min(s - s0, s0 + vao - s) * t.inclinacao;
 }
 function claraboia(c, t, base) {
+  if (moderno()) {  // domo de vidro plano sobre a laje
+    const y = base + PE_DIREITO + 0.28;
+    caixa(c.x, c.x + c.largura, c.y, c.y + c.profundidade, y, y + 0.14, mat(0xdcedf3, { transparent: true, opacity: 0.8 }));
+    return;
+  }
   const P = (x, y) => [x, alturaTelhado(t, base, x, y) + 0.035, y];
   const x1 = c.x + c.largura, y1 = c.y + c.profundidade;
   quad([P(c.x, c.y), P(x1, c.y), P(x1, y1), P(c.x, y1)], [[0, 0], [1, 0], [1, 1], [0, 1]],
@@ -600,6 +666,9 @@ IMAGENS.listras = { m: 1, cv: tela(256, (g, n) => {
   for (let k = 0; k < 16; k++) { g.fillStyle = cores[k % cores.length]; g.fillRect(k * n / 16, 0, n / 16, n); }
 }) };
 
+const colcha = (W, D) => moderno() ? mat(0xe4ddd0) : matTex("chita", W, D);
+const almofada = () => moderno() ? mat(fachada().destaque) : matTex("chita", 0.35, 0.35);
+
 function bx(g, x0, x1, y0, y1, z0, z1, material) {
   const m = new THREE.Mesh(new THREE.BoxGeometry(x1 - x0, y1 - y0, z1 - z0), material);
   m.position.set((x0 + x1) / 2, (y0 + y1) / 2, (z0 + z1) / 2);
@@ -609,7 +678,8 @@ function bx(g, x0, x1, y0, y1, z0, z1, material) {
 function cil(g, r, h, x, y, z, material, deitado) {
   const m = new THREE.Mesh(new THREE.CylinderGeometry(r, r, h, 18), material);
   m.position.set(x, y, z);
-  if (deitado) m.rotation.z = Math.PI / 2;
+  if (deitado === "z") m.rotation.x = Math.PI / 2;
+  else if (deitado) m.rotation.z = Math.PI / 2;
   g.add(m);
   return m;
 }
@@ -627,25 +697,26 @@ const MONTAR = {
   cama(g, W, D) {
     bx(g, -W / 2, W / 2, 0.08, 0.32, -D / 2, D / 2, mat(MOVEL.madeira));
     bx(g, -W / 2 + 0.03, W / 2 - 0.03, 0.32, 0.54, -D / 2 + 0.03, D / 2 - 0.03, mat(MOVEL.lencol));
-    bx(g, -W / 2 - 0.02, W / 2 + 0.02, 0.3, 0.57, -D / 2 + 0.55, D / 2 + 0.02, matTex("chita", W, D));
+    bx(g, -W / 2 - 0.02, W / 2 + 0.02, 0.3, 0.57, -D / 2 + 0.55, D / 2 + 0.02, colcha(W, D));
+    if (moderno()) bx(g, -W / 2 - 0.03, W / 2 + 0.03, 0.29, 0.59, D / 2 - 0.5, D / 2 + 0.03, mat(fachada().destaque));
     const n = W > 1.2 ? 2 : 1, lp = (W - 0.2) / n;
     for (let k = 0; k < n; k++) bx(g, -W / 2 + 0.1 + k * lp + 0.03, -W / 2 + 0.1 + (k + 1) * lp - 0.03, 0.54, 0.68, -D / 2 + 0.08, -D / 2 + 0.45, mat(MOVEL.branco));
     bx(g, -W / 2 - 0.03, W / 2 + 0.03, 0.08, 1.05, -D / 2 - 0.06, -D / 2, mat(MOVEL.madeiraEscura));
     if (W > 1.2) for (const sx of [-1, 1]) bx(g, sx * (W / 2 + 0.06), sx * (W / 2 + 0.5), 0, 0.55, -D / 2, -D / 2 + 0.4, mat(MOVEL.madeira));
   },
-  sofa(g, W, D, cor = MOVEL.sofa) {
+  sofa(g, W, D, mv, cor = moderno() ? 0xd8d2c7 : MOVEL.sofa) {
     const m = mat(cor);
     bx(g, -W / 2, W / 2, 0.08, 0.42, -D / 2, D / 2, m);
     bx(g, -W / 2, W / 2, 0.42, 0.86, -D / 2, -D / 2 + 0.22, m);
     for (const sx of [-1, 1]) bx(g, sx > 0 ? W / 2 - 0.17 : -W / 2, sx > 0 ? W / 2 : -W / 2 + 0.17, 0.42, 0.64, -D / 2, D / 2, m);
     const n = Math.max(1, Math.round((W - 0.34) / 0.65)), l = (W - 0.34) / n;
     for (let k = 0; k < n; k++) bx(g, -W / 2 + 0.17 + k * l + 0.01, -W / 2 + 0.17 + (k + 1) * l - 0.01, 0.42, 0.5, -D / 2 + 0.22, D / 2 - 0.02, mat(new THREE.Color(cor).offsetHSL(0, 0, 0.05).getHex()));
-    if (W > 1.2) for (const sx of [-1, 1]) bx(g, sx * (W / 2 - 0.55), sx * (W / 2 - 0.2), 0.5, 0.85, -D / 2 + 0.22, -D / 2 + 0.34, matTex("chita", 0.35, 0.35));
+    if (W > 1.2) for (const sx of [-1, 1]) bx(g, sx * (W / 2 - 0.55), sx * (W / 2 - 0.2), 0.5, 0.85, -D / 2 + 0.22, -D / 2 + 0.34, almofada());
   },
-  poltrona(g, W, D) { MONTAR.sofa(g, W, D, MOVEL.poltrona); },
+  poltrona(g, W, D) { MONTAR.sofa(g, W, D, null, moderno() ? 0xa8683c : MOVEL.poltrona); },
   rack(g, W, D) {
     bx(g, -W / 2, W / 2, 0.08, 0.5, -D / 2, D / 2, mat(MOVEL.madeira));
-    const tv = Math.min(W - 0.2, 1.3);
+    const tv = W >= 1.43 ? 1.23 : W - 0.2;  // TV de 55": 1,23 × 0,71 m
     bx(g, -tv / 2, tv / 2, 0.62, 0.62 + tv * 0.58, -D / 2 + 0.08, -D / 2 + 0.13, mat(MOVEL.preto));
     bx(g, -0.15, 0.15, 0.5, 0.62, -D / 2 + 0.06, -D / 2 + 0.16, mat(MOVEL.preto));
   },
@@ -654,8 +725,8 @@ const MONTAR = {
     cil(g, 0.1, 0.3, W / 4, 1.0, 0, mat(MOVEL.vaso));
   },
   tapete(g, W, D) {
-    bx(g, -W / 2, W / 2, 0, 0.012, -D / 2, D / 2, mat(MOVEL.tapete));
-    bx(g, -W / 2 + 0.15, W / 2 - 0.15, 0, 0.016, -D / 2 + 0.15, D / 2 - 0.15, mat(MOVEL.tapeteMiolo));
+    bx(g, -W / 2, W / 2, 0, 0.012, -D / 2, D / 2, mat(moderno() ? 0xb9ad98 : MOVEL.tapete));
+    bx(g, -W / 2 + 0.15, W / 2 - 0.15, 0, 0.016, -D / 2 + 0.15, D / 2 - 0.15, mat(moderno() ? 0xd8d0c0 : MOVEL.tapeteMiolo));
   },
   mesa(g, W, D, mv) {
     const m = mat(MOVEL.madeira);
@@ -700,21 +771,22 @@ const MONTAR = {
     }
   },
   "guarda-roupa"(g, W, D) {
-    bx(g, -W / 2, W / 2, 0, 2.1, -D / 2, D / 2, mat(MOVEL.madeira));
+    bx(g, -W / 2, W / 2, 0, 2.25, -D / 2, D / 2, mat(moderno() ? 0xe6e1d8 : MOVEL.madeira));
     const n = Math.max(1, Math.round(W / 0.5));
-    for (let k = 1; k < n; k++) { const x = -W / 2 + W * k / n; bx(g, x - 0.006, x + 0.006, 0.05, 2.05, D / 2, D / 2 + 0.01, mat(MOVEL.madeiraEscura)); }
+    for (let k = 1; k < n; k++) { const x = -W / 2 + W * k / n; bx(g, x - 0.006, x + 0.006, 0.05, 2.2, D / 2, D / 2 + 0.01, mat(MOVEL.madeiraEscura)); }
     for (let k = 0; k < n; k++) { const x = -W / 2 + W * (k + 0.5) / n + (k % 2 ? -0.18 : 0.18) * W / n; bx(g, x - 0.01, x + 0.01, 0.95, 1.2, D / 2, D / 2 + 0.03, mat(MOVEL.inox)); }
   },
   bancada(g, W, D, mv) {
-    bx(g, -W / 2, W / 2, 0.1, 0.86, -D / 2, D / 2 - 0.02, mat(MOVEL.branco));
+    bx(g, -W / 2, W / 2, 0.1, 0.86, -D / 2, D / 2 - 0.02, mat(moderno() ? COR.madeiraModerna : MOVEL.branco));
     bx(g, -W / 2, W / 2, 0, 0.1, -D / 2, D / 2 - 0.08, mat(MOVEL.preto));
     bx(g, -W / 2, W / 2, 0.86, 0.9, -D / 2, D / 2, mat(MOVEL.granito));
     const n = Math.max(1, Math.round(W / 0.6));
     for (let k = 1; k < n; k++) { const x = -W / 2 + W * k / n; bx(g, x - 0.005, x + 0.005, 0.12, 0.84, D / 2 - 0.02, D / 2 - 0.01, mat(MOVEL.inox)); }
-    if (mv.pia) {
-      bx(g, -0.3, 0.3, 0.88, 0.905, -0.2, 0.2, mat(MOVEL.inox));
+    if (mv.pia) {  // cuba de 0,56 × 0,34
+      bx(g, -0.28, 0.28, 0.88, 0.905, -0.17, 0.17, mat(MOVEL.inox));
       cil(g, 0.02, 0.3, 0, 1.05, -D / 2 + 0.08, mat(MOVEL.inox));
     }
+    if (mv.cooktop) bx(g, -0.29, 0.29, 0.9, 0.907, -0.25, 0.25, mat(MOVEL.preto));  // cooktop de 4 bocas
   },
   fogao(g, W, D) {
     bx(g, -W / 2, W / 2, 0, 0.88, -D / 2, D / 2, mat(MOVEL.inox));
@@ -726,16 +798,32 @@ const MONTAR = {
     bx(g, -W / 2, W / 2, 1.2, 1.21, D / 2, D / 2 + 0.005, mat(MOVEL.preto));
     bx(g, W / 2 - 0.08, W / 2 - 0.05, 0.6, 1.6, D / 2, D / 2 + 0.04, mat(MOVEL.preto));
   },
+  // vaso com caixa acoplada: 0,38 × 0,70, assento a 0,40 m e caixa até 0,78 m
   vaso(g, W, D) {
     const m = mat(MOVEL.louca);
-    bx(g, -0.17, 0.17, 0, 0.4, -D / 2 + 0.15, D / 2 - 0.02, m);
-    bx(g, -0.2, 0.2, 0.38, 0.75, -D / 2, -D / 2 + 0.17, m);
+    bx(g, -0.17, 0.17, 0, 0.4, -D / 2 + 0.18, D / 2 - 0.02, m);
+    bx(g, -0.19, 0.19, 0.4, 0.78, -D / 2, -D / 2 + 0.18, m);
   },
-  pia(g, W, D) {
-    bx(g, -W / 2, W / 2, 0.15, 0.8, -D / 2, D / 2, mat(MOVEL.madeira));
-    bx(g, -W / 2, W / 2, 0.8, 0.84, -D / 2, D / 2, mat(MOVEL.louca));
-    bx(g, -Math.min(0.25, W / 2 - 0.05), Math.min(0.25, W / 2 - 0.05), 0.84, 0.86, -D / 2 + 0.1, D / 2 - 0.08, mat(0xdadad6));
-    bx(g, -W / 2 + 0.05, W / 2 - 0.05, 1.05, 1.75, -D / 2 - 0.02, -D / 2, mat(MOVEL.espelho));
+  // bancada de banheiro a 0,90 m com gabinete suspenso, cubas de apoio e espelho
+  pia(g, W, D, mv) {
+    bx(g, -W / 2, W / 2, 0.4, 0.86, -D / 2, D / 2, mat(moderno() ? COR.madeiraModerna : MOVEL.madeira));
+    bx(g, -W / 2, W / 2, 0.86, 0.9, -D / 2, D / 2, mat(moderno() ? 0xe8e5df : MOVEL.louca));
+    const n = mv.cubas || 1;
+    for (let k = 0; k < n; k++) {
+      const cx = -W / 2 + W * (k + 0.5) / n;
+      bx(g, cx - 0.2, cx + 0.2, 0.9, 1.02, -0.12, 0.2, mat(MOVEL.louca));
+      cil(g, 0.015, 0.25, cx, 1.02, -D / 2 + 0.07, mat(MOVEL.inox));
+    }
+    bx(g, -W / 2 + 0.05, W / 2 - 0.05, 1.1, 1.85, -D / 2 - 0.02, -D / 2, mat(MOVEL.espelho));
+  },
+  maquina(g, W, D) {  // máquina de lavar 0,60 × 0,65 × 0,85
+    bx(g, -W / 2, W / 2, 0, 0.85, -D / 2, D / 2, mat(MOVEL.branco));
+    cil(g, 0.19, 0.02, 0, 0.42, D / 2 + 0.01, mat(0x3a4a55), "z");
+  },
+  tanque(g, W, D) {  // tanque 0,55 × 0,50 a 0,85 m
+    bx(g, -W / 2, W / 2, 0, 0.85, -D / 2, D / 2, mat(MOVEL.louca));
+    bx(g, -W / 2 + 0.05, W / 2 - 0.05, 0.6, 0.855, -D / 2 + 0.12, D / 2 - 0.05, mat(0xd2d2ce));
+    cil(g, 0.015, 0.25, 0, 1.0, -D / 2 + 0.06, mat(MOVEL.inox));
   },
   chuveiro(g, W, D) {
     bx(g, -W / 2, W / 2, 0, 0.03, -D / 2, D / 2, mat(MOVEL.louca));
@@ -762,7 +850,7 @@ const MONTAR = {
   },
   // rede de dormir pendurada no pergolado, com tecido listrado
   rede(g, W, D) {
-    const nx = 28, nz = 8, gancho = 1.9, fundo = 0.5, pos = [], uv = [], idx = [];
+    const nx = 28, nz = 8, gancho = 1.7, fundo = 0.5, pos = [], uv = [], idx = [];
     for (let i = 0; i <= nx; i++) {
       const u = i / nx, t = 2 * u - 1;
       const larg = D * (0.12 + 0.88 * Math.sqrt(Math.max(0, 1 - t * t)));
@@ -781,7 +869,9 @@ const MONTAR = {
     geo.setAttribute("uv", new THREE.Float32BufferAttribute(uv, 2));
     geo.setIndex(idx);
     geo.computeVertexNormals();
-    g.add(new THREE.Mesh(geo, matTex("listras", 1, 1, 0xffffff, { side: THREE.DoubleSide })));
+    g.add(new THREE.Mesh(geo, moderno() ? mat(0xece3cf, { side: THREE.DoubleSide }) : matTex("listras", 1, 1, 0xffffff, { side: THREE.DoubleSide })));
+    const teto = moderno() ? 2.78 : 2.38;  // cordas até a laje (moderno) ou o pergolado (colonial)
+    for (const sx of [-1, 1]) cil(g, 0.012, teto - gancho, sx * W / 2, (gancho + teto) / 2, 0, mat(0xcbbd9c));
   },
 };
 
@@ -830,7 +920,9 @@ function corPlanta(c) {
 function piso(c) {
   if (estado.cores) return mat(corPlanta(c));
   const n = c.nome.toLowerCase();
-  const tipo = /banh|cozinha|despensa|serviço/.test(n) ? "ladrilho" : /garagem/.test(n) ? "cimento" : /varanda|gourmet/.test(n) ? "tijoleira" : "taco";
+  const tipo = moderno()
+    ? (/banh/.test(n) ? "ladrilho" : /cozinha|despensa|serviço|hall|escada|corredor/.test(n) ? "porcelanato" : /garagem|gourmet/.test(n) ? "cimento" : /varanda/.test(n) ? "deck" : "tabua")
+    : (/banh|cozinha|despensa|serviço/.test(n) ? "ladrilho" : /garagem/.test(n) ? "cimento" : /varanda|gourmet/.test(n) ? "tijoleira" : "taco");
   return matTex(tipo, c.largura, c.profundidade);
 }
 
@@ -861,7 +953,7 @@ function construir() {
     }
 
     const ab = nivel.aberturas || [];
-    for (const s of paredes(nivel)) construirParede(nivel, s, base, altura, ab.filter(a => chave(linhaDe(a)) === chave(s)), i === 0);
+    for (const s of paredes(nivel)) construirParede(nivel, s, base, altura, ab.filter(a => chave(linhaDe(a)) === chave(s)), i);
 
     // guarda-corpo de cobogó nas áreas externas do andar de cima (onde não há parede)
     if (i > 0) {
@@ -874,8 +966,13 @@ function construir() {
           for (const iv of ocupadas.get(chave(s)) || []) livre = tirar(livre, iv);
           for (const [a, b] of livre) {
             if (b - a < 0.05) continue;
-            naLinha(s.o, s.v, a, b, base, base + 1.0, 0, 0.1, matTex("cobogo", b - a, 1.0, 0xffffff, { transparent: true, alphaTest: 0.5, side: THREE.DoubleSide }));
-            naLinha(s.o, s.v, a - 0.06, b + 0.06, base + 1.0, base + 1.06, 0, 0.14, mat(COR.moldura));
+            if (moderno()) {  // vidro com corrimão fino
+              naLinha(s.o, s.v, a, b, base, base + 1.1, 0, 0.02, vidro());
+              naLinha(s.o, s.v, a, b, base + 1.08, base + 1.13, 0, 0.05, mat(COR.grafite));
+            } else {
+              naLinha(s.o, s.v, a, b, base, base + 1.0, 0, 0.1, matTex("cobogo", b - a, 1.0, 0xffffff, { transparent: true, alphaTest: 0.5, side: THREE.DoubleSide }));
+              naLinha(s.o, s.v, a - 0.06, b + 0.06, base + 1.0, base + 1.06, 0, 0.14, mat(COR.moldura));
+            }
           }
         }
       }
@@ -883,11 +980,11 @@ function construir() {
 
     for (const e of nivel.escadas || []) escadaU(e, base);
     for (const el of nivel.elementos || []) {
-      const m = el.material === "tijolo" ? mat(COR.tijolo) : mat(COR.bancada);
+      const m = el.material === "churrasqueira" ? mat(moderno() ? COR.concretoEscuro : COR.tijolo) : mat(COR.bancada);
       const y0 = base + (el.base || 0);
       caixa(el.x, el.x + el.largura, el.y, el.y + el.profundidade, y0, y0 + el.altura - (el.base || 0), m);
     }
-    for (const pg of nivel.pergolados || []) if (!estado.baixas) pergolado(pg, base);
+    for (const pg of nivel.pergolados || []) if (!estado.baixas && !moderno()) pergolado(pg, base);
     if (estado.moveis) for (const mv of nivel.moveis || []) movel(mv, base);
     if (estado.telhado && !estado.baixas) {
       for (const t of nivel.telhados || []) telhado(t, base);
@@ -897,18 +994,27 @@ function construir() {
     if (i === 0) {
       for (const m of nivel.muros || []) {
         const s = linhaDe(m);
-        const cobogo = m.tipo === "cobogo", alt = cobogo ? 2.2 : 1.8;
+        const cobogo = m.tipo === "cobogo", alt = cobogo ? 2.2 : moderno() ? 2.0 : 1.8;
         const portao = /portão/i.test(m.nome) ? [4.5, 7.5] : null;
         let trechos = [[s.a, s.b]];
         if (portao) trechos = tirar(trechos, portao);
         for (const [a, b] of trechos) {
-          const mm = cobogo ? matTex("cobogo", b - a, alt, 0xffffff, { transparent: true, alphaTest: 0.5, side: THREE.DoubleSide }) : mat(fachada().parede);
+          const mm = cobogo ? matTex("cobogo", b - a, alt, 0xffffff, { transparent: true, alphaTest: 0.5, side: THREE.DoubleSide }) : mat(fachada().destaque);
           naLinha(s.o, s.v, a, b, 0, alt, 0, cobogo ? 0.1 : 0.15, mm);
           naLinha(s.o, s.v, a - 0.04, b + 0.04, alt, alt + 0.06, 0, 0.2, mat(COR.moldura));
         }
-        if (portao) naLinha(s.o, s.v, portao[0], portao[1], 0.03, 1.9, 0, 0.06, matTex("regua", portao[1] - portao[0], 1.9, fachada().esquadria));
+        if (portao) {
+          const ap = moderno() ? 2.0 : 1.9, lp = portao[1] - portao[0];
+          naLinha(s.o, s.v, portao[0], portao[1], 0.03, ap, 0, 0.06, moderno() ? matTex("veneziana", lp, ap, COR.madeiraModerna) : matTex("regua", lp, ap, fachada().esquadria));
+        }
       }
-      for (const [px, pz] of nivel.pilares || []) caixa(px - 0.15, px + 0.15, pz - 0.15, pz + 0.15, 0, PE_DIREITO, mat(COR.pilar));
+      // no moderno, os pilares do quintal sobem até a laje que cobre a varanda
+      const cima = niveis[1] && visiveis[1] && moderno() ? niveis[1] : null;
+      for (const [px, pz] of nivel.pilares || []) {
+        const dentro = cima && cima.comodos.some(c => !c.externo && px >= c.x && px <= c.x + c.largura && pz >= c.y && pz <= c.y + c.profundidade);
+        const topo = cima && !dentro ? baseDe(1) + PE_DIREITO : PE_DIREITO, r = moderno() ? 0.11 : 0.15;
+        caixa(px - r, px + r, pz - r, pz + r, 0, topo, mat(COR.pilar));
+      }
     }
 
     if (estado.rotulos && (i === ultimoVisivel || estado.separar)) {
@@ -937,7 +1043,14 @@ function lista(niveis, visiveis) {
     }
     html += `<li class="total"><span>Área interna</span><span>${fmt(total)} m²</span></li></ul>`;
   });
-  html += `<h2>Linguagem da casa</h2><dl>
+  html += moderno() ? `<h2>Linguagem da casa</h2><dl>
+    <div><dt>Construir uma sombra</dt><dd>Laje com platibanda que avança sobre a varanda e a fachada, protegendo do sol, como no modernismo do Recife.</dd></div>
+    <div><dt>Volumes limpos</dt><dd>Térreo branco e o andar de cima como volume de destaque na cor escolhida.</dd></div>
+    <div><dt>Cobogó</dt><dd>Invenção pernambucana usada de forma contemporânea: ilumina e ventila a escada e fecha o muro da área gourmet.</dd></div>
+    <div><dt>Madeira e vidro</dt><dd>Porta pivotante e portão em ripado de madeira, esquadrias grafite, portas de vidro amplas e guarda-corpo de vidro.</dd></div>
+    <div><dt>Ventilação cruzada</dt><dd>Varanda e portas de vidro na frente, cobogós e janelas altas nos fundos.</dd></div>
+    <div><dt>Pisos</dt><dd>Tábua de madeira nos quartos e salas, porcelanato claro na cozinha, ladrilho hidráulico nos banheiros, cimento queimado no quintal e deck na varanda.</dd></div>
+  </dl>` : `<h2>Linguagem da casa</h2><dl>
     <div><dt>Telhado colonial</dt><dd>Duas águas de telha de barro, cumeeira paralela à rua, oitões nas laterais e beiral com testeira de madeira.</dd></div>
     <div><dt>Fachada caiada e colorida</dt><dd>Reboco nas cores de Olinda e do Recife Antigo, cimalha e molduras brancas nas portas e janelas.</dd></div>
     <div><dt>Barrado de azulejo</dt><dd>Azulejo azul e branco até 90 cm na fachada do térreo.</dd></div>
@@ -946,19 +1059,27 @@ function lista(niveis, visiveis) {
     <div><dt>Telha de vidro</dt><dd>Nos cômodos do térreo sem parede para fora, a luz entra pelo telhado, como nas casas antigas do interior.</dd></div>
     <div><dt>Rede e chita</dt><dd>Rede de dormir na varanda e colchas de chita nos quartos.</dd></div>
     <div><dt>Pisos</dt><dd>Taco de madeira nos quartos e salas, ladrilho hidráulico nas áreas molhadas, tijoleira no quintal e varanda.</dd></div>
-  </dl>
-  <p class="nota">Medidas de portas, janelas e móveis são estimadas. As laterais têm construções vizinhas: no térreo não há janelas laterais; no 1º andar, sim. A área de serviço aparece retangular, mas é triangular.</p>`;
+  </dl>`;
+  html += `<p class="nota">Móveis, louças e boxes com medidas comerciais (cama queen 1,58 × 1,98 m, sofá 2,10 × 0,92 m, vaso 0,38 × 0,70 m, box a partir de 0,90 m, bancadas a 0,90 m). Portas e janelas são estimadas. As laterais têm construções vizinhas: no térreo não há janelas laterais; no 1º andar, sim. A área de serviço aparece retangular, mas é triangular.</p>`;
   el.innerHTML = html;
 }
 
 // ---------- controles ----------
 const segFachadas = document.getElementById("fachadas");
-segFachadas.innerHTML = Object.entries(FACHADAS).map(([k, f]) =>
-  `<button id="f-${k}" data-f="${k}" title="${f.nome}" aria-label="Fachada ${f.nome}"><span class="amostra" style="background:${hex(f.parede)}"><i style="background:${hex(f.esquadria)}"></i></span><span class="rot">${f.nome}</span></button>`).join("");
+function botoesCor() {
+  segFachadas.innerHTML = Object.entries(ESTILOS[estado.estilo].cores).map(([k, f]) => {
+    const [fundo, detalhe] = moderno() ? [f.destaque, COR.branco] : [f.parede, f.esquadria];
+    return `<button id="f-${k}" data-f="${k}" title="${f.nome}" aria-label="Cor ${f.nome}"><span class="amostra" style="background:${hex(fundo)}"><i style="background:${hex(detalhe)}"></i></span><span class="rot">${f.nome}</span></button>`;
+  }).join("");
+  const largo = document.body.clientWidth >= 1100;
+  for (const r of segFachadas.querySelectorAll(".rot")) r.hidden = !largo;
+}
+botoesCor();
 
 function sincronizar() {
   for (const b of document.querySelectorAll("#cenarios button")) b.setAttribute("aria-pressed", b.dataset.c === estado.cenario);
-  for (const b of document.querySelectorAll("#fachadas button")) b.setAttribute("aria-pressed", b.dataset.f === estado.fachada);
+  for (const b of document.querySelectorAll("#estilos button")) b.setAttribute("aria-pressed", b.dataset.e === estado.estilo);
+  for (const b of document.querySelectorAll("#fachadas button")) b.setAttribute("aria-pressed", b.dataset.f === estado.cor[estado.estilo]);
   const temAndar = CENARIOS[estado.cenario].length > 1;
   if (!temAndar) estado.andar = "todos";
   for (const b of document.querySelectorAll("#andares button")) {
@@ -978,7 +1099,11 @@ document.getElementById("andares").addEventListener("click", e => {
 });
 segFachadas.addEventListener("click", e => {
   const b = e.target.closest("button"); if (!b) return;
-  estado.fachada = b.dataset.f; sincronizar();
+  estado.cor[estado.estilo] = b.dataset.f; sincronizar();
+});
+document.getElementById("estilos").addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  estado.estilo = b.dataset.e; botoesCor(); sincronizar();
 });
 for (const id of ["telhado", "moveis", "separar", "baixas", "rotulos", "cores"]) {
   const el = document.getElementById(id);
