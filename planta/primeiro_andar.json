@@ -84,10 +84,10 @@
   "integracoes": [
     {
       "x1": 6,
-      "y1": 4.2,
-      "x2": 6,
-      "y2": 8,
-      "nota": "Suíte abre para a varanda (porta de vidro)"
+      "y1": 3,
+      "x2": 8.5,
+      "y2": 3,
+      "nota": "Chegada da escada no corredor"
     }
   ],
   "muros": [
@@ -119,10 +119,154 @@
   ],
   "observacoes": [
     "Pavimento em retângulo único de 9 × 8 m sobre a parte coberta da casa, inclusive por cima da área de serviço (precisa de pilar junto ao muro dos fundos; a área de serviço é triangular — forma final com o engenheiro).",
-    "Varanda de lateral a lateral (3 × 8 m) sobre a área gourmet e a garagem, terminando 4 m antes do muro do portão; borda externa apoiada na linha de pilares x = 3 m.",
     "Corredor reto de 1,2 m ligando escada, quartos de visitas, suíte e banheiro.",
     "Suíte: quarto 4 × 3,8 m aberto para a varanda, closet de passagem e banheiro da suíte.",
     "Banho da suíte e banheiro social lado a lado, sobre a cozinha do térreo, dividindo a mesma prumada de água e esgoto.",
-    "Quartos de visitas com 3,25 × 3 m (9,75 m²) cada."
+    "Quartos de visitas com 3,25 × 3 m (9,75 m²) cada.",
+    "Varanda de lateral a lateral (3 × 8 m) sobre a área gourmet e a garagem, com pergolado de madeira e guarda-corpo de cobogó; borda externa apoiada na linha de pilares x = 3 m.",
+    "Telhado colonial de duas águas com cumeeira paralela à rua, oitões nas laterais e beiral sobre a varanda.",
+    "Janelas nas laterais (y = 0 e y = 8) supõem que a casa não é colada nos vizinhos; confirmar."
+  ],
+  "aberturas": [
+    {
+      "tipo": "cobogo",
+      "x1": 6,
+      "y1": 0.4,
+      "x2": 6,
+      "y2": 2.6
+    },
+    {
+      "tipo": "porta",
+      "x1": 6,
+      "y1": 3.15,
+      "x2": 6,
+      "y2": 4.05
+    },
+    {
+      "tipo": "porta-vidro",
+      "x1": 6,
+      "y1": 4.7,
+      "x2": 6,
+      "y2": 7.5
+    },
+    {
+      "tipo": "janela",
+      "x1": 9.4,
+      "y1": 0,
+      "x2": 10.9,
+      "y2": 0
+    },
+    {
+      "tipo": "porta",
+      "x1": 9.0,
+      "y1": 3,
+      "x2": 9.8,
+      "y2": 3
+    },
+    {
+      "tipo": "janela",
+      "x1": 12.6,
+      "y1": 0,
+      "x2": 14.1,
+      "y2": 0
+    },
+    {
+      "tipo": "porta",
+      "x1": 12.2,
+      "y1": 3,
+      "x2": 13.0,
+      "y2": 3
+    },
+    {
+      "tipo": "janela-alta",
+      "x1": 15,
+      "y1": 3.2,
+      "x2": 15,
+      "y2": 4.0
+    },
+    {
+      "tipo": "porta",
+      "x1": 8.8,
+      "y1": 4.2,
+      "x2": 9.6,
+      "y2": 4.2
+    },
+    {
+      "tipo": "janela",
+      "x1": 7.2,
+      "y1": 8,
+      "x2": 8.8,
+      "y2": 8
+    },
+    {
+      "tipo": "porta",
+      "x1": 10,
+      "y1": 4.4,
+      "x2": 10,
+      "y2": 5.2
+    },
+    {
+      "tipo": "janela-alta",
+      "x1": 10.3,
+      "y1": 8,
+      "x2": 11.2,
+      "y2": 8
+    },
+    {
+      "tipo": "porta",
+      "x1": 11.5,
+      "y1": 4.4,
+      "x2": 11.5,
+      "y2": 5.1
+    },
+    {
+      "tipo": "janela-alta",
+      "x1": 11.8,
+      "y1": 8,
+      "x2": 12.7,
+      "y2": 8
+    },
+    {
+      "tipo": "porta",
+      "x1": 13.3,
+      "y1": 4.2,
+      "x2": 14.1,
+      "y2": 4.2
+    },
+    {
+      "tipo": "janela-alta",
+      "x1": 13.5,
+      "y1": 8,
+      "x2": 14.5,
+      "y2": 8
+    }
+  ],
+  "telhados": [
+    {
+      "tipo": "duas-aguas",
+      "x": 6,
+      "y": 0,
+      "largura": 9,
+      "profundidade": 8,
+      "cumeeira": "y",
+      "nivel": 1,
+      "inclinacao": 0.3,
+      "beiral": [
+        0.8,
+        0.3
+      ]
+    }
+  ],
+  "pergolados": [
+    {
+      "x": 3,
+      "y": 0,
+      "largura": 3,
+      "profundidade": 8,
+      "nivel": 1,
+      "altura": 2.4,
+      "direcao": "x",
+      "espaco": 0.45
+    }
   ]
 }

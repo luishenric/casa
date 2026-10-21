@@ -65,11 +65,46 @@ for i in d.get("integracoes", []):
     o.append(f'<line x1="{x1+a}" y1="{y1+b}" x2="{x2-a}" y2="{y2-b}" stroke="{"#eef3e6" if externo else "#e6eff8"}" stroke-width="5"/>')
     o.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#7a8aa0" stroke-width="1" stroke-dasharray="4 4"/>')
 
+# portas e janelas: abre a parede e desenha o símbolo
+for ab in d.get("aberturas", []):
+    x1, y1, x2, y2 = (M + ab[k] * S for k in ("x1", "y1", "x2", "y2"))
+    vert = x1 == x2
+    t = ab["tipo"]
+    if vert:
+        o.append(f'<rect x="{x1-3}" y="{y1}" width="6" height="{y2-y1}" fill="#fff"/>')
+    else:
+        o.append(f'<rect x="{x1}" y="{y1-3}" width="{x2-x1}" height="6" fill="#fff"/>')
+    if t == "porta":
+        r = (y2 - y1) if vert else (x2 - x1)
+        if vert:
+            o.append(f'<line x1="{x1}" y1="{y1}" x2="{x1+r}" y2="{y1}" stroke="#222" stroke-width="1.5"/>')
+            o.append(f'<path d="M{x1+r},{y1} A{r},{r} 0 0 1 {x1},{y2}" fill="none" stroke="#999" stroke-width="1"/>')
+        else:
+            o.append(f'<line x1="{x1}" y1="{y1}" x2="{x1}" y2="{y1+r}" stroke="#222" stroke-width="1.5"/>')
+            o.append(f'<path d="M{x1},{y1+r} A{r},{r} 0 0 0 {x2},{y1}" fill="none" stroke="#999" stroke-width="1"/>')
+    elif t in ("janela", "janela-alta", "porta-vidro"):
+        cor = "#3a7ca5" if t == "porta-vidro" else "#222"
+        tr = ' stroke-dasharray="3 2"' if t == "janela-alta" else ""
+        for off in (-3, 0, 3):
+            if vert:
+                o.append(f'<line x1="{x1+off}" y1="{y1}" x2="{x2+off}" y2="{y2}" stroke="{cor}" stroke-width="1"{tr}/>')
+            else:
+                o.append(f'<line x1="{x1}" y1="{y1+off}" x2="{x2}" y2="{y2+off}" stroke="{cor}" stroke-width="1"{tr}/>')
+    elif t == "cobogo":
+        n = int(((y2 - y1) if vert else (x2 - x1)) // 8)
+        for k in range(n):
+            cx, cy = (x1, y1 + 4 + k * 8) if vert else (x1 + 4 + k * 8, y1)
+            o.append(f'<rect x="{cx-2.5}" y="{cy-2.5}" width="5" height="5" fill="none" stroke="#222" stroke-width="1"/>')
+    elif t == "portao-garagem":
+        o.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#222" stroke-width="2" stroke-dasharray="6 3"/>')
+
 for m in d.get("muros", []):
     x1, y1, x2, y2 = (M + m[k] * S for k in ("x1", "y1", "x2", "y2"))
-    o.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#777" stroke-width="5"/>')
-    tx, ty = x1 - 8, (y1 + y2) / 2
-    o.append(f'<text x="{tx}" y="{ty}" font-size="11" fill="#555" text-anchor="middle" transform="rotate(-90 {tx} {ty})">{m["nome"]}</text>')
+    tr = ' stroke-dasharray="2 3"' if m.get("tipo") == "cobogo" else ""
+    o.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#777" stroke-width="5"{tr}/>')
+    if x1 == x2:
+        tx, ty = x1 - 8, (y1 + y2) / 2
+        o.append(f'<text x="{tx}" y="{ty}" font-size="11" fill="#555" text-anchor="middle" transform="rotate(-90 {tx} {ty})">{m["nome"]}</text>')
 for px, py in d.get("pilares", []):
     o.append(f'<rect x="{M+px*S-6}" y="{M+py*S-6}" width="12" height="12" fill="#222"/>')
 

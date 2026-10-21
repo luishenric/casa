@@ -85,7 +85,8 @@
     "Larguras de Sala e Sala de Jantar não têm cota no papel; foram estimadas pela proporção do desenho.",
     "Anotações '4m 1.5 2 2' e '6 x 8' no topo do papel não ficaram claras e não foram aplicadas.",
     "Sala e Sala de Jantar parecem integradas (a parede entre elas não chega até a circulação).",
-    "Área de serviço externa junto ao muro dos fundos; na realidade tem formato triangular (desenhada como retângulo de 2 × 4 m), forma final a definir com o engenheiro."
+    "Área de serviço externa junto ao muro dos fundos; na realidade tem formato triangular (desenhada como retângulo de 2 × 4 m), forma final a definir com o engenheiro.",
+    "Portas e janelas da casa atual são aproximadas (não estavam no esboço)."
   ],
   "muros": [
     {
@@ -94,6 +95,136 @@
       "x2": -1,
       "y2": 8,
       "nome": "Muro / portão"
+    }
+  ],
+  "aberturas": [
+    {
+      "tipo": "janela",
+      "x1": 0,
+      "y1": 1.2,
+      "x2": 0,
+      "y2": 2.8
+    },
+    {
+      "tipo": "janela",
+      "x1": 2,
+      "y1": 0,
+      "x2": 3.5,
+      "y2": 0
+    },
+    {
+      "tipo": "portao-garagem",
+      "x1": 0,
+      "y1": 4.6,
+      "x2": 0,
+      "y2": 7.4
+    },
+    {
+      "tipo": "porta",
+      "x1": 6,
+      "y1": 2,
+      "x2": 6,
+      "y2": 2.8
+    },
+    {
+      "tipo": "porta",
+      "x1": 6.3,
+      "y1": 1.5,
+      "x2": 7.0,
+      "y2": 1.5
+    },
+    {
+      "tipo": "porta",
+      "x1": 7.5,
+      "y1": 2.5,
+      "x2": 7.5,
+      "y2": 3.3
+    },
+    {
+      "tipo": "passagem",
+      "x1": 6.2,
+      "y1": 4,
+      "x2": 7.3,
+      "y2": 4
+    },
+    {
+      "tipo": "janela-alta",
+      "x1": 6.4,
+      "y1": 0,
+      "x2": 7.1,
+      "y2": 0
+    },
+    {
+      "tipo": "janela",
+      "x1": 8.2,
+      "y1": 0,
+      "x2": 9.4,
+      "y2": 0
+    },
+    {
+      "tipo": "janela",
+      "x1": 11,
+      "y1": 0,
+      "x2": 12.2,
+      "y2": 0
+    },
+    {
+      "tipo": "porta",
+      "x1": 10.3,
+      "y1": 4,
+      "x2": 11.1,
+      "y2": 4
+    },
+    {
+      "tipo": "porta",
+      "x1": 13,
+      "y1": 2.8,
+      "x2": 13,
+      "y2": 3.6
+    },
+    {
+      "tipo": "porta",
+      "x1": 6,
+      "y1": 5,
+      "x2": 6,
+      "y2": 5.9
+    },
+    {
+      "tipo": "janela",
+      "x1": 7,
+      "y1": 8,
+      "x2": 8.5,
+      "y2": 8
+    },
+    {
+      "tipo": "janela",
+      "x1": 11,
+      "y1": 8,
+      "x2": 13,
+      "y2": 8
+    },
+    {
+      "tipo": "porta",
+      "x1": 13.4,
+      "y1": 4,
+      "x2": 14.3,
+      "y2": 4
+    }
+  ],
+  "telhados": [
+    {
+      "tipo": "duas-aguas",
+      "x": 0,
+      "y": 0,
+      "largura": 15,
+      "profundidade": 8,
+      "cumeeira": "y",
+      "nivel": 0,
+      "inclinacao": 0.3,
+      "beiral": [
+        0.6,
+        0.3
+      ]
     }
   ]
 }

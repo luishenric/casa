@@ -13,19 +13,19 @@
   --line: #d2d7d2;
   --accent: #1f6a64;
   --accent-fg: #ffffff;
-  --scene: #e2e6e1;
+  --scene: #dfe7ea;
   --font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
   --font-body: "Figtree", ui-sans-serif, system-ui, sans-serif;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --bg: #131816; --surface: #1b211f; --fg: #e6ebe8; --muted: #98a39e; --line: #2d3532;
-    --accent: #5fb2a9; --accent-fg: #0c1412; --scene: #1a201e; color-scheme: dark;
+    --accent: #5fb2a9; --accent-fg: #0c1412; --scene: #1c2427; color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --bg: #131816; --surface: #1b211f; --fg: #e6ebe8; --muted: #98a39e; --line: #2d3532;
-  --accent: #5fb2a9; --accent-fg: #0c1412; --scene: #1a201e; color-scheme: dark;
+  --accent: #5fb2a9; --accent-fg: #0c1412; --scene: #1c2427; color-scheme: dark;
 }
 html, body { height: 100%; }
 body {
@@ -40,28 +40,33 @@ header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 14px; }
 h1 { font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; margin: 0; text-wrap: balance; }
 .sub { color: var(--muted); }
 .controles { display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: center; }
-.grupo { display: flex; align-items: center; gap: 8px; }
+.grupo { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 .grupo > span { font-size: 11px; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); }
 .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--surface); }
-.seg button { font: inherit; border: 0; background: transparent; color: var(--fg); padding: 6px 12px; cursor: pointer; }
+.seg button { font: inherit; border: 0; background: transparent; color: var(--fg); padding: 6px 12px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
 .seg button + button { border-left: 1px solid var(--line); }
 .seg button[aria-pressed="true"] { background: var(--accent); color: var(--accent-fg); }
 .seg button:disabled { color: var(--muted); cursor: default; opacity: .5; }
 .seg button:focus-visible, .chk input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.amostra { width: 14px; height: 14px; border-radius: 3px; border: 1px solid rgba(0,0,0,.25); display: inline-grid; place-items: end; overflow: hidden; }
+.amostra i { display: block; width: 7px; height: 9px; }
 .chk { display: inline-flex; gap: 6px; align-items: center; color: var(--fg); cursor: pointer; }
 .chk input { accent-color: var(--accent); margin: 0; }
-main { flex: 1; min-height: 0; display: grid; grid-template-columns: minmax(0, 1fr) 250px; gap: 12px; }
-#cena { position: relative; min-height: 0; border-radius: 10px; overflow: hidden; background: var(--scene); border: 1px solid var(--line); }
-#cena canvas { display: block; width: 100%; height: 100%; touch-action: none; }
-.dica { position: absolute; left: 10px; bottom: 8px; font-size: 12px; color: var(--muted); pointer-events: none; }
+main { flex: 1; min-height: 0; display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: 12px; }
+#cena { position: relative; min-height: 0; min-width: 0; border-radius: 10px; overflow: hidden; background: var(--scene); border: 1px solid var(--line); }
+#cena canvas { position: absolute; inset: 0; display: block; width: 100%; height: 100%; touch-action: none; }
+.dica { position: absolute; left: 10px; right: 10px; bottom: 8px; font-size: 12px; color: var(--muted); pointer-events: none; }
 aside { min-width: 0; overflow: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; }
-aside h2 { font-size: 11px; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); margin: 10px 0 6px; font-weight: 600; }
+aside h2 { font-size: 11px; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); margin: 14px 0 6px; font-weight: 600; }
 aside h2:first-child { margin-top: 0; }
 ul { list-style: none; margin: 0; padding: 0; }
 li { display: flex; justify-content: space-between; gap: 8px; padding: 5px 0; border-bottom: 1px solid var(--line); font-variant-numeric: tabular-nums; }
 li .nome { display: flex; align-items: center; gap: 7px; min-width: 0; }
 li .cor { flex: none; width: 10px; height: 10px; border-radius: 2px; border: 1px solid var(--line); }
 li.total { font-weight: 600; border-bottom: 0; }
+dl { margin: 0; display: grid; gap: 8px; }
+dt { font-weight: 600; }
+dd { margin: 2px 0 0; color: var(--muted); line-height: 1.4; }
 .nota { color: var(--muted); font-size: 12px; line-height: 1.45; margin: 12px 0 0; }
 @media (max-width: 760px) {
   html, body { height: auto; min-height: 100%; }
@@ -71,7 +76,7 @@ li.total { font-weight: 600; border-bottom: 0; }
 
 <header>
   <h1>Casa 3D</h1>
-  <span class="sub">Lote 15 × 8 m · gire, aproxime e compare as opções</span>
+  <span class="sub">Lote 15 × 8 m · colonial pernambucano com linhas de hoje</span>
 </header>
 
 <div class="controles">
@@ -89,36 +94,156 @@ li.total { font-weight: 600; border-bottom: 0; }
       <button id="a-1" data-a="1">1º andar</button>
     </div>
   </div>
+  <div class="grupo"><span>Fachada</span>
+    <div class="seg" id="fachadas"></div>
+  </div>
+  <label class="chk"><input type="checkbox" id="telhado" checked> Telhado</label>
   <label class="chk"><input type="checkbox" id="separar"> Separar andares</label>
   <label class="chk"><input type="checkbox" id="baixas"> Paredes baixas</label>
-  <label class="chk"><input type="checkbox" id="rotulos" checked> Nomes</label>
+  <label class="chk"><input type="checkbox" id="rotulos"> Nomes</label>
+  <label class="chk"><input type="checkbox" id="cores"> Cores da planta</label>
 </div>
 
 <main>
-  <div id="cena"><span class="dica">Arraste para girar · pinça ou roda para zoom</span></div>
+  <div id="cena"><span class="dica">Arraste para girar · pinça ou roda para zoom · desmarque Telhado para ver dentro</span></div>
   <aside id="lista"></aside>
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 <script>
-const DADOS = {"planta": {"descricao": "Planta baixa térrea transcrita do esboço à mão. Medidas em metros; origem (0,0) no canto superior esquerdo, x para a direita, y para baixo.", "dimensoes_totais": {"largura": 15, "profundidade": 8}, "comodos": [{"nome": "Quarto 1", "x": 0, "y": 0, "largura": 6, "profundidade": 4, "medida": "lida"}, {"nome": "Banheiro", "x": 6, "y": 0, "largura": 1.5, "profundidade": 1.5, "medida": "lida"}, {"nome": "Circulação", "x": 6, "y": 1.5, "largura": 1.5, "profundidade": 2.5, "medida": "estimada"}, {"nome": "Quarto 2", "x": 7.5, "y": 0, "largura": 2.5, "profundidade": 4, "medida": "lida"}, {"nome": "Cozinha", "x": 10, "y": 0, "largura": 3, "profundidade": 4, "medida": "lida"}, {"nome": "Área de serviço", "x": 13, "y": 0, "largura": 2, "profundidade": 4, "medida": "lida", "externo": true}, {"nome": "Garagem", "x": 0, "y": 4, "largura": 6, "profundidade": 4, "medida": "lida"}, {"nome": "Sala", "x": 6, "y": 4, "largura": 3.5, "profundidade": 4, "medida": "estimada"}, {"nome": "Sala de Jantar", "x": 9.5, "y": 4, "largura": 5.5, "profundidade": 4, "medida": "estimada"}], "observacoes": ["Larguras da linha de cima (6 / 1,5 / 2,5 / 3 / 2) foram lidas das cotas do desenho.", "Garagem com o mesmo tamanho do Quarto 1 (6 × 4 m), conforme confirmado; a linha de baixo inteira passa a ter 4 m de fundo.", "Larguras de Sala e Sala de Jantar não têm cota no papel; foram estimadas pela proporção do desenho.", "Anotações '4m 1.5 2 2' e '6 x 8' no topo do papel não ficaram claras e não foram aplicadas.", "Sala e Sala de Jantar parecem integradas (a parede entre elas não chega até a circulação).", "Área de serviço externa junto ao muro dos fundos; na realidade tem formato triangular (desenhada como retângulo de 2 × 4 m), forma final a definir com o engenheiro."], "muros": [{"x1": -1, "y1": 0, "x2": -1, "y2": 8, "nome": "Muro / portão"}]}, "reforma": {"titulo": "Reforma (térreo)", "descricao": "Proposta de reforma sem primeiro andar. Mesmo sistema de coordenadas de planta.json.", "dimensoes_totais": {"largura": 15, "profundidade": 8}, "comodos": [{"nome": "Quarto", "x": 0, "y": 0, "largura": 4.5, "profundidade": 4, "status": "reformado"}, {"nome": "Banheiro suíte", "x": 4.5, "y": 0, "largura": 3, "profundidade": 1.5, "status": "reformado"}, {"nome": "Closet", "x": 4.5, "y": 1.5, "largura": 1.5, "profundidade": 2.5, "status": "reformado"}, {"nome": "Circulação", "x": 6, "y": 1.5, "largura": 1.5, "profundidade": 2.5, "status": "mantido"}, {"nome": "Escritório", "x": 7.5, "y": 0, "largura": 2.5, "profundidade": 4, "status": "reformado"}, {"nome": "Banheiro", "x": 10, "y": 0, "largura": 1.5, "profundidade": 4, "status": "reformado"}, {"nome": "Despensa", "x": 11.5, "y": 0, "largura": 1.5, "profundidade": 4, "status": "reformado"}, {"nome": "Área de serviço", "x": 13, "y": 0, "largura": 2, "profundidade": 4, "status": "mantido", "externo": true}, {"nome": "Garagem", "x": 0, "y": 4, "largura": 6, "profundidade": 4, "status": "mantido"}, {"nome": "Sala de TV", "x": 6, "y": 4, "largura": 3.5, "profundidade": 4, "status": "reformado"}, {"nome": "Jantar", "x": 9.5, "y": 4, "largura": 2.5, "profundidade": 4, "status": "reformado"}, {"nome": "Cozinha", "x": 12, "y": 4, "largura": 3, "profundidade": 4, "status": "reformado"}], "integracoes": [{"x1": 9.5, "y1": 4, "x2": 9.5, "y2": 8, "nota": "Sala de TV aberta para o Jantar"}, {"x1": 12, "y1": 4, "x2": 12, "y2": 8, "nota": "Cozinha aberta para o Jantar"}], "observacoes": ["Suíte: o Quarto 1 (6 × 4 m) vira Quarto (4,5 × 4 m) + Closet; o banheiro existente cresce para dentro do quarto e vira o banheiro da suíte (3 × 1,5 m).", "Acesso à suíte pela Circulação, entrando pelo Closet (que liga Quarto e Banheiro).", "Antiga Cozinha (3 × 4 m) dividida em Banheiro social e Despensa, ambos abrindo para a área de Cozinha/Jantar.", "Antiga Sala de Jantar vira Cozinha + Jantar, integrada com a Sala de TV (sem paredes entre elas).", "A antiga Cozinha já tem ponto de água e esgoto, o que facilita o novo banheiro; a nova cozinha precisa de ponto novo de água, esgoto e gás.", "Paredes que forem removidas (sala/jantar, quarto) precisam ser liberadas pelo engenheiro, caso sejam estruturais.", "Área de serviço externa junto ao muro dos fundos; na realidade tem formato triangular (desenhada como retângulo de 2 × 4 m), forma final a definir com o engenheiro."], "muros": [{"x1": -1, "y1": 0, "x2": -1, "y2": 8, "nome": "Muro / portão"}]}, "terreo_sobrado": {"titulo": "Sobrado — térreo", "descricao": "Opção com primeiro andar: térreo. Mesmo sistema de coordenadas de planta.json; a frente (portão) fica à esquerda.", "dimensoes_totais": {"largura": 15, "profundidade": 8}, "comodos": [{"nome": "Área gourmet", "x": 0, "y": 0, "largura": 6, "profundidade": 4, "status": "reformado", "externo": true}, {"nome": "Garagem aberta", "x": 0, "y": 4, "largura": 6, "profundidade": 4, "status": "reformado", "externo": true}, {"nome": "Escada em U", "x": 6, "y": 0, "largura": 2.5, "profundidade": 3, "status": "reformado"}, {"nome": "Hall", "x": 6, "y": 3, "largura": 2.5, "profundidade": 1, "status": "reformado"}, {"nome": "Escritório", "x": 8.5, "y": 0, "largura": 2, "profundidade": 4, "status": "reformado"}, {"nome": "Banheiro", "x": 10.5, "y": 0, "largura": 1.5, "profundidade": 4, "status": "reformado"}, {"nome": "Despensa", "x": 12, "y": 0, "largura": 1, "profundidade": 4, "status": "reformado"}, {"nome": "Área de serviço", "x": 13, "y": 0, "largura": 2, "profundidade": 4, "status": "mantido", "externo": true}, {"nome": "Sala de TV", "x": 6, "y": 4, "largura": 3.5, "profundidade": 4, "status": "mantido"}, {"nome": "Jantar", "x": 9.5, "y": 4, "largura": 2.5, "profundidade": 4, "status": "reformado"}, {"nome": "Cozinha", "x": 12, "y": 4, "largura": 3, "profundidade": 4, "status": "reformado"}], "integracoes": [{"x1": 0, "y1": 4, "x2": 6, "y2": 4, "nota": "Quintal: área gourmet e garagem abertas entre si"}, {"x1": 6, "y1": 4, "x2": 8.5, "y2": 4, "nota": "Hall da escada aberto para a Sala de TV"}, {"x1": 9.5, "y1": 4, "x2": 9.5, "y2": 8, "nota": "Sala de TV aberta para o Jantar"}, {"x1": 12, "y1": 4, "x2": 12, "y2": 8, "nota": "Cozinha aberta para o Jantar"}], "muros": [{"x1": -1, "y1": 0, "x2": -1, "y2": 8, "nome": "Muro / portão"}], "pilares": [[3, 0], [3, 4], [3, 8], [15, 0]], "observacoes": ["Portão no muro da frente, 1 m antes da área gourmet/garagem.", "Escada em U (2,5 × 3 m) ocupando o antigo banheiro, a circulação e uma faixa do Quarto 2; hall de 1 m aberto para a Sala de TV.", "Antiga cozinha + faixa do Quarto 2 (x 8,5–13) dividida em Escritório (2 × 4 m), Banheiro (1,5 × 4 m, porta para o Jantar) e Despensa linear (1 × 4 m, porta para a Cozinha).", "Pilares propostos (quadrados pretos): linha x = 3 m na área gourmet/garagem para apoiar a borda da varanda, e um junto ao muro dos fundos para o 1º andar que passa por cima do corredor externo. Posição e quantidade a definir com o engenheiro.", "Área de serviço externa junto ao muro dos fundos; na realidade tem formato triangular (desenhada como retângulo de 2 × 4 m), forma final a definir com o engenheiro."]}, "primeiro_andar": {"titulo": "Sobrado — 1º andar", "descricao": "Opção com primeiro andar: pavimento superior. Mesmo sistema de coordenadas de planta.json; o contorno tracejado é o térreo.", "dimensoes_totais": {"largura": 15, "profundidade": 8}, "contorno": true, "comodos": [{"nome": "Varanda", "x": 3, "y": 0, "largura": 3, "profundidade": 8, "status": "reformado", "externo": true}, {"nome": "Escada em U", "x": 6, "y": 0, "largura": 2.5, "profundidade": 3, "status": "reformado"}, {"nome": "Quarto visitas 1", "x": 8.5, "y": 0, "largura": 3.25, "profundidade": 3, "status": "reformado"}, {"nome": "Quarto visitas 2", "x": 11.75, "y": 0, "largura": 3.25, "profundidade": 3, "status": "reformado"}, {"nome": "Corredor", "x": 6, "y": 3, "largura": 9, "profundidade": 1.2, "status": "reformado"}, {"nome": "Suíte", "x": 6, "y": 4.2, "largura": 4, "profundidade": 3.8, "status": "reformado"}, {"nome": "Closet", "x": 10, "y": 4.2, "largura": 1.5, "profundidade": 3.8, "status": "reformado"}, {"nome": "Banho suíte", "x": 11.5, "y": 4.2, "largura": 1.5, "profundidade": 3.8, "status": "reformado"}, {"nome": "Banheiro", "x": 13, "y": 4.2, "largura": 2, "profundidade": 3.8, "status": "reformado"}], "integracoes": [{"x1": 6, "y1": 4.2, "x2": 6, "y2": 8, "nota": "Suíte abre para a varanda (porta de vidro)"}], "muros": [{"x1": -1, "y1": 0, "x2": -1, "y2": 8, "nome": "Muro / portão"}], "pilares": [[3, 0], [3, 4], [3, 8], [15, 0]], "observacoes": ["Pavimento em retângulo único de 9 × 8 m sobre a parte coberta da casa, inclusive por cima da área de serviço (precisa de pilar junto ao muro dos fundos; a área de serviço é triangular — forma final com o engenheiro).", "Varanda de lateral a lateral (3 × 8 m) sobre a área gourmet e a garagem, terminando 4 m antes do muro do portão; borda externa apoiada na linha de pilares x = 3 m.", "Corredor reto de 1,2 m ligando escada, quartos de visitas, suíte e banheiro.", "Suíte: quarto 4 × 3,8 m aberto para a varanda, closet de passagem e banheiro da suíte.", "Banho da suíte e banheiro social lado a lado, sobre a cozinha do térreo, dividindo a mesma prumada de água e esgoto.", "Quartos de visitas com 3,25 × 3 m (9,75 m²) cada."]}};
+const DADOS = {"planta": {"descricao": "Planta baixa térrea transcrita do esboço à mão. Medidas em metros; origem (0,0) no canto superior esquerdo, x para a direita, y para baixo.", "dimensoes_totais": {"largura": 15, "profundidade": 8}, "comodos": [{"nome": "Quarto 1", "x": 0, "y": 0, "largura": 6, "profundidade": 4, "medida": "lida"}, {"nome": "Banheiro", "x": 6, "y": 0, "largura": 1.5, "profundidade": 1.5, "medida": "lida"}, {"nome": "Circulação", "x": 6, "y": 1.5, "largura": 1.5, "profundidade": 2.5, "medida": "estimada"}, {"nome": "Quarto 2", "x": 7.5, "y": 0, "largura": 2.5, "profundidade": 4, "medida": "lida"}, {"nome": "Cozinha", "x": 10, "y": 0, "largura": 3, "profundidade": 4, "medida": "lida"}, {"nome": "Área de serviço", "x": 13, "y": 0, "largura": 2, "profundidade": 4, "medida": "lida", "externo": true}, {"nome": "Garagem", "x": 0, "y": 4, "largura": 6, "profundidade": 4, "medida": "lida"}, {"nome": "Sala", "x": 6, "y": 4, "largura": 3.5, "profundidade": 4, "medida": "estimada"}, {"nome": "Sala de Jantar", "x": 9.5, "y": 4, "largura": 5.5, "profundidade": 4, "medida": "estimada"}], "observacoes": ["Larguras da linha de cima (6 / 1,5 / 2,5 / 3 / 2) foram lidas das cotas do desenho.", "Garagem com o mesmo tamanho do Quarto 1 (6 × 4 m), conforme confirmado; a linha de baixo inteira passa a ter 4 m de fundo.", "Larguras de Sala e Sala de Jantar não têm cota no papel; foram estimadas pela proporção do desenho.", "Anotações '4m 1.5 2 2' e '6 x 8' no topo do papel não ficaram claras e não foram aplicadas.", "Sala e Sala de Jantar parecem integradas (a parede entre elas não chega até a circulação).", "Área de serviço externa junto ao muro dos fundos; na realidade tem formato triangular (desenhada como retângulo de 2 × 4 m), forma final a definir com o engenheiro.", "Portas e janelas da casa atual são aproximadas (não estavam no esboço)."], "muros": [{"x1": -1, "y1": 0, "x2": -1, "y2": 8, "nome": "Muro / portão"}], "aberturas": [{"tipo": "janela", "x1": 0, "y1": 1.2, "x2": 0, "y2": 2.8}, {"tipo": "janela", "x1": 2, "y1": 0, "x2": 3.5, "y2": 0}, {"tipo": "portao-garagem", "x1": 0, "y1": 4.6, "x2": 0, "y2": 7.4}, {"tipo": "porta", "x1": 6, "y1": 2, "x2": 6, "y2": 2.8}, {"tipo": "porta", "x1": 6.3, "y1": 1.5, "x2": 7.0, "y2": 1.5}, {"tipo": "porta", "x1": 7.5, "y1": 2.5, "x2": 7.5, "y2": 3.3}, {"tipo": "passagem", "x1": 6.2, "y1": 4, "x2": 7.3, "y2": 4}, {"tipo": "janela-alta", "x1": 6.4, "y1": 0, "x2": 7.1, "y2": 0}, {"tipo": "janela", "x1": 8.2, "y1": 0, "x2": 9.4, "y2": 0}, {"tipo": "janela", "x1": 11, "y1": 0, "x2": 12.2, "y2": 0}, {"tipo": "porta", "x1": 10.3, "y1": 4, "x2": 11.1, "y2": 4}, {"tipo": "porta", "x1": 13, "y1": 2.8, "x2": 13, "y2": 3.6}, {"tipo": "porta", "x1": 6, "y1": 5, "x2": 6, "y2": 5.9}, {"tipo": "janela", "x1": 7, "y1": 8, "x2": 8.5, "y2": 8}, {"tipo": "janela", "x1": 11, "y1": 8, "x2": 13, "y2": 8}, {"tipo": "porta", "x1": 13.4, "y1": 4, "x2": 14.3, "y2": 4}], "telhados": [{"tipo": "duas-aguas", "x": 0, "y": 0, "largura": 15, "profundidade": 8, "cumeeira": "y", "nivel": 0, "inclinacao": 0.3, "beiral": [0.6, 0.3]}]}, "reforma": {"titulo": "Reforma (térreo)", "descricao": "Proposta de reforma sem primeiro andar. Mesmo sistema de coordenadas de planta.json.", "dimensoes_totais": {"largura": 15, "profundidade": 8}, "comodos": [{"nome": "Quarto", "x": 0, "y": 0, "largura": 4.5, "profundidade": 4, "status": "reformado"}, {"nome": "Banheiro suíte", "x": 4.5, "y": 0, "largura": 3, "profundidade": 1.5, "status": "reformado"}, {"nome": "Closet", "x": 4.5, "y": 1.5, "largura": 1.5, "profundidade": 2.5, "status": "reformado"}, {"nome": "Circulação", "x": 6, "y": 1.5, "largura": 1.5, "profundidade": 2.5, "status": "mantido"}, {"nome": "Escritório", "x": 7.5, "y": 0, "largura": 2.5, "profundidade": 4, "status": "reformado"}, {"nome": "Banheiro", "x": 10, "y": 0, "largura": 1.5, "profundidade": 4, "status": "reformado"}, {"nome": "Despensa", "x": 11.5, "y": 0, "largura": 1.5, "profundidade": 4, "status": "reformado"}, {"nome": "Área de serviço", "x": 13, "y": 0, "largura": 2, "profundidade": 4, "status": "mantido", "externo": true}, {"nome": "Garagem", "x": 0, "y": 4, "largura": 6, "profundidade": 4, "status": "mantido"}, {"nome": "Sala de TV", "x": 6, "y": 4, "largura": 3.5, "profundidade": 4, "status": "reformado"}, {"nome": "Jantar", "x": 9.5, "y": 4, "largura": 2.5, "profundidade": 4, "status": "reformado"}, {"nome": "Cozinha", "x": 12, "y": 4, "largura": 3, "profundidade": 4, "status": "reformado"}], "integracoes": [{"x1": 9.5, "y1": 4, "x2": 9.5, "y2": 8, "nota": "Sala de TV aberta para o Jantar"}, {"x1": 12, "y1": 4, "x2": 12, "y2": 8, "nota": "Cozinha aberta para o Jantar"}], "observacoes": ["Suíte: o Quarto 1 (6 × 4 m) vira Quarto (4,5 × 4 m) + Closet; o banheiro existente cresce para dentro do quarto e vira o banheiro da suíte (3 × 1,5 m).", "Acesso à suíte pela Circulação, entrando pelo Closet (que liga Quarto e Banheiro).", "Antiga Cozinha (3 × 4 m) dividida em Banheiro social e Despensa, ambos abrindo para a área de Cozinha/Jantar.", "Antiga Sala de Jantar vira Cozinha + Jantar, integrada com a Sala de TV (sem paredes entre elas).", "A antiga Cozinha já tem ponto de água e esgoto, o que facilita o novo banheiro; a nova cozinha precisa de ponto novo de água, esgoto e gás.", "Paredes que forem removidas (sala/jantar, quarto) precisam ser liberadas pelo engenheiro, caso sejam estruturais.", "Área de serviço externa junto ao muro dos fundos; na realidade tem formato triangular (desenhada como retângulo de 2 × 4 m), forma final a definir com o engenheiro.", "Janelas nas laterais (y = 0 e y = 8) supõem que a casa não é colada nos vizinhos; confirmar."], "muros": [{"x1": -1, "y1": 0, "x2": -1, "y2": 8, "nome": "Muro / portão"}], "aberturas": [{"tipo": "janela", "x1": 0, "y1": 1.2, "x2": 0, "y2": 2.8}, {"tipo": "janela", "x1": 1.5, "y1": 0, "x2": 3, "y2": 0}, {"tipo": "janela-alta", "x1": 5.5, "y1": 0, "x2": 6.5, "y2": 0}, {"tipo": "porta", "x1": 4.7, "y1": 1.5, "x2": 5.5, "y2": 1.5}, {"tipo": "passagem", "x1": 4.5, "y1": 2, "x2": 4.5, "y2": 3.5}, {"tipo": "porta", "x1": 6, "y1": 2.6, "x2": 6, "y2": 3.4}, {"tipo": "passagem", "x1": 6.2, "y1": 4, "x2": 7.3, "y2": 4}, {"tipo": "porta", "x1": 7.5, "y1": 2.6, "x2": 7.5, "y2": 3.4}, {"tipo": "janela", "x1": 8.1, "y1": 0, "x2": 9.4, "y2": 0}, {"tipo": "porta", "x1": 10.3, "y1": 4, "x2": 11, "y2": 4}, {"tipo": "janela-alta", "x1": 10.4, "y1": 0, "x2": 11.1, "y2": 0}, {"tipo": "porta", "x1": 12.2, "y1": 4, "x2": 12.9, "y2": 4}, {"tipo": "janela-alta", "x1": 13, "y1": 1, "x2": 13, "y2": 2}, {"tipo": "portao-garagem", "x1": 0, "y1": 4.6, "x2": 0, "y2": 7.4}, {"tipo": "porta", "x1": 6, "y1": 5, "x2": 6, "y2": 5.9}, {"tipo": "janela", "x1": 7, "y1": 8, "x2": 8.6, "y2": 8}, {"tipo": "janela", "x1": 10, "y1": 8, "x2": 11.5, "y2": 8}, {"tipo": "janela", "x1": 12.8, "y1": 8, "x2": 14.4, "y2": 8}, {"tipo": "porta", "x1": 13.3, "y1": 4, "x2": 14.1, "y2": 4}], "telhados": [{"tipo": "duas-aguas", "x": 0, "y": 0, "largura": 15, "profundidade": 8, "cumeeira": "y", "nivel": 0, "inclinacao": 0.3, "beiral": [0.6, 0.3]}]}, "terreo_sobrado": {"titulo": "Sobrado — térreo", "descricao": "Opção com primeiro andar: térreo. Mesmo sistema de coordenadas de planta.json; a frente (portão) fica à esquerda.", "dimensoes_totais": {"largura": 15, "profundidade": 8}, "comodos": [{"nome": "Área gourmet", "x": 0, "y": 0, "largura": 6, "profundidade": 4, "status": "reformado", "externo": true}, {"nome": "Garagem aberta", "x": 0, "y": 4, "largura": 6, "profundidade": 4, "status": "reformado", "externo": true}, {"nome": "Escada em U", "x": 6, "y": 0, "largura": 2.5, "profundidade": 3, "status": "reformado"}, {"nome": "Hall", "x": 6, "y": 3, "largura": 2.5, "profundidade": 1, "status": "reformado"}, {"nome": "Escritório", "x": 8.5, "y": 0, "largura": 2, "profundidade": 4, "status": "reformado"}, {"nome": "Banheiro", "x": 10.5, "y": 0, "largura": 1.5, "profundidade": 4, "status": "reformado"}, {"nome": "Despensa", "x": 12, "y": 0, "largura": 1, "profundidade": 4, "status": "reformado"}, {"nome": "Área de serviço", "x": 13, "y": 0, "largura": 2, "profundidade": 4, "status": "mantido", "externo": true}, {"nome": "Sala de TV", "x": 6, "y": 4, "largura": 3.5, "profundidade": 4, "status": "mantido"}, {"nome": "Jantar", "x": 9.5, "y": 4, "largura": 2.5, "profundidade": 4, "status": "reformado"}, {"nome": "Cozinha", "x": 12, "y": 4, "largura": 3, "profundidade": 4, "status": "reformado"}], "integracoes": [{"x1": 0, "y1": 4, "x2": 6, "y2": 4, "nota": "Quintal: área gourmet e garagem abertas entre si"}, {"x1": 6, "y1": 4, "x2": 8.5, "y2": 4, "nota": "Hall da escada aberto para a Sala de TV"}, {"x1": 9.5, "y1": 4, "x2": 9.5, "y2": 8, "nota": "Sala de TV aberta para o Jantar"}, {"x1": 12, "y1": 4, "x2": 12, "y2": 8, "nota": "Cozinha aberta para o Jantar"}, {"x1": 6, "y1": 3, "x2": 8.5, "y2": 3, "nota": "Início da escada aberto para o hall"}], "muros": [{"x1": -1, "y1": 0, "x2": -1, "y2": 8, "nome": "Muro / portão"}, {"x1": -1, "y1": 0, "x2": 6, "y2": 0, "nome": "Muro lateral em cobogó", "tipo": "cobogo"}, {"x1": -1, "y1": 8, "x2": 6, "y2": 8, "nome": "Muro lateral"}], "pilares": [[3, 0], [3, 4], [3, 8], [15, 0]], "observacoes": ["Portão no muro da frente, 1 m antes da área gourmet/garagem.", "Escada em U (2,5 × 3 m) ocupando o antigo banheiro, a circulação e uma faixa do Quarto 2; hall de 1 m aberto para a Sala de TV.", "Antiga cozinha + faixa do Quarto 2 (x 8,5–13) dividida em Escritório (2 × 4 m), Banheiro (1,5 × 4 m, porta para o Jantar) e Despensa linear (1 × 4 m, porta para a Cozinha).", "Pilares propostos (quadrados pretos): linha x = 3 m na área gourmet/garagem para apoiar a borda da varanda, e um junto ao muro dos fundos para o 1º andar que passa por cima do corredor externo. Posição e quantidade a definir com o engenheiro.", "Área de serviço externa junto ao muro dos fundos; na realidade tem formato triangular (desenhada como retângulo de 2 × 4 m), forma final a definir com o engenheiro.", "Entrada principal pelo hall da escada, vinda do quintal; Sala de TV abre para o quintal com porta de vidro.", "Escada iluminada por painel de cobogó voltado para a área gourmet; muro lateral da área gourmet também em cobogó.", "Área gourmet com bancada e fogão a lenha com chaminé.", "Janelas nas laterais (y = 0 e y = 8) supõem que a casa não é colada nos vizinhos; confirmar."], "aberturas": [{"tipo": "cobogo", "x1": 6, "y1": 0.4, "x2": 6, "y2": 2.6}, {"tipo": "porta", "x1": 6, "y1": 3.05, "x2": 6, "y2": 3.95, "nota": "entrada principal"}, {"tipo": "porta-vidro", "x1": 6, "y1": 4.6, "x2": 6, "y2": 7.4}, {"tipo": "porta", "x1": 8.7, "y1": 4, "x2": 9.5, "y2": 4}, {"tipo": "janela", "x1": 8.9, "y1": 0, "x2": 10.1, "y2": 0}, {"tipo": "porta", "x1": 10.7, "y1": 4, "x2": 11.4, "y2": 4}, {"tipo": "janela-alta", "x1": 10.8, "y1": 0, "x2": 11.7, "y2": 0}, {"tipo": "porta", "x1": 12.1, "y1": 4, "x2": 12.8, "y2": 4}, {"tipo": "janela-alta", "x1": 13, "y1": 1, "x2": 13, "y2": 2}, {"tipo": "porta", "x1": 13.2, "y1": 4, "x2": 14, "y2": 4}, {"tipo": "janela", "x1": 14.1, "y1": 4, "x2": 14.9, "y2": 4}, {"tipo": "janela", "x1": 7, "y1": 8, "x2": 8.6, "y2": 8}, {"tipo": "janela", "x1": 10, "y1": 8, "x2": 11.5, "y2": 8}, {"tipo": "janela", "x1": 12.8, "y1": 8, "x2": 14.4, "y2": 8}], "escadas": [{"tipo": "U", "x": 6, "y": 0, "largura": 2.5, "profundidade": 3}], "elementos": [{"nome": "Bancada gourmet", "x": 0.6, "y": 0.15, "largura": 3.2, "profundidade": 0.65, "altura": 0.9, "material": "bancada"}, {"nome": "Fogão a lenha", "x": 3.8, "y": 0.15, "largura": 1.3, "profundidade": 0.75, "altura": 0.85, "material": "tijolo"}, {"nome": "Chaminé", "x": 4.2, "y": 0.2, "largura": 0.5, "profundidade": 0.45, "altura": 3.4, "base": 0.85, "material": "tijolo"}], "telhados": []}, "primeiro_andar": {"titulo": "Sobrado — 1º andar", "descricao": "Opção com primeiro andar: pavimento superior. Mesmo sistema de coordenadas de planta.json; o contorno tracejado é o térreo.", "dimensoes_totais": {"largura": 15, "profundidade": 8}, "contorno": true, "comodos": [{"nome": "Varanda", "x": 3, "y": 0, "largura": 3, "profundidade": 8, "status": "reformado", "externo": true}, {"nome": "Escada em U", "x": 6, "y": 0, "largura": 2.5, "profundidade": 3, "status": "reformado"}, {"nome": "Quarto visitas 1", "x": 8.5, "y": 0, "largura": 3.25, "profundidade": 3, "status": "reformado"}, {"nome": "Quarto visitas 2", "x": 11.75, "y": 0, "largura": 3.25, "profundidade": 3, "status": "reformado"}, {"nome": "Corredor", "x": 6, "y": 3, "largura": 9, "profundidade": 1.2, "status": "reformado"}, {"nome": "Suíte", "x": 6, "y": 4.2, "largura": 4, "profundidade": 3.8, "status": "reformado"}, {"nome": "Closet", "x": 10, "y": 4.2, "largura": 1.5, "profundidade": 3.8, "status": "reformado"}, {"nome": "Banho suíte", "x": 11.5, "y": 4.2, "largura": 1.5, "profundidade": 3.8, "status": "reformado"}, {"nome": "Banheiro", "x": 13, "y": 4.2, "largura": 2, "profundidade": 3.8, "status": "reformado"}], "integracoes": [{"x1": 6, "y1": 3, "x2": 8.5, "y2": 3, "nota": "Chegada da escada no corredor"}], "muros": [{"x1": -1, "y1": 0, "x2": -1, "y2": 8, "nome": "Muro / portão"}], "pilares": [[3, 0], [3, 4], [3, 8], [15, 0]], "observacoes": ["Pavimento em retângulo único de 9 × 8 m sobre a parte coberta da casa, inclusive por cima da área de serviço (precisa de pilar junto ao muro dos fundos; a área de serviço é triangular — forma final com o engenheiro).", "Corredor reto de 1,2 m ligando escada, quartos de visitas, suíte e banheiro.", "Suíte: quarto 4 × 3,8 m aberto para a varanda, closet de passagem e banheiro da suíte.", "Banho da suíte e banheiro social lado a lado, sobre a cozinha do térreo, dividindo a mesma prumada de água e esgoto.", "Quartos de visitas com 3,25 × 3 m (9,75 m²) cada.", "Varanda de lateral a lateral (3 × 8 m) sobre a área gourmet e a garagem, com pergolado de madeira e guarda-corpo de cobogó; borda externa apoiada na linha de pilares x = 3 m.", "Telhado colonial de duas águas com cumeeira paralela à rua, oitões nas laterais e beiral sobre a varanda.", "Janelas nas laterais (y = 0 e y = 8) supõem que a casa não é colada nos vizinhos; confirmar."], "aberturas": [{"tipo": "cobogo", "x1": 6, "y1": 0.4, "x2": 6, "y2": 2.6}, {"tipo": "porta", "x1": 6, "y1": 3.15, "x2": 6, "y2": 4.05}, {"tipo": "porta-vidro", "x1": 6, "y1": 4.7, "x2": 6, "y2": 7.5}, {"tipo": "janela", "x1": 9.4, "y1": 0, "x2": 10.9, "y2": 0}, {"tipo": "porta", "x1": 9.0, "y1": 3, "x2": 9.8, "y2": 3}, {"tipo": "janela", "x1": 12.6, "y1": 0, "x2": 14.1, "y2": 0}, {"tipo": "porta", "x1": 12.2, "y1": 3, "x2": 13.0, "y2": 3}, {"tipo": "janela-alta", "x1": 15, "y1": 3.2, "x2": 15, "y2": 4.0}, {"tipo": "porta", "x1": 8.8, "y1": 4.2, "x2": 9.6, "y2": 4.2}, {"tipo": "janela", "x1": 7.2, "y1": 8, "x2": 8.8, "y2": 8}, {"tipo": "porta", "x1": 10, "y1": 4.4, "x2": 10, "y2": 5.2}, {"tipo": "janela-alta", "x1": 10.3, "y1": 8, "x2": 11.2, "y2": 8}, {"tipo": "porta", "x1": 11.5, "y1": 4.4, "x2": 11.5, "y2": 5.1}, {"tipo": "janela-alta", "x1": 11.8, "y1": 8, "x2": 12.7, "y2": 8}, {"tipo": "porta", "x1": 13.3, "y1": 4.2, "x2": 14.1, "y2": 4.2}, {"tipo": "janela-alta", "x1": 13.5, "y1": 8, "x2": 14.5, "y2": 8}], "telhados": [{"tipo": "duas-aguas", "x": 6, "y": 0, "largura": 9, "profundidade": 8, "cumeeira": "y", "nivel": 1, "inclinacao": 0.3, "beiral": [0.8, 0.3]}], "pergolados": [{"x": 3, "y": 0, "largura": 3, "profundidade": 8, "nivel": 1, "altura": 2.4, "direcao": "x", "espaco": 0.45}]}};
 
-const PE_DIREITO = 2.8, ESPESSURA = 0.15, LAJE = 0.12, PAREDE_BAIXA = 1.2;
+const PE_DIREITO = 2.8, ESPESSURA = 0.15, LAJE = 0.12, PAREDE_BAIXA = 1.2, BARRADO = 0.9;
 const CENARIOS = {
   atual:   [DADOS.planta],
   reforma: [DADOS.reforma],
   sobrado: [DADOS.terreo_sobrado, DADOS.primeiro_andar],
 };
 const NOME_ANDAR = ["Térreo", "1º andar"];
+const FACHADAS = {
+  olinda:   { nome: "Amarelo Olinda", parede: 0xe0b04c, esquadria: 0x22507c },
+  colonial: { nome: "Azul colonial",  parede: 0x6b98bf, esquadria: 0xf3efe6 },
+  recife:   { nome: "Rosa Recife",    parede: 0xd8918a, esquadria: 0x2e6a4f },
+  cal:      { nome: "Cal e anil",     parede: 0xf1ece2, esquadria: 0x22507c },
+};
+// medidas de cada tipo de abertura: peitoril e altura (m)
+const ABERTURA = {
+  "porta": { p: 0, h: 2.1 }, "passagem": { p: 0, h: 2.1 }, "porta-vidro": { p: 0, h: 2.4 },
+  "janela": { p: 1.0, h: 1.3 }, "janela-alta": { p: 1.7, h: 0.5 }, "cobogo": { p: 0.3, h: 2.3 },
+  "portao-garagem": { p: 0, h: 2.4 },
+};
 const COR = {
   externo: 0xc5d9b2, reformado: 0xd6e5f2, existente: 0xe8e4dc,
-  parede: 0xf6f4ef, laje: 0xcfcbc3, pilar: 0x3b403e, muro: 0xb5b1a8, portao: 0x4d5355,
-  terreno: 0x9fbb86, guarda: 0x8fc0d6,
+  cal: 0xf3efe7, moldura: 0xfaf8f3, laje: 0xe9e4da, madeira: 0x8a5a32, madeiraClara: 0xa9784a,
+  vidro: 0x9cc7d8, terreno: 0x93b57a, pilar: 0xf3efe7, telhaCumeeira: 0x8e3f22, bancada: 0x55524c, tijolo: 0xa4523a,
 };
 const hex = n => "#" + n.toString(16).padStart(6, "0");
 
-const estado = { cenario: "sobrado", andar: "todos", separar: false, baixas: false, rotulos: true };
+const estado = { cenario: "sobrado", andar: "todos", fachada: "olinda", telhado: true, separar: false, baixas: false, rotulos: false, cores: false };
+
+// ---------- texturas desenhadas no canvas (1 imagem = 1 metro, salvo indicação) ----------
+function tela(px, desenhar) {
+  const cv = document.createElement("canvas");
+  cv.width = cv.height = px;
+  desenhar(cv.getContext("2d"), px);
+  return cv;
+}
+function variar(base, amp) {
+  const c = new THREE.Color(base), d = (Math.random() - 0.5) * amp;
+  return `rgb(${[c.r, c.g, c.b].map(v => Math.max(0, Math.min(255, Math.round((v + d) * 255)))).join(",")})`;
+}
+const IMAGENS = {
+  // telha colonial: canais descendo a água, fiadas a cada ~42 cm
+  telha: { m: 1, cv: tela(256, (g, n) => {
+    g.fillStyle = "#9b4526"; g.fillRect(0, 0, n, n);
+    const larg = n / 5, fiada = n / 2.4;
+    for (let r = 0; r < 3; r++) for (let c = 0; c < 5; c++) {
+      const x = c * larg, y = r * fiada;
+      const gr = g.createLinearGradient(x, 0, x + larg, 0);
+      const base = variar(0xb85a33, 0.12);
+      gr.addColorStop(0, "rgba(60,20,10,0.55)"); gr.addColorStop(0.35, base); gr.addColorStop(0.6, base); gr.addColorStop(1, "rgba(60,20,10,0.6)");
+      g.fillStyle = gr; g.fillRect(x, y, larg, fiada);
+      g.fillStyle = "rgba(40,12,5,0.45)"; g.fillRect(x, y + fiada - 6, larg, 6);
+    }
+  }) },
+  // azulejo português azul e branco, peças de 15 cm (a imagem cobre 60 cm)
+  azulejo: { m: 0.6, cv: tela(256, (g, n) => {
+    const t = n / 4;
+    for (let i = 0; i < 4; i++) for (let j = 0; j < 4; j++) {
+      const x = i * t, y = j * t;
+      g.fillStyle = "#f4f1ea"; g.fillRect(x, y, t, t);
+      g.strokeStyle = "#1f4f8f"; g.lineWidth = 3;
+      g.beginPath(); g.arc(x, y, t * 0.32, 0, Math.PI / 2); g.stroke();
+      g.beginPath(); g.arc(x + t, y, t * 0.32, Math.PI / 2, Math.PI); g.stroke();
+      g.beginPath(); g.arc(x, y + t, t * 0.32, -Math.PI / 2, 0); g.stroke();
+      g.beginPath(); g.arc(x + t, y + t, t * 0.32, Math.PI, Math.PI * 1.5); g.stroke();
+      g.fillStyle = "#1f4f8f";
+      g.beginPath(); g.moveTo(x + t / 2, y + t * 0.2); g.lineTo(x + t * 0.8, y + t / 2); g.lineTo(x + t / 2, y + t * 0.8); g.lineTo(x + t * 0.2, y + t / 2); g.closePath(); g.fill();
+      g.fillStyle = "#f4f1ea"; g.beginPath(); g.arc(x + t / 2, y + t / 2, t * 0.1, 0, Math.PI * 2); g.fill();
+      g.strokeStyle = "rgba(30,60,110,0.25)"; g.lineWidth = 1; g.strokeRect(x + 0.5, y + 0.5, t - 1, t - 1);
+    }
+  }) },
+  // cobogó: blocos de 20 cm com furos (transparência pelo canal alfa)
+  cobogo: { m: 0.4, cv: tela(256, (g, n) => {
+    g.fillStyle = "#efe9de"; g.fillRect(0, 0, n, n);
+    g.globalCompositeOperation = "destination-out";
+    const t = n / 2;
+    for (let i = 0; i < 2; i++) for (let j = 0; j < 2; j++) {
+      const cx = i * t + t / 2, cy = j * t + t / 2, r = t * 0.36;
+      for (const [dx, dy] of [[-1, -1], [1, -1], [1, 1], [-1, 1]]) {
+        g.beginPath(); g.arc(cx + dx * t / 2, cy + dy * t / 2, r, 0, Math.PI * 2); g.fill();
+      }
+      g.beginPath(); g.arc(cx, cy, t * 0.1, 0, Math.PI * 2); g.fill();
+    }
+    g.globalCompositeOperation = "source-over";
+    g.strokeStyle = "rgba(0,0,0,0.12)"; g.lineWidth = 2;
+    for (let k = 0; k <= 2; k++) { g.beginPath(); g.moveTo(k * t, 0); g.lineTo(k * t, n); g.moveTo(0, k * t); g.lineTo(n, k * t); g.stroke(); }
+  }) },
+  // taco de madeira em espinha
+  taco: { m: 0.8, cv: tela(256, (g, n) => {
+    const l = n / 8, c = n / 2;
+    for (let i = 0; i < 8; i++) for (let j = 0; j < 2; j++) {
+      g.fillStyle = variar(0xa8743f, 0.14);
+      if ((i + j) % 2) g.fillRect(i * l, j * c, l, c); else g.fillRect(i * l, j * c, l, c);
+      g.strokeStyle = "rgba(60,30,10,0.35)"; g.strokeRect(i * l + 0.5, j * c + 0.5, l - 1, c - 1);
+    }
+  }) },
+  // ladrilho hidráulico 20 × 20 cm
+  ladrilho: { m: 0.8, cv: tela(256, (g, n) => {
+    const t = n / 4;
+    for (let i = 0; i < 4; i++) for (let j = 0; j < 4; j++) {
+      const x = i * t, y = j * t;
+      g.fillStyle = "#efe6d4"; g.fillRect(x, y, t, t);
+      g.fillStyle = "#b5543a";
+      for (const [dx, dy] of [[0, 0], [t, 0], [0, t], [t, t]]) { g.beginPath(); g.arc(x + dx, y + dy, t * 0.42, 0, Math.PI * 2); g.fill(); }
+      g.fillStyle = "#efe6d4";
+      for (const [dx, dy] of [[0, 0], [t, 0], [0, t], [t, t]]) { g.beginPath(); g.arc(x + dx, y + dy, t * 0.28, 0, Math.PI * 2); g.fill(); }
+      g.fillStyle = "#2f3b3a";
+      g.beginPath(); g.moveTo(x + t / 2, y + t * 0.18); g.lineTo(x + t * 0.82, y + t / 2); g.lineTo(x + t / 2, y + t * 0.82); g.lineTo(x + t * 0.18, y + t / 2); g.closePath(); g.fill();
+      g.fillStyle = "#d9a441"; g.beginPath(); g.arc(x + t / 2, y + t / 2, t * 0.12, 0, Math.PI * 2); g.fill();
+    }
+  }) },
+  // tijoleira de barro 30 × 30 cm
+  tijoleira: { m: 0.9, cv: tela(256, (g, n) => {
+    const t = n / 3;
+    g.fillStyle = "#d8cbb6"; g.fillRect(0, 0, n, n);
+    for (let i = 0; i < 3; i++) for (let j = 0; j < 3; j++) { g.fillStyle = variar(0xb4613f, 0.12); g.fillRect(i * t + 2, j * t + 2, t - 4, t - 4); }
+  }) },
+  cimento: { m: 1, cv: tela(128, (g, n) => {
+    g.fillStyle = "#a9a7a1"; g.fillRect(0, 0, n, n);
+    for (let k = 0; k < 900; k++) { g.fillStyle = `rgba(${Math.random() < .5 ? "0,0,0" : "255,255,255"},0.06)`; g.fillRect(Math.random() * n, Math.random() * n, 2, 2); }
+  }) },
+  // venezianas e réguas (tingidas pela cor da esquadria)
+  veneziana: { m: 0.5, cv: tela(64, (g, n) => {
+    g.fillStyle = "#ffffff"; g.fillRect(0, 0, n, n);
+    for (let y = 0; y < n; y += 8) { g.fillStyle = "rgba(0,0,0,0.28)"; g.fillRect(0, y + 5, n, 3); }
+  }) },
+  regua: { m: 0.5, cv: tela(64, (g, n) => {
+    g.fillStyle = "#ffffff"; g.fillRect(0, 0, n, n);
+    for (let x = 0; x < n; x += 10) { g.fillStyle = "rgba(0,0,0,0.25)"; g.fillRect(x + 8, 0, 2, n); }
+  }) },
+};
 
 // ---------- cena ----------
 const cena = document.getElementById("cena");
@@ -127,61 +252,88 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 cena.prepend(renderer.domElement);
+const maxAniso = renderer.capabilities.getMaxAnisotropy();
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 200);
-const DIRECAO_CAMERA = new THREE.Vector3(-0.55, 0.62, 0.56).normalize();
+const DIRECAO_CAMERA = new THREE.Vector3(-0.85, 0.45, 0.42).normalize();
 const controls = new THREE.OrbitControls(camera, renderer.domElement);
-controls.target.set(7, 1, 4);
+controls.target.set(7, 1.6, 4);
 controls.enableDamping = true;
-controls.maxPolarAngle = Math.PI / 2 - 0.05;
-controls.minDistance = 4;
+controls.maxPolarAngle = Math.PI / 2 - 0.03;
+controls.minDistance = 3;
 controls.maxDistance = 60;
-controls.update();
 
-scene.add(new THREE.HemisphereLight(0xffffff, 0x7d8279, 0.55));
-const sol = new THREE.DirectionalLight(0xffffff, 0.55);
-sol.position.set(-6, 18, 12);
+scene.add(new THREE.HemisphereLight(0xfdfbf5, 0x7d8279, 0.6));
+const sol = new THREE.DirectionalLight(0xfff6e8, 0.62);
+sol.position.set(-8, 16, 14);
 sol.target.position.set(7, 0, 4);
 sol.castShadow = true;
 sol.shadow.mapSize.set(2048, 2048);
-Object.assign(sol.shadow.camera, { left: -14, right: 14, top: 14, bottom: -14, near: 1, far: 50 });
+sol.shadow.bias = -0.0005;
+Object.assign(sol.shadow.camera, { left: -14, right: 14, top: 14, bottom: -14, near: 1, far: 60 });
 scene.add(sol, sol.target);
 
-const terreno = new THREE.Mesh(new THREE.PlaneGeometry(20, 12), new THREE.MeshLambertMaterial({ color: COR.terreno }));
+const terreno = new THREE.Mesh(new THREE.PlaneGeometry(26, 18), new THREE.MeshLambertMaterial({ color: COR.terreno }));
 terreno.rotation.x = -Math.PI / 2;
-terreno.position.set(7, -0.02, 4);
+terreno.position.set(7, -0.03, 4);
 terreno.receiveShadow = true;
 scene.add(terreno);
+// calçada em frente ao portão
+const calcada = new THREE.Mesh(new THREE.PlaneGeometry(2.4, 18), new THREE.MeshLambertMaterial({ color: 0xc9c4b8 }));
+calcada.rotation.x = -Math.PI / 2;
+calcada.position.set(-2.4, -0.02, 4);
+scene.add(calcada);
 
 let grupo = new THREE.Group();
 scene.add(grupo);
 
 function corFundo() {
-  scene.background = new THREE.Color(getComputedStyle(document.documentElement).getPropertyValue("--scene").trim() || "#e2e6e1");
+  scene.background = new THREE.Color(getComputedStyle(document.documentElement).getPropertyValue("--scene").trim() || "#dfe7ea");
 }
 corFundo();
 matchMedia("(prefers-color-scheme: dark)").addEventListener("change", corFundo);
 new MutationObserver(corFundo).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
 
-// ---------- geometria ----------
-const materiais = {};
+// ---------- materiais ----------
+const cache = {};
 function mat(cor, opts = {}) {
-  const k = cor + JSON.stringify(opts);
-  return materiais[k] || (materiais[k] = new THREE.MeshLambertMaterial({ color: cor, ...opts }));
+  const k = "c" + cor + JSON.stringify(opts);
+  return cache[k] || (cache[k] = new THREE.MeshLambertMaterial({ color: cor, ...opts }));
 }
-// caixa em coordenadas da planta: x → x, y da planta → z, altura → y
-function caixa(x0, x1, z0, z1, y0, y1, cor, opts) {
-  const m = new THREE.Mesh(new THREE.BoxGeometry(x1 - x0, y1 - y0, z1 - z0), mat(cor, opts));
-  m.position.set((x0 + x1) / 2, (y0 + y1) / 2, (z0 + z1) / 2);
-  m.castShadow = !opts; m.receiveShadow = true;
+// material com textura repetida para cobrir larg × alt metros
+function matTex(nome, larg, alt, cor = 0xffffff, opts = {}) {
+  const img = IMAGENS[nome];
+  const rx = +(larg / img.m).toFixed(2), ry = +(alt / img.m).toFixed(2);
+  const k = `t${nome}|${rx}|${ry}|${cor}|${JSON.stringify(opts)}`;
+  if (cache[k]) return cache[k];
+  const tex = new THREE.CanvasTexture(img.cv);
+  tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
+  tex.repeat.set(rx, ry);
+  tex.anisotropy = maxAniso;
+  return (cache[k] = new THREE.MeshLambertMaterial({ map: tex, color: cor, ...opts }));
+}
+const vidro = () => mat(COR.vidro, { transparent: true, opacity: 0.35 });
+const fachada = () => FACHADAS[estado.fachada];
+
+// ---------- geometria básica ----------
+function addMesh(geo, material, sombra = true) {
+  const m = new THREE.Mesh(geo, material);
+  m.castShadow = sombra && !material.transparent;
+  m.receiveShadow = true;
   grupo.add(m);
   return m;
 }
-
-function corPiso(c) {
-  if (c.externo) return COR.externo;
-  return c.status === "reformado" ? COR.reformado : COR.existente;
+// caixa em coordenadas da planta: x → x, y da planta → z, altura → y
+function caixa(x0, x1, z0, z1, y0, y1, material) {
+  const m = addMesh(new THREE.BoxGeometry(Math.max(x1 - x0, 0.001), Math.max(y1 - y0, 0.001), Math.max(z1 - z0, 0.001)), material);
+  m.position.set((x0 + x1) / 2, (y0 + y1) / 2, (z0 + z1) / 2);
+  return m;
+}
+// caixa sobre uma linha de parede: o = "h" (corre em x, na posição z = v) ou "v" (corre em z, na posição x = v)
+function naLinha(o, v, a, b, y0, y1, off, esp, material) {
+  const c = v + off;
+  return o === "h" ? caixa(a, b, c - esp / 2, c + esp / 2, y0, y1, material) : caixa(c - esp / 2, c + esp / 2, a, b, y0, y1, material);
 }
 
 function juntar(iv) {
@@ -202,6 +354,10 @@ function tirar(iv, [c0, c1]) {
   }
   return out;
 }
+const linhaDe = ab => ab.x1 === ab.x2
+  ? { o: "v", v: ab.x1, a: Math.min(ab.y1, ab.y2), b: Math.max(ab.y1, ab.y2) }
+  : { o: "h", v: ab.y1, a: Math.min(ab.x1, ab.x2), b: Math.max(ab.x1, ab.x2) };
+const chave = s => s.o + "|" + s.v;
 
 // paredes = bordas dos cômodos internos, sem duplicar as compartilhadas e sem as integrações
 function paredes(nivel) {
@@ -213,10 +369,7 @@ function paredes(nivel) {
     add(linhas, "h|" + c.y, c.x, x1); add(linhas, "h|" + y1, c.x, x1);
     add(linhas, "v|" + c.x, c.y, y1); add(linhas, "v|" + x1, c.y, y1);
   }
-  for (const i of nivel.integracoes || []) {
-    if (i.x1 === i.x2) add(cortes, "v|" + i.x1, Math.min(i.y1, i.y2), Math.max(i.y1, i.y2));
-    else add(cortes, "h|" + i.y1, Math.min(i.x1, i.x2), Math.max(i.x1, i.x2));
-  }
+  for (const i of nivel.integracoes || []) { const s = linhaDe(i); add(cortes, chave(s), s.a, s.b); }
   const out = [];
   for (const [k, iv] of linhas) {
     let m = juntar(iv);
@@ -227,10 +380,186 @@ function paredes(nivel) {
   return out;
 }
 
-function parede(s, base, altura, cor, opts, esp = ESPESSURA) {
-  const h = esp / 2;
-  if (s.o === "h") caixa(s.a - h, s.b + h, s.v - h, s.v + h, base, base + altura, cor, opts);
-  else caixa(s.v - h, s.v + h, s.a - h, s.b + h, base, base + altura, cor, opts);
+// de que lado da parede fica a rua/quintal: +1, -1, ou 0 se a parede é interna
+function ladoExterno(nivel, s) {
+  const dentro = (x, y) => nivel.comodos.some(c => !c.externo && x > c.x && x < c.x + c.largura && y > c.y && y < c.y + c.profundidade);
+  const m = (s.a + s.b) / 2, d = 0.2;
+  const [mais, menos] = s.o === "h" ? [dentro(m, s.v + d), dentro(m, s.v - d)] : [dentro(s.v + d, m), dentro(s.v - d, m)];
+  return mais && !menos ? -1 : menos && !mais ? 1 : 0;
+}
+
+function medidas(ab, externo) {
+  const t = ABERTURA[ab.tipo] || ABERTURA.porta;
+  // porta externa ganha bandeira de vidro em cima, como nos sobrados antigos
+  return ab.tipo === "porta" && externo ? { p: 0, h: 2.55, bandeira: 2.1 } : t;
+}
+
+function moldura(s, a, b, y0, y1, lado, base, peitoril) {
+  const off = lado * (ESPESSURA / 2 + 0.035), m = mat(COR.moldura), w = 0.11;
+  naLinha(s.o, s.v, a - w, a, base + y0, base + y1 + w, off, 0.06, m);
+  naLinha(s.o, s.v, b, b + w, base + y0, base + y1 + w, off, 0.06, m);
+  naLinha(s.o, s.v, a - w, b + w, base + y1, base + y1 + w, off, 0.07, m);
+  if (peitoril) naLinha(s.o, s.v, a - w, b + w, base + y0 - 0.06, base + y0, lado * (ESPESSURA / 2 + 0.06), 0.12, m);
+}
+
+function caixilho(s, a, b, y0, y1, base, cor, montantes) {
+  const m = mat(cor), e = 0.05;
+  naLinha(s.o, s.v, a, a + e, base + y0, base + y1, 0, 0.07, m);
+  naLinha(s.o, s.v, b - e, b, base + y0, base + y1, 0, 0.07, m);
+  naLinha(s.o, s.v, a, b, base + y1 - e, base + y1, 0, 0.07, m);
+  naLinha(s.o, s.v, a, b, base + y0, base + y0 + e, 0, 0.07, m);
+  for (let k = 1; k < montantes; k++) {
+    const x = a + (b - a) * k / montantes;
+    naLinha(s.o, s.v, x - e / 2, x + e / 2, base + y0, base + y1, 0, 0.06, m);
+  }
+  naLinha(s.o, s.v, a + e, b - e, base + y0 + e, base + y1 - e, 0, 0.02, vidro());
+}
+
+function preencherAbertura(ab, s, lado, base) {
+  const { p, h, bandeira } = medidas(ab, !!lado);
+  const a = s.a, b = s.b, larg = b - a, esq = fachada().esquadria;
+  const ext = !!lado;
+  switch (ab.tipo) {
+    case "porta":
+      if (ext) {
+        naLinha(s.o, s.v, a + 0.02, b - 0.02, base, base + bandeira, 0, 0.05, matTex("regua", larg, bandeira, esq));
+        caixilho(s, a, b, bandeira, h, base, esq, 2);
+        moldura(s, a, b, 0, h, lado, base, false);
+      } else {
+        naLinha(s.o, s.v, a + 0.02, b - 0.02, base, base + h, 0, 0.04, mat(COR.madeira));
+      }
+      break;
+    case "porta-vidro":
+      caixilho(s, a, b, 0, h, base, esq, Math.max(2, Math.round(larg / 0.7)));
+      if (ext) moldura(s, a, b, 0, h, lado, base, false);
+      break;
+    case "janela":
+    case "janela-alta":
+      caixilho(s, a, b, p, p + h, base, esq, ab.tipo === "janela" ? 2 : 1);
+      if (ext) {
+        moldura(s, a, b, p, p + h, lado, base, true);
+        if (ab.tipo === "janela") {  // folhas de veneziana abertas rentes à fachada
+          const f = larg / 2, off = lado * (ESPESSURA / 2 + 0.03), mv = matTex("veneziana", f, h, esq);
+          naLinha(s.o, s.v, a - 0.11 - f, a - 0.11, base + p, base + p + h, off, 0.03, mv);
+          naLinha(s.o, s.v, b + 0.11, b + 0.11 + f, base + p, base + p + h, off, 0.03, mv);
+        }
+      }
+      break;
+    case "cobogo":
+      naLinha(s.o, s.v, a, b, base + p, base + p + h, 0, ESPESSURA * 0.9,
+        matTex("cobogo", larg, h, 0xffffff, { transparent: true, alphaTest: 0.5, side: THREE.DoubleSide }));
+      if (ext) moldura(s, a, b, p, p + h, lado, base, false);
+      break;
+    case "portao-garagem":
+      naLinha(s.o, s.v, a, b, base, base + h, 0, 0.06, matTex("regua", larg, h, esq));
+      if (ext) moldura(s, a, b, 0, h, lado, base, false);
+      break;
+  }
+}
+
+// uma parede com seus vãos: núcleo caiado + reboco colorido do lado de fora, barrado de azulejo e cimalha
+function construirParede(nivel, s, base, altura, aberturas, terreo) {
+  const lado = ladoExterno(nivel, s);
+  const pecas = [];
+  let cheio = [[s.a, s.b]];
+  for (const ab of aberturas) {
+    const l = linhaDe(ab);
+    const a = Math.max(l.a, s.a), b = Math.min(l.b, s.b);
+    if (b - a < 1e-6) continue;
+    cheio = tirar(cheio, [a, b]);
+    const { p, h } = medidas(ab, !!lado);
+    if (p > 0) pecas.push([a, b, 0, Math.min(p, altura)]);
+    if (p + h < altura) pecas.push([a, b, p + h, altura]);
+    if (!estado.baixas || p + h <= altura) preencherAbertura(ab, { ...s, a, b }, lado, base);
+  }
+  for (const [a, b] of cheio) pecas.push([a - ESPESSURA / 2, b + ESPESSURA / 2, 0, altura]);
+
+  const cal = mat(COR.cal);
+  for (const [a, b, y0, y1] of pecas) {
+    if (y1 - y0 < 1e-3) continue;
+    naLinha(s.o, s.v, a, b, base + y0, base + y1, 0, ESPESSURA, cal);
+    if (!lado) continue;
+    const off = lado * (ESPESSURA / 2 + 0.012);
+    const corte = terreo ? Math.min(Math.max(BARRADO, y0), y1) : y0;
+    if (corte > y0) naLinha(s.o, s.v, a, b, base + y0, base + corte, off, 0.024, matTex("azulejo", b - a, corte - y0));
+    if (y1 > corte) naLinha(s.o, s.v, a, b, base + corte, base + y1, off, 0.024, mat(fachada().parede));
+  }
+  if (lado && !estado.baixas) {  // cimalha branca no alto da fachada
+    naLinha(s.o, s.v, s.a - ESPESSURA / 2, s.b + ESPESSURA / 2, base + altura - 0.22, base + altura, lado * (ESPESSURA / 2 + 0.05), 0.1, mat(COR.moldura));
+  }
+}
+
+// ---------- telhado colonial de duas águas: cumeeira paralela à rua, oitões nas laterais ----------
+function quad(pts, uvs, material) {
+  const pos = [], uv = [];
+  for (const i of [0, 1, 2, 0, 2, 3]) { pos.push(...pts[i]); uv.push(...uvs[i]); }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3));
+  g.setAttribute("uv", new THREE.Float32BufferAttribute(uv, 2));
+  g.computeVertexNormals();
+  return addMesh(g, material);
+}
+function triangulo(pts, material) {
+  const g = new THREE.BufferGeometry();
+  g.setAttribute("position", new THREE.Float32BufferAttribute(pts.flat(), 3));
+  g.computeVertexNormals();
+  return addMesh(g, material);
+}
+function telhado(t, base) {
+  const inc = t.inclinacao, [b0, b1] = t.beiral, topo = base + PE_DIREITO;
+  const porY = t.cumeeira === "y";
+  // s = eixo do vão (cai a água), u = eixo da cumeeira
+  const [s0, vao] = porY ? [t.x, t.largura] : [t.y, t.profundidade];
+  const [u0, comp] = porY ? [t.y, t.profundidade] : [t.x, t.largura];
+  const P = (s, u, h) => porY ? [s, h, u] : [u, h, s];
+  const hb = topo + 0.06, sm = s0 + vao / 2, hr = hb + (vao / 2) * inc, k = Math.sqrt(1 + inc * inc);
+  const ua = u0 - 0.15, ub = u0 + comp + 0.15;
+  const mTelha = matTex("telha", 1, 1, 0xffffff, { side: THREE.DoubleSide });
+  const se = s0 - b0, sf = s0 + vao + b1;
+  const he = hb - b0 * inc, hf = hb - b1 * inc;
+  quad([P(se, ua, he), P(sm, ua, hr), P(sm, ub, hr), P(se, ub, he)],
+       [[ua, 0], [ua, (sm - se) * k], [ub, (sm - se) * k], [ub, 0]], mTelha);
+  quad([P(sf, ua, hf), P(sm, ua, hr), P(sm, ub, hr), P(sf, ub, hf)],
+       [[ua, 0], [ua, (sf - sm) * k], [ub, (sf - sm) * k], [ub, 0]], mTelha);
+  // cumeeira e testeiras de madeira nos beirais
+  const eixo = (s, h, dx, dy) => porY ? caixa(s - dx, s + dx, ua, ub, h - dy, h + dy, mat(COR.telhaCumeeira)) : caixa(ua, ub, s - dx, s + dx, h - dy, h + dy, mat(COR.telhaCumeeira));
+  eixo(sm, hr + 0.04, 0.13, 0.06);
+  const testeira = (s, h) => porY ? caixa(s - 0.025, s + 0.025, ua, ub, h - 0.16, h + 0.02, mat(COR.madeira)) : caixa(ua, ub, s - 0.025, s + 0.025, h - 0.16, h + 0.02, mat(COR.madeira));
+  testeira(se, he); testeira(sf, hf);
+  // oitões: empena triangular na cor da fachada, com friso branco acompanhando a água
+  const mOitao = mat(fachada().parede, { side: THREE.DoubleSide });
+  for (const u of [u0, u0 + comp]) {
+    for (const d of [-ESPESSURA / 2, ESPESSURA / 2]) {
+      triangulo([P(s0, u + d, topo), P(s0 + vao, u + d, topo), P(sm, u + d, hr)], mOitao);
+    }
+  }
+}
+
+function pergolado(pg, base) {
+  const m = mat(COR.madeiraClara), y = base + pg.altura;
+  caixa(pg.x + 0.05, pg.x + 0.2, pg.y, pg.y + pg.profundidade, y - 0.22, y, m);  // viga sobre os pilares
+  for (let z = pg.y + 0.1; z < pg.y + pg.profundidade; z += pg.espaco) caixa(pg.x, pg.x + pg.largura, z - 0.03, z + 0.03, y, y + 0.16, m);
+}
+
+// escada em U de alvenaria com degraus de madeira
+function escadaU(e, base) {
+  const n = 16, r = (PE_DIREITO + LAJE) / n, larg = (e.largura - 0.2) / 2;
+  const xa = e.x + 0.05, xb = e.x + e.largura - 0.05, patamar = e.y + 1;
+  const passo1 = (e.y + e.profundidade - patamar) / 7, passo2 = (e.y + e.profundidade - patamar) / 8;
+  const degrau = mat(COR.madeiraClara), alv = mat(COR.cal);
+  for (let k = 1; k <= 7; k++) {
+    const z1 = e.y + e.profundidade - (k - 1) * passo1, z0 = z1 - passo1;
+    caixa(xa, xa + larg, z0, z1, base, base + k * r - 0.03, alv);
+    caixa(xa, xa + larg, z0, z1 + 0.03, base + k * r - 0.03, base + k * r, degrau);
+  }
+  caixa(xa, xb, e.y + 0.05, patamar, base, base + 8 * r - 0.03, alv);
+  caixa(xa, xb, e.y + 0.05, patamar, base + 8 * r - 0.03, base + 8 * r, degrau);
+  for (let k = 9; k <= 16; k++) {
+    const z0 = patamar + (k - 9) * passo2, z1 = z0 + passo2;
+    caixa(xb - larg, xb, z0, z1, base, base + k * r - 0.03, alv);
+    caixa(xb - larg, xb, z0 - 0.03, z1, base + k * r - 0.03, base + k * r, degrau);
+  }
+  caixa(xa + larg, xb - larg, patamar, e.y + e.profundidade, base, base + 8 * r + 0.9, alv);  // mureta entre os lances
 }
 
 function rotulo(texto, sub, x, y, z) {
@@ -239,14 +568,14 @@ function rotulo(texto, sub, x, y, z) {
   g.font = f1; const w1 = g.measureText(texto).width;
   g.font = f2; const w2 = g.measureText(sub).width;
   cv.width = Math.ceil(Math.max(w1, w2) + 28 * esc); cv.height = 64 * esc;
-  g.fillStyle = "rgba(255,255,255,0.88)";
+  g.fillStyle = "rgba(255,255,255,0.9)";
   g.beginPath(); g.roundRect ? g.roundRect(0, 0, cv.width, cv.height, 10 * esc) : g.rect(0, 0, cv.width, cv.height); g.fill();
   g.textAlign = "center"; g.fillStyle = "#1c2220"; g.font = f1; g.fillText(texto, cv.width / 2, 28 * esc);
   g.fillStyle = "#4f5955"; g.font = f2; g.fillText(sub, cv.width / 2, 53 * esc);
   const tex = new THREE.CanvasTexture(cv);
-  tex.anisotropy = 4;
   const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, depthTest: false }));
-  const alt = 0.85;
+  sp.userData.descartavel = true;
+  const alt = 0.8;
   sp.scale.set(alt * cv.width / cv.height, alt, 1);
   sp.position.set(x, y, z);
   sp.renderOrder = 10;
@@ -254,10 +583,25 @@ function rotulo(texto, sub, x, y, z) {
 }
 
 const fmt = v => String(+v.toFixed(2)).replace(".", ",");
+const ehEscada = c => /^escada/i.test(c.nome);
+
+function corPlanta(c) {
+  if (c.externo) return COR.externo;
+  return c.status === "reformado" ? COR.reformado : COR.existente;
+}
+function piso(c) {
+  if (estado.cores) return mat(corPlanta(c));
+  const n = c.nome.toLowerCase();
+  const tipo = /banh|cozinha|despensa|serviço/.test(n) ? "ladrilho" : /garagem/.test(n) ? "cimento" : /varanda|gourmet/.test(n) ? "tijoleira" : "taco";
+  return matTex(tipo, c.largura, c.profundidade);
+}
 
 function construir() {
   scene.remove(grupo);
-  grupo.traverse(o => { if (o.geometry) o.geometry.dispose(); if (o.material && o.material.map) { o.material.map.dispose(); o.material.dispose(); } });
+  grupo.traverse(o => {
+    if (o.geometry) o.geometry.dispose();
+    if (o.userData.descartavel) { o.material.map.dispose(); o.material.dispose(); }
+  });
   grupo = new THREE.Group();
   scene.add(grupo);
 
@@ -265,45 +609,77 @@ function construir() {
   const visiveis = niveis.map((_, i) => estado.andar === "todos" || +estado.andar === i);
   const ultimoVisivel = visiveis.lastIndexOf(true);
   const altura = estado.baixas ? PAREDE_BAIXA : PE_DIREITO;
+  const baseDe = i => i * (PE_DIREITO + LAJE) + (estado.separar ? i * 3 : 0);
 
   niveis.forEach((nivel, i) => {
     if (!visiveis[i]) return;
-    const base = i * (PE_DIREITO + LAJE) + (estado.separar ? i * 3 : 0);
+    const base = baseDe(i);
 
     for (const c of nivel.comodos) {
+      if (i > 0 && ehEscada(c)) continue;  // vão da escada
       const x1 = c.x + c.largura, z1 = c.y + c.profundidade;
-      if (i > 0) caixa(c.x, x1, c.y, z1, base - LAJE, base, COR.laje);
-      caixa(c.x, x1, c.y, z1, base, base + 0.02, corPiso(c));
-      if (i > 0 && c.externo) {
-        for (const s of [{ o: "h", v: c.y, a: c.x, b: x1 }, { o: "h", v: z1, a: c.x, b: x1 }, { o: "v", v: c.x, a: c.y, b: z1 }, { o: "v", v: x1, a: c.y, b: z1 }])
-          parede(s, base, 1.1, COR.guarda, { transparent: true, opacity: 0.45 }, 0.05);
+      if (i > 0) caixa(c.x, x1, c.y, z1, base - LAJE, base, mat(COR.laje));
+      caixa(c.x, x1, c.y, z1, base, base + 0.02, piso(c));
+    }
+
+    const ab = nivel.aberturas || [];
+    for (const s of paredes(nivel)) construirParede(nivel, s, base, altura, ab.filter(a => chave(linhaDe(a)) === chave(s)), i === 0);
+
+    // guarda-corpo de cobogó nas áreas externas do andar de cima (onde não há parede)
+    if (i > 0) {
+      const ocupadas = new Map();
+      for (const s of paredes(nivel)) (ocupadas.get(chave(s)) || ocupadas.set(chave(s), []).get(chave(s))).push([s.a, s.b]);
+      for (const c of nivel.comodos.filter(c => c.externo)) {
+        const x1 = c.x + c.largura, z1 = c.y + c.profundidade;
+        for (const s of [{ o: "h", v: c.y, a: c.x, b: x1 }, { o: "h", v: z1, a: c.x, b: x1 }, { o: "v", v: c.x, a: c.y, b: z1 }, { o: "v", v: x1, a: c.y, b: z1 }]) {
+          let livre = [[s.a, s.b]];
+          for (const iv of ocupadas.get(chave(s)) || []) livre = tirar(livre, iv);
+          for (const [a, b] of livre) {
+            if (b - a < 0.05) continue;
+            naLinha(s.o, s.v, a, b, base, base + 1.0, 0, 0.1, matTex("cobogo", b - a, 1.0, 0xffffff, { transparent: true, alphaTest: 0.5, side: THREE.DoubleSide }));
+            naLinha(s.o, s.v, a - 0.06, b + 0.06, base + 1.0, base + 1.06, 0, 0.14, mat(COR.moldura));
+          }
+        }
       }
     }
-    for (const s of paredes(nivel)) parede(s, base, altura, COR.parede);
+
+    for (const e of nivel.escadas || []) escadaU(e, base);
+    for (const el of nivel.elementos || []) {
+      const m = el.material === "tijolo" ? mat(COR.tijolo) : mat(COR.bancada);
+      const y0 = base + (el.base || 0);
+      caixa(el.x, el.x + el.largura, el.y, el.y + el.profundidade, y0, y0 + el.altura - (el.base || 0), m);
+    }
+    for (const pg of nivel.pergolados || []) if (!estado.baixas) pergolado(pg, base);
+    if (estado.telhado && !estado.baixas) for (const t of nivel.telhados || []) telhado(t, base);
 
     if (i === 0) {
       for (const m of nivel.muros || []) {
-        const portao = [4.5, 7.5];  // trecho do portão em frente à garagem (ilustrativo)
-        const s = { o: m.x1 === m.x2 ? "v" : "h", v: m.x1 === m.x2 ? m.x1 : m.y1, a: Math.min(m.y1, m.y2), b: Math.max(m.y1, m.y2) };
-        for (const [a, b] of tirar([[s.a, s.b]], portao)) parede({ ...s, a, b }, 0, 1.8, COR.muro);
-        parede({ ...s, a: portao[0], b: portao[1] }, 0, 1.8, COR.portao, undefined, 0.08);
+        const s = linhaDe(m);
+        const cobogo = m.tipo === "cobogo", alt = cobogo ? 2.2 : 1.8;
+        const portao = /portão/i.test(m.nome) ? [4.5, 7.5] : null;
+        let trechos = [[s.a, s.b]];
+        if (portao) trechos = tirar(trechos, portao);
+        for (const [a, b] of trechos) {
+          const mm = cobogo ? matTex("cobogo", b - a, alt, 0xffffff, { transparent: true, alphaTest: 0.5, side: THREE.DoubleSide }) : mat(fachada().parede);
+          naLinha(s.o, s.v, a, b, 0, alt, 0, cobogo ? 0.1 : 0.15, mm);
+          naLinha(s.o, s.v, a - 0.04, b + 0.04, alt, alt + 0.06, 0, 0.2, mat(COR.moldura));
+        }
+        if (portao) naLinha(s.o, s.v, portao[0], portao[1], 0.03, 1.9, 0, 0.06, matTex("regua", portao[1] - portao[0], 1.9, fachada().esquadria));
       }
-      for (const [px, pz] of nivel.pilares || []) caixa(px - 0.13, px + 0.13, pz - 0.13, pz + 0.13, 0, PE_DIREITO, COR.pilar);
+      for (const [px, pz] of nivel.pilares || []) caixa(px - 0.15, px + 0.15, pz - 0.15, pz + 0.15, 0, PE_DIREITO, mat(COR.pilar));
     }
 
-    // nomes: só do andar de cima quando os andares estão empilhados (os de baixo ficariam escondidos)
     if (estado.rotulos && (i === ultimoVisivel || estado.separar)) {
       for (const c of nivel.comodos) {
-        const area = c.largura * c.profundidade;
-        rotulo(c.nome, `${fmt(c.largura)} × ${fmt(c.profundidade)} m · ${fmt(area)} m²`,
-               c.x + c.largura / 2, base + altura + 0.45, c.y + c.profundidade / 2);
+        rotulo(c.nome, `${fmt(c.largura)} × ${fmt(c.profundidade)} m · ${fmt(c.largura * c.profundidade)} m²`,
+               c.x + c.largura / 2, base + altura + (estado.telhado ? 2.6 : 0.45), c.y + c.profundidade / 2);
       }
     }
   });
   lista(niveis, visiveis);
 }
 
-// ---------- lista de cômodos ----------
+// ---------- painel ----------
 function lista(niveis, visiveis) {
   const el = document.getElementById("lista");
   let html = "";
@@ -315,17 +691,30 @@ function lista(niveis, visiveis) {
     for (const c of nivel.comodos) {
       const a = c.largura * c.profundidade;
       if (!c.externo) total += a;
-      html += `<li><span class="nome"><span class="cor" style="background:${hex(corPiso(c))}"></span>${c.nome}</span><span>${fmt(a)} m²</span></li>`;
+      html += `<li><span class="nome"><span class="cor" style="background:${hex(corPlanta(c))}"></span>${c.nome}</span><span>${fmt(a)} m²</span></li>`;
     }
     html += `<li class="total"><span>Área interna</span><span>${fmt(total)} m²</span></li></ul>`;
   });
-  html += `<p class="nota">Paredes desenhadas sem portas e janelas. Cômodos azuis são novos ou reformados; verdes são áreas externas. A área de serviço aparece retangular, mas é triangular.</p>`;
+  html += `<h2>Linguagem da casa</h2><dl>
+    <div><dt>Telhado colonial</dt><dd>Duas águas de telha de barro, cumeeira paralela à rua, oitões nas laterais e beiral com testeira de madeira.</dd></div>
+    <div><dt>Fachada caiada e colorida</dt><dd>Reboco nas cores de Olinda e do Recife Antigo, cimalha e molduras brancas nas portas e janelas.</dd></div>
+    <div><dt>Barrado de azulejo</dt><dd>Azulejo azul e branco até 90 cm na fachada do térreo.</dd></div>
+    <div><dt>Esquadrias de madeira</dt><dd>Janelas com venezianas abertas e portas com bandeira de vidro, pintadas em cor forte.</dd></div>
+    <div><dt>Cobogó</dt><dd>Invenção pernambucana: ilumina a escada, faz o guarda-corpo da varanda e o muro da área gourmet.</dd></div>
+    <div><dt>Pisos</dt><dd>Taco de madeira nos quartos e salas, ladrilho hidráulico nas áreas molhadas, tijoleira no quintal e varanda.</dd></div>
+  </dl>
+  <p class="nota">Medidas de portas e janelas são estimadas. Janelas nas laterais supõem que a casa não é colada nos vizinhos. A área de serviço aparece retangular, mas é triangular.</p>`;
   el.innerHTML = html;
 }
 
 // ---------- controles ----------
+const segFachadas = document.getElementById("fachadas");
+segFachadas.innerHTML = Object.entries(FACHADAS).map(([k, f]) =>
+  `<button id="f-${k}" data-f="${k}" title="${f.nome}" aria-label="Fachada ${f.nome}"><span class="amostra" style="background:${hex(f.parede)}"><i style="background:${hex(f.esquadria)}"></i></span><span class="rot">${f.nome}</span></button>`).join("");
+
 function sincronizar() {
   for (const b of document.querySelectorAll("#cenarios button")) b.setAttribute("aria-pressed", b.dataset.c === estado.cenario);
+  for (const b of document.querySelectorAll("#fachadas button")) b.setAttribute("aria-pressed", b.dataset.f === estado.fachada);
   const temAndar = CENARIOS[estado.cenario].length > 1;
   if (!temAndar) estado.andar = "todos";
   for (const b of document.querySelectorAll("#andares button")) {
@@ -343,7 +732,11 @@ document.getElementById("andares").addEventListener("click", e => {
   const b = e.target.closest("button"); if (!b || b.disabled) return;
   estado.andar = b.dataset.a; sincronizar();
 });
-for (const id of ["separar", "baixas", "rotulos"]) {
+segFachadas.addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  estado.fachada = b.dataset.f; sincronizar();
+});
+for (const id of ["telhado", "separar", "baixas", "rotulos", "cores"]) {
   const el = document.getElementById(id);
   el.addEventListener("change", () => { estado[id] = el.checked; construir(); });
 }
@@ -356,11 +749,13 @@ function redimensionar() {
   camera.aspect = w / h;
   camera.updateProjectionMatrix();
   if (!enquadrado) {  // enquadra a casa uma vez; depois a câmera é do usuário
-    const dist = 22 * Math.max(1, 1.25 / camera.aspect);
+    const dist = 23 * Math.max(1, 1.25 / camera.aspect);
     camera.position.copy(controls.target).addScaledVector(DIRECAO_CAMERA, dist);
     controls.update();
     enquadrado = true;
   }
+  // rótulos das fachadas só cabem por extenso em telas largas
+  for (const r of document.querySelectorAll("#fachadas .rot")) r.hidden = document.body.clientWidth < 1100;
 }
 new ResizeObserver(redimensionar).observe(cena);
 redimensionar();
