@@ -186,7 +186,8 @@
     "Entrada principal pelo hall da escada, vinda do quintal; Sala de TV abre para o quintal com porta de vidro.",
     "Escada iluminada por painel de cobogó voltado para a área gourmet; muro lateral da área gourmet também em cobogó.",
     "Área gourmet com bancada e fogão a lenha com chaminé.",
-    "Janelas nas laterais (y = 0 e y = 8) supõem que a casa não é colada nos vizinhos; confirmar."
+    "Térreo sem janelas nas laterais (y = 0 e y = 8), que têm construções vizinhas; janelas laterais só no 1º andar.",
+    "Escritório ganha janela interna de vidro para o jantar; banheiro do térreo precisa de exaustor (sem parede para fora)."
   ],
   "aberturas": [
     {
@@ -219,25 +220,11 @@
       "y2": 4
     },
     {
-      "tipo": "janela",
-      "x1": 8.9,
-      "y1": 0,
-      "x2": 10.1,
-      "y2": 0
-    },
-    {
       "tipo": "porta",
       "x1": 10.7,
       "y1": 4,
       "x2": 11.4,
       "y2": 4
-    },
-    {
-      "tipo": "janela-alta",
-      "x1": 10.8,
-      "y1": 0,
-      "x2": 11.7,
-      "y2": 0
     },
     {
       "tipo": "porta",
@@ -269,24 +256,11 @@
     },
     {
       "tipo": "janela",
-      "x1": 7,
-      "y1": 8,
-      "x2": 8.6,
-      "y2": 8
-    },
-    {
-      "tipo": "janela",
-      "x1": 10,
-      "y1": 8,
-      "x2": 11.5,
-      "y2": 8
-    },
-    {
-      "tipo": "janela",
-      "x1": 12.8,
-      "y1": 8,
-      "x2": 14.4,
-      "y2": 8
+      "x1": 9.7,
+      "y1": 4,
+      "x2": 10.4,
+      "y2": 4,
+      "nota": "janela interna de vidro para o jantar"
     }
   ],
   "escadas": [
@@ -328,5 +302,162 @@
       "material": "tijolo"
     }
   ],
-  "telhados": []
+  "telhados": [],
+  "moveis": [
+    {
+      "tipo": "mesa",
+      "x": 1.1,
+      "y": 1.6,
+      "largura": 2.4,
+      "profundidade": 0.9,
+      "frente": "+y",
+      "cadeiras": 8
+    },
+    {
+      "tipo": "planta",
+      "x": 0.15,
+      "y": 3.4,
+      "largura": 0.5,
+      "profundidade": 0.5,
+      "frente": "+y"
+    },
+    {
+      "tipo": "planta",
+      "x": 5.4,
+      "y": 0.15,
+      "largura": 0.5,
+      "profundidade": 0.5,
+      "frente": "+y"
+    },
+    {
+      "tipo": "carro",
+      "x": 0.8,
+      "y": 5.1,
+      "largura": 4.5,
+      "profundidade": 1.8,
+      "frente": "-x"
+    },
+    {
+      "tipo": "escrivaninha",
+      "x": 8.6,
+      "y": 0.05,
+      "largura": 1.8,
+      "profundidade": 0.65,
+      "frente": "+y"
+    },
+    {
+      "tipo": "estante",
+      "x": 8.55,
+      "y": 1.3,
+      "largura": 0.4,
+      "profundidade": 2.0,
+      "frente": "+x"
+    },
+    {
+      "tipo": "chuveiro",
+      "x": 10.55,
+      "y": 0.05,
+      "largura": 1.4,
+      "profundidade": 1.0,
+      "frente": "+y"
+    },
+    {
+      "tipo": "vaso",
+      "x": 10.55,
+      "y": 1.5,
+      "largura": 0.6,
+      "profundidade": 0.45,
+      "frente": "+x"
+    },
+    {
+      "tipo": "pia",
+      "x": 11.5,
+      "y": 1.5,
+      "largura": 0.45,
+      "profundidade": 0.8,
+      "frente": "-x"
+    },
+    {
+      "tipo": "estante",
+      "x": 12.55,
+      "y": 0.1,
+      "largura": 0.4,
+      "profundidade": 3.2,
+      "frente": "-x"
+    },
+    {
+      "tipo": "rack",
+      "x": 6.8,
+      "y": 7.5,
+      "largura": 2,
+      "profundidade": 0.45,
+      "frente": "-y"
+    },
+    {
+      "tipo": "tapete",
+      "x": 6.9,
+      "y": 6.1,
+      "largura": 2,
+      "profundidade": 1.3,
+      "frente": "+y"
+    },
+    {
+      "tipo": "sofa",
+      "x": 6.9,
+      "y": 5.2,
+      "largura": 2,
+      "profundidade": 0.9,
+      "frente": "+y"
+    },
+    {
+      "tipo": "planta",
+      "x": 6.15,
+      "y": 7.45,
+      "largura": 0.45,
+      "profundidade": 0.45,
+      "frente": "+y"
+    },
+    {
+      "tipo": "mesa",
+      "x": 10.0,
+      "y": 5.55,
+      "largura": 1.6,
+      "profundidade": 0.9,
+      "frente": "+y",
+      "cadeiras": 6
+    },
+    {
+      "tipo": "bancada",
+      "x": 12.3,
+      "y": 7.4,
+      "largura": 2.65,
+      "profundidade": 0.6,
+      "frente": "-y",
+      "pia": true
+    },
+    {
+      "tipo": "fogao",
+      "x": 14.35,
+      "y": 6.0,
+      "largura": 0.6,
+      "profundidade": 0.6,
+      "frente": "-x"
+    },
+    {
+      "tipo": "bancada",
+      "x": 14.35,
+      "y": 6.6,
+      "largura": 0.6,
+      "profundidade": 0.8,
+      "frente": "-x"
+    },
+    {
+      "tipo": "geladeira",
+      "x": 14.25,
+      "y": 4.85,
+      "largura": 0.7,
+      "profundidade": 0.7,
+      "frente": "-x"
+    }
+  ]
 }

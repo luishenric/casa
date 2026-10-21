@@ -98,6 +98,7 @@ dd { margin: 2px 0 0; color: var(--muted); line-height: 1.4; }
     <div class="seg" id="fachadas"></div>
   </div>
   <label class="chk"><input type="checkbox" id="telhado" checked> Telhado</label>
+  <label class="chk"><input type="checkbox" id="moveis" checked> Móveis</label>
   <label class="chk"><input type="checkbox" id="separar"> Separar andares</label>
   <label class="chk"><input type="checkbox" id="baixas"> Paredes baixas</label>
   <label class="chk"><input type="checkbox" id="rotulos"> Nomes</label>
@@ -112,7 +113,7 @@ dd { margin: 2px 0 0; color: var(--muted); line-height: 1.4; }
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 <script>
-const DADOS = {"planta": {"descricao": "Planta baixa térrea transcrita do esboço à mão. Medidas em metros; origem (0,0) no canto superior esquerdo, x para a direita, y para baixo.", "dimensoes_totais": {"largura": 15, "profundidade": 8}, "comodos": [{"nome": "Quarto 1", "x": 0, "y": 0, "largura": 6, "profundidade": 4, "medida": "lida"}, {"nome": "Banheiro", "x": 6, "y": 0, "largura": 1.5, "profundidade": 1.5, "medida": "lida"}, {"nome": "Circulação", "x": 6, "y": 1.5, "largura": 1.5, "profundidade": 2.5, "medida": "estimada"}, {"nome": "Quarto 2", "x": 7.5, "y": 0, "largura": 2.5, "profundidade": 4, "medida": "lida"}, {"nome": "Cozinha", "x": 10, "y": 0, "largura": 3, "profundidade": 4, "medida": "lida"}, {"nome": "Área de serviço", "x": 13, "y": 0, "largura": 2, "profundidade": 4, "medida": "lida", "externo": true}, {"nome": "Garagem", "x": 0, "y": 4, "largura": 6, "profundidade": 4, "medida": "lida"}, {"nome": "Sala", "x": 6, "y": 4, "largura": 3.5, "profundidade": 4, "medida": "estimada"}, {"nome": "Sala de Jantar", "x": 9.5, "y": 4, "largura": 5.5, "profundidade": 4, "medida": "estimada"}], "observacoes": ["Larguras da linha de cima (6 / 1,5 / 2,5 / 3 / 2) foram lidas das cotas do desenho.", "Garagem com o mesmo tamanho do Quarto 1 (6 × 4 m), conforme confirmado; a linha de baixo inteira passa a ter 4 m de fundo.", "Larguras de Sala e Sala de Jantar não têm cota no papel; foram estimadas pela proporção do desenho.", "Anotações '4m 1.5 2 2' e '6 x 8' no topo do papel não ficaram claras e não foram aplicadas.", "Sala e Sala de Jantar parecem integradas (a parede entre elas não chega até a circulação).", "Área de serviço externa junto ao muro dos fundos; na realidade tem formato triangular (desenhada como retângulo de 2 × 4 m), forma final a definir com o engenheiro.", "Portas e janelas da casa atual são aproximadas (não estavam no esboço)."], "muros": [{"x1": -1, "y1": 0, "x2": -1, "y2": 8, "nome": "Muro / portão"}], "aberturas": [{"tipo": "janela", "x1": 0, "y1": 1.2, "x2": 0, "y2": 2.8}, {"tipo": "janela", "x1": 2, "y1": 0, "x2": 3.5, "y2": 0}, {"tipo": "portao-garagem", "x1": 0, "y1": 4.6, "x2": 0, "y2": 7.4}, {"tipo": "porta", "x1": 6, "y1": 2, "x2": 6, "y2": 2.8}, {"tipo": "porta", "x1": 6.3, "y1": 1.5, "x2": 7.0, "y2": 1.5}, {"tipo": "porta", "x1": 7.5, "y1": 2.5, "x2": 7.5, "y2": 3.3}, {"tipo": "passagem", "x1": 6.2, "y1": 4, "x2": 7.3, "y2": 4}, {"tipo": "janela-alta", "x1": 6.4, "y1": 0, "x2": 7.1, "y2": 0}, {"tipo": "janela", "x1": 8.2, "y1": 0, "x2": 9.4, "y2": 0}, {"tipo": "janela", "x1": 11, "y1": 0, "x2": 12.2, "y2": 0}, {"tipo": "porta", "x1": 10.3, "y1": 4, "x2": 11.1, "y2": 4}, {"tipo": "porta", "x1": 13, "y1": 2.8, "x2": 13, "y2": 3.6}, {"tipo": "porta", "x1": 6, "y1": 5, "x2": 6, "y2": 5.9}, {"tipo": "janela", "x1": 7, "y1": 8, "x2": 8.5, "y2": 8}, {"tipo": "janela", "x1": 11, "y1": 8, "x2": 13, "y2": 8}, {"tipo": "porta", "x1": 13.4, "y1": 4, "x2": 14.3, "y2": 4}], "telhados": [{"tipo": "duas-aguas", "x": 0, "y": 0, "largura": 15, "profundidade": 8, "cumeeira": "y", "nivel": 0, "inclinacao": 0.3, "beiral": [0.6, 0.3]}]}, "reforma": {"titulo": "Reforma (térreo)", "descricao": "Proposta de reforma sem primeiro andar. Mesmo sistema de coordenadas de planta.json.", "dimensoes_totais": {"largura": 15, "profundidade": 8}, "comodos": [{"nome": "Quarto", "x": 0, "y": 0, "largura": 4.5, "profundidade": 4, "status": "reformado"}, {"nome": "Banheiro suíte", "x": 4.5, "y": 0, "largura": 3, "profundidade": 1.5, "status": "reformado"}, {"nome": "Closet", "x": 4.5, "y": 1.5, "largura": 1.5, "profundidade": 2.5, "status": "reformado"}, {"nome": "Circulação", "x": 6, "y": 1.5, "largura": 1.5, "profundidade": 2.5, "status": "mantido"}, {"nome": "Escritório", "x": 7.5, "y": 0, "largura": 2.5, "profundidade": 4, "status": "reformado"}, {"nome": "Banheiro", "x": 10, "y": 0, "largura": 1.5, "profundidade": 4, "status": "reformado"}, {"nome": "Despensa", "x": 11.5, "y": 0, "largura": 1.5, "profundidade": 4, "status": "reformado"}, {"nome": "Área de serviço", "x": 13, "y": 0, "largura": 2, "profundidade": 4, "status": "mantido", "externo": true}, {"nome": "Garagem", "x": 0, "y": 4, "largura": 6, "profundidade": 4, "status": "mantido"}, {"nome": "Sala de TV", "x": 6, "y": 4, "largura": 3.5, "profundidade": 4, "status": "reformado"}, {"nome": "Jantar", "x": 9.5, "y": 4, "largura": 2.5, "profundidade": 4, "status": "reformado"}, {"nome": "Cozinha", "x": 12, "y": 4, "largura": 3, "profundidade": 4, "status": "reformado"}], "integracoes": [{"x1": 9.5, "y1": 4, "x2": 9.5, "y2": 8, "nota": "Sala de TV aberta para o Jantar"}, {"x1": 12, "y1": 4, "x2": 12, "y2": 8, "nota": "Cozinha aberta para o Jantar"}], "observacoes": ["Suíte: o Quarto 1 (6 × 4 m) vira Quarto (4,5 × 4 m) + Closet; o banheiro existente cresce para dentro do quarto e vira o banheiro da suíte (3 × 1,5 m).", "Acesso à suíte pela Circulação, entrando pelo Closet (que liga Quarto e Banheiro).", "Antiga Cozinha (3 × 4 m) dividida em Banheiro social e Despensa, ambos abrindo para a área de Cozinha/Jantar.", "Antiga Sala de Jantar vira Cozinha + Jantar, integrada com a Sala de TV (sem paredes entre elas).", "A antiga Cozinha já tem ponto de água e esgoto, o que facilita o novo banheiro; a nova cozinha precisa de ponto novo de água, esgoto e gás.", "Paredes que forem removidas (sala/jantar, quarto) precisam ser liberadas pelo engenheiro, caso sejam estruturais.", "Área de serviço externa junto ao muro dos fundos; na realidade tem formato triangular (desenhada como retângulo de 2 × 4 m), forma final a definir com o engenheiro.", "Janelas nas laterais (y = 0 e y = 8) supõem que a casa não é colada nos vizinhos; confirmar."], "muros": [{"x1": -1, "y1": 0, "x2": -1, "y2": 8, "nome": "Muro / portão"}], "aberturas": [{"tipo": "janela", "x1": 0, "y1": 1.2, "x2": 0, "y2": 2.8}, {"tipo": "janela", "x1": 1.5, "y1": 0, "x2": 3, "y2": 0}, {"tipo": "janela-alta", "x1": 5.5, "y1": 0, "x2": 6.5, "y2": 0}, {"tipo": "porta", "x1": 4.7, "y1": 1.5, "x2": 5.5, "y2": 1.5}, {"tipo": "passagem", "x1": 4.5, "y1": 2, "x2": 4.5, "y2": 3.5}, {"tipo": "porta", "x1": 6, "y1": 2.6, "x2": 6, "y2": 3.4}, {"tipo": "passagem", "x1": 6.2, "y1": 4, "x2": 7.3, "y2": 4}, {"tipo": "porta", "x1": 7.5, "y1": 2.6, "x2": 7.5, "y2": 3.4}, {"tipo": "janela", "x1": 8.1, "y1": 0, "x2": 9.4, "y2": 0}, {"tipo": "porta", "x1": 10.3, "y1": 4, "x2": 11, "y2": 4}, {"tipo": "janela-alta", "x1": 10.4, "y1": 0, "x2": 11.1, "y2": 0}, {"tipo": "porta", "x1": 12.2, "y1": 4, "x2": 12.9, "y2": 4}, {"tipo": "janela-alta", "x1": 13, "y1": 1, "x2": 13, "y2": 2}, {"tipo": "portao-garagem", "x1": 0, "y1": 4.6, "x2": 0, "y2": 7.4}, {"tipo": "porta", "x1": 6, "y1": 5, "x2": 6, "y2": 5.9}, {"tipo": "janela", "x1": 7, "y1": 8, "x2": 8.6, "y2": 8}, {"tipo": "janela", "x1": 10, "y1": 8, "x2": 11.5, "y2": 8}, {"tipo": "janela", "x1": 12.8, "y1": 8, "x2": 14.4, "y2": 8}, {"tipo": "porta", "x1": 13.3, "y1": 4, "x2": 14.1, "y2": 4}], "telhados": [{"tipo": "duas-aguas", "x": 0, "y": 0, "largura": 15, "profundidade": 8, "cumeeira": "y", "nivel": 0, "inclinacao": 0.3, "beiral": [0.6, 0.3]}]}, "terreo_sobrado": {"titulo": "Sobrado — térreo", "descricao": "Opção com primeiro andar: térreo. Mesmo sistema de coordenadas de planta.json; a frente (portão) fica à esquerda.", "dimensoes_totais": {"largura": 15, "profundidade": 8}, "comodos": [{"nome": "Área gourmet", "x": 0, "y": 0, "largura": 6, "profundidade": 4, "status": "reformado", "externo": true}, {"nome": "Garagem aberta", "x": 0, "y": 4, "largura": 6, "profundidade": 4, "status": "reformado", "externo": true}, {"nome": "Escada em U", "x": 6, "y": 0, "largura": 2.5, "profundidade": 3, "status": "reformado"}, {"nome": "Hall", "x": 6, "y": 3, "largura": 2.5, "profundidade": 1, "status": "reformado"}, {"nome": "Escritório", "x": 8.5, "y": 0, "largura": 2, "profundidade": 4, "status": "reformado"}, {"nome": "Banheiro", "x": 10.5, "y": 0, "largura": 1.5, "profundidade": 4, "status": "reformado"}, {"nome": "Despensa", "x": 12, "y": 0, "largura": 1, "profundidade": 4, "status": "reformado"}, {"nome": "Área de serviço", "x": 13, "y": 0, "largura": 2, "profundidade": 4, "status": "mantido", "externo": true}, {"nome": "Sala de TV", "x": 6, "y": 4, "largura": 3.5, "profundidade": 4, "status": "mantido"}, {"nome": "Jantar", "x": 9.5, "y": 4, "largura": 2.5, "profundidade": 4, "status": "reformado"}, {"nome": "Cozinha", "x": 12, "y": 4, "largura": 3, "profundidade": 4, "status": "reformado"}], "integracoes": [{"x1": 0, "y1": 4, "x2": 6, "y2": 4, "nota": "Quintal: área gourmet e garagem abertas entre si"}, {"x1": 6, "y1": 4, "x2": 8.5, "y2": 4, "nota": "Hall da escada aberto para a Sala de TV"}, {"x1": 9.5, "y1": 4, "x2": 9.5, "y2": 8, "nota": "Sala de TV aberta para o Jantar"}, {"x1": 12, "y1": 4, "x2": 12, "y2": 8, "nota": "Cozinha aberta para o Jantar"}, {"x1": 6, "y1": 3, "x2": 8.5, "y2": 3, "nota": "Início da escada aberto para o hall"}], "muros": [{"x1": -1, "y1": 0, "x2": -1, "y2": 8, "nome": "Muro / portão"}, {"x1": -1, "y1": 0, "x2": 6, "y2": 0, "nome": "Muro lateral em cobogó", "tipo": "cobogo"}, {"x1": -1, "y1": 8, "x2": 6, "y2": 8, "nome": "Muro lateral"}], "pilares": [[3, 0], [3, 4], [3, 8], [15, 0]], "observacoes": ["Portão no muro da frente, 1 m antes da área gourmet/garagem.", "Escada em U (2,5 × 3 m) ocupando o antigo banheiro, a circulação e uma faixa do Quarto 2; hall de 1 m aberto para a Sala de TV.", "Antiga cozinha + faixa do Quarto 2 (x 8,5–13) dividida em Escritório (2 × 4 m), Banheiro (1,5 × 4 m, porta para o Jantar) e Despensa linear (1 × 4 m, porta para a Cozinha).", "Pilares propostos (quadrados pretos): linha x = 3 m na área gourmet/garagem para apoiar a borda da varanda, e um junto ao muro dos fundos para o 1º andar que passa por cima do corredor externo. Posição e quantidade a definir com o engenheiro.", "Área de serviço externa junto ao muro dos fundos; na realidade tem formato triangular (desenhada como retângulo de 2 × 4 m), forma final a definir com o engenheiro.", "Entrada principal pelo hall da escada, vinda do quintal; Sala de TV abre para o quintal com porta de vidro.", "Escada iluminada por painel de cobogó voltado para a área gourmet; muro lateral da área gourmet também em cobogó.", "Área gourmet com bancada e fogão a lenha com chaminé.", "Janelas nas laterais (y = 0 e y = 8) supõem que a casa não é colada nos vizinhos; confirmar."], "aberturas": [{"tipo": "cobogo", "x1": 6, "y1": 0.4, "x2": 6, "y2": 2.6}, {"tipo": "porta", "x1": 6, "y1": 3.05, "x2": 6, "y2": 3.95, "nota": "entrada principal"}, {"tipo": "porta-vidro", "x1": 6, "y1": 4.6, "x2": 6, "y2": 7.4}, {"tipo": "porta", "x1": 8.7, "y1": 4, "x2": 9.5, "y2": 4}, {"tipo": "janela", "x1": 8.9, "y1": 0, "x2": 10.1, "y2": 0}, {"tipo": "porta", "x1": 10.7, "y1": 4, "x2": 11.4, "y2": 4}, {"tipo": "janela-alta", "x1": 10.8, "y1": 0, "x2": 11.7, "y2": 0}, {"tipo": "porta", "x1": 12.1, "y1": 4, "x2": 12.8, "y2": 4}, {"tipo": "janela-alta", "x1": 13, "y1": 1, "x2": 13, "y2": 2}, {"tipo": "porta", "x1": 13.2, "y1": 4, "x2": 14, "y2": 4}, {"tipo": "janela", "x1": 14.1, "y1": 4, "x2": 14.9, "y2": 4}, {"tipo": "janela", "x1": 7, "y1": 8, "x2": 8.6, "y2": 8}, {"tipo": "janela", "x1": 10, "y1": 8, "x2": 11.5, "y2": 8}, {"tipo": "janela", "x1": 12.8, "y1": 8, "x2": 14.4, "y2": 8}], "escadas": [{"tipo": "U", "x": 6, "y": 0, "largura": 2.5, "profundidade": 3}], "elementos": [{"nome": "Bancada gourmet", "x": 0.6, "y": 0.15, "largura": 3.2, "profundidade": 0.65, "altura": 0.9, "material": "bancada"}, {"nome": "Fogão a lenha", "x": 3.8, "y": 0.15, "largura": 1.3, "profundidade": 0.75, "altura": 0.85, "material": "tijolo"}, {"nome": "Chaminé", "x": 4.2, "y": 0.2, "largura": 0.5, "profundidade": 0.45, "altura": 3.4, "base": 0.85, "material": "tijolo"}], "telhados": []}, "primeiro_andar": {"titulo": "Sobrado — 1º andar", "descricao": "Opção com primeiro andar: pavimento superior. Mesmo sistema de coordenadas de planta.json; o contorno tracejado é o térreo.", "dimensoes_totais": {"largura": 15, "profundidade": 8}, "contorno": true, "comodos": [{"nome": "Varanda", "x": 3, "y": 0, "largura": 3, "profundidade": 8, "status": "reformado", "externo": true}, {"nome": "Escada em U", "x": 6, "y": 0, "largura": 2.5, "profundidade": 3, "status": "reformado"}, {"nome": "Quarto visitas 1", "x": 8.5, "y": 0, "largura": 3.25, "profundidade": 3, "status": "reformado"}, {"nome": "Quarto visitas 2", "x": 11.75, "y": 0, "largura": 3.25, "profundidade": 3, "status": "reformado"}, {"nome": "Corredor", "x": 6, "y": 3, "largura": 9, "profundidade": 1.2, "status": "reformado"}, {"nome": "Suíte", "x": 6, "y": 4.2, "largura": 4, "profundidade": 3.8, "status": "reformado"}, {"nome": "Closet", "x": 10, "y": 4.2, "largura": 1.5, "profundidade": 3.8, "status": "reformado"}, {"nome": "Banho suíte", "x": 11.5, "y": 4.2, "largura": 1.5, "profundidade": 3.8, "status": "reformado"}, {"nome": "Banheiro", "x": 13, "y": 4.2, "largura": 2, "profundidade": 3.8, "status": "reformado"}], "integracoes": [{"x1": 6, "y1": 3, "x2": 8.5, "y2": 3, "nota": "Chegada da escada no corredor"}], "muros": [{"x1": -1, "y1": 0, "x2": -1, "y2": 8, "nome": "Muro / portão"}], "pilares": [[3, 0], [3, 4], [3, 8], [15, 0]], "observacoes": ["Pavimento em retângulo único de 9 × 8 m sobre a parte coberta da casa, inclusive por cima da área de serviço (precisa de pilar junto ao muro dos fundos; a área de serviço é triangular — forma final com o engenheiro).", "Corredor reto de 1,2 m ligando escada, quartos de visitas, suíte e banheiro.", "Suíte: quarto 4 × 3,8 m aberto para a varanda, closet de passagem e banheiro da suíte.", "Banho da suíte e banheiro social lado a lado, sobre a cozinha do térreo, dividindo a mesma prumada de água e esgoto.", "Quartos de visitas com 3,25 × 3 m (9,75 m²) cada.", "Varanda de lateral a lateral (3 × 8 m) sobre a área gourmet e a garagem, com pergolado de madeira e guarda-corpo de cobogó; borda externa apoiada na linha de pilares x = 3 m.", "Telhado colonial de duas águas com cumeeira paralela à rua, oitões nas laterais e beiral sobre a varanda.", "Janelas nas laterais (y = 0 e y = 8) supõem que a casa não é colada nos vizinhos; confirmar."], "aberturas": [{"tipo": "cobogo", "x1": 6, "y1": 0.4, "x2": 6, "y2": 2.6}, {"tipo": "porta", "x1": 6, "y1": 3.15, "x2": 6, "y2": 4.05}, {"tipo": "porta-vidro", "x1": 6, "y1": 4.7, "x2": 6, "y2": 7.5}, {"tipo": "janela", "x1": 9.4, "y1": 0, "x2": 10.9, "y2": 0}, {"tipo": "porta", "x1": 9.0, "y1": 3, "x2": 9.8, "y2": 3}, {"tipo": "janela", "x1": 12.6, "y1": 0, "x2": 14.1, "y2": 0}, {"tipo": "porta", "x1": 12.2, "y1": 3, "x2": 13.0, "y2": 3}, {"tipo": "janela-alta", "x1": 15, "y1": 3.2, "x2": 15, "y2": 4.0}, {"tipo": "porta", "x1": 8.8, "y1": 4.2, "x2": 9.6, "y2": 4.2}, {"tipo": "janela", "x1": 7.2, "y1": 8, "x2": 8.8, "y2": 8}, {"tipo": "porta", "x1": 10, "y1": 4.4, "x2": 10, "y2": 5.2}, {"tipo": "janela-alta", "x1": 10.3, "y1": 8, "x2": 11.2, "y2": 8}, {"tipo": "porta", "x1": 11.5, "y1": 4.4, "x2": 11.5, "y2": 5.1}, {"tipo": "janela-alta", "x1": 11.8, "y1": 8, "x2": 12.7, "y2": 8}, {"tipo": "porta", "x1": 13.3, "y1": 4.2, "x2": 14.1, "y2": 4.2}, {"tipo": "janela-alta", "x1": 13.5, "y1": 8, "x2": 14.5, "y2": 8}], "telhados": [{"tipo": "duas-aguas", "x": 6, "y": 0, "largura": 9, "profundidade": 8, "cumeeira": "y", "nivel": 1, "inclinacao": 0.3, "beiral": [0.8, 0.3]}], "pergolados": [{"x": 3, "y": 0, "largura": 3, "profundidade": 8, "nivel": 1, "altura": 2.4, "direcao": "x", "espaco": 0.45}]}};
+const DADOS = {"planta": {"descricao": "Planta baixa térrea transcrita do esboço à mão. Medidas em metros; origem (0,0) no canto superior esquerdo, x para a direita, y para baixo.", "dimensoes_totais": {"largura": 15, "profundidade": 8}, "comodos": [{"nome": "Quarto 1", "x": 0, "y": 0, "largura": 6, "profundidade": 4, "medida": "lida"}, {"nome": "Banheiro", "x": 6, "y": 0, "largura": 1.5, "profundidade": 1.5, "medida": "lida"}, {"nome": "Circulação", "x": 6, "y": 1.5, "largura": 1.5, "profundidade": 2.5, "medida": "estimada"}, {"nome": "Quarto 2", "x": 7.5, "y": 0, "largura": 2.5, "profundidade": 4, "medida": "lida"}, {"nome": "Cozinha", "x": 10, "y": 0, "largura": 3, "profundidade": 4, "medida": "lida"}, {"nome": "Área de serviço", "x": 13, "y": 0, "largura": 2, "profundidade": 4, "medida": "lida", "externo": true}, {"nome": "Garagem", "x": 0, "y": 4, "largura": 6, "profundidade": 4, "medida": "lida"}, {"nome": "Sala", "x": 6, "y": 4, "largura": 3.5, "profundidade": 4, "medida": "estimada"}, {"nome": "Sala de Jantar", "x": 9.5, "y": 4, "largura": 5.5, "profundidade": 4, "medida": "estimada"}], "observacoes": ["Larguras da linha de cima (6 / 1,5 / 2,5 / 3 / 2) foram lidas das cotas do desenho.", "Garagem com o mesmo tamanho do Quarto 1 (6 × 4 m), conforme confirmado; a linha de baixo inteira passa a ter 4 m de fundo.", "Larguras de Sala e Sala de Jantar não têm cota no papel; foram estimadas pela proporção do desenho.", "Anotações '4m 1.5 2 2' e '6 x 8' no topo do papel não ficaram claras e não foram aplicadas.", "Sala e Sala de Jantar parecem integradas (a parede entre elas não chega até a circulação).", "Área de serviço externa junto ao muro dos fundos; na realidade tem formato triangular (desenhada como retângulo de 2 × 4 m), forma final a definir com o engenheiro.", "Portas, janelas e móveis da casa atual são aproximados (não estavam no esboço).", "Laterais com construções vizinhas: sem janelas laterais; Quarto 2, banheiro, sala e sala de jantar recebem luz por telha de vidro."], "muros": [{"x1": -1, "y1": 0, "x2": -1, "y2": 8, "nome": "Muro / portão"}], "aberturas": [{"tipo": "janela", "x1": 0, "y1": 1.2, "x2": 0, "y2": 2.8}, {"tipo": "portao-garagem", "x1": 0, "y1": 4.6, "x2": 0, "y2": 7.4}, {"tipo": "porta", "x1": 6, "y1": 2, "x2": 6, "y2": 2.8}, {"tipo": "porta", "x1": 6.3, "y1": 1.5, "x2": 7.0, "y2": 1.5}, {"tipo": "porta", "x1": 7.5, "y1": 2.5, "x2": 7.5, "y2": 3.3}, {"tipo": "passagem", "x1": 6.2, "y1": 4, "x2": 7.3, "y2": 4}, {"tipo": "porta", "x1": 10.3, "y1": 4, "x2": 11.1, "y2": 4}, {"tipo": "porta", "x1": 13, "y1": 2.8, "x2": 13, "y2": 3.6}, {"tipo": "porta", "x1": 6, "y1": 5, "x2": 6, "y2": 5.9}, {"tipo": "porta", "x1": 13.4, "y1": 4, "x2": 14.3, "y2": 4}, {"tipo": "janela", "x1": 13, "y1": 1, "x2": 13, "y2": 2.4}], "telhados": [{"tipo": "duas-aguas", "x": 0, "y": 0, "largura": 15, "profundidade": 8, "cumeeira": "y", "nivel": 0, "inclinacao": 0.3, "beiral": [0.6, 0.3]}], "claraboias": [{"x": 8.2, "y": 1.2, "largura": 1, "profundidade": 1.4}, {"x": 6.4, "y": 0.3, "largura": 0.7, "profundidade": 0.8}, {"x": 7.3, "y": 5.4, "largura": 1, "profundidade": 1.4}, {"x": 11.5, "y": 5.4, "largura": 1, "profundidade": 1.4}], "moveis": [{"tipo": "cama", "x": 2.2, "y": 0.05, "largura": 1.6, "profundidade": 2.0, "frente": "+y"}, {"tipo": "guarda-roupa", "x": 5.35, "y": 0.1, "largura": 0.6, "profundidade": 1.8, "frente": "-x"}, {"tipo": "vaso", "x": 6.05, "y": 0.05, "largura": 0.45, "profundidade": 0.6, "frente": "+y"}, {"tipo": "pia", "x": 6.9, "y": 0.05, "largura": 0.55, "profundidade": 0.45, "frente": "+y"}, {"tipo": "cama", "x": 9.0, "y": 0.05, "largura": 0.9, "profundidade": 1.9, "frente": "+y"}, {"tipo": "guarda-roupa", "x": 7.55, "y": 0.1, "largura": 0.6, "profundidade": 1.8, "frente": "+x"}, {"tipo": "bancada", "x": 10.1, "y": 0.05, "largura": 2.8, "profundidade": 0.6, "frente": "+y", "pia": true}, {"tipo": "geladeira", "x": 12.25, "y": 1.0, "largura": 0.7, "profundidade": 0.7, "frente": "-x"}, {"tipo": "mesa", "x": 10.7, "y": 2.1, "largura": 1.0, "profundidade": 0.8, "frente": "+y", "cadeiras": 4}, {"tipo": "carro", "x": 0.8, "y": 5.1, "largura": 4.5, "profundidade": 1.8, "frente": "-x"}, {"tipo": "rack", "x": 6.8, "y": 7.5, "largura": 2, "profundidade": 0.45, "frente": "-y"}, {"tipo": "tapete", "x": 6.9, "y": 6.1, "largura": 2, "profundidade": 1.3, "frente": "+y"}, {"tipo": "sofa", "x": 6.9, "y": 5.2, "largura": 2, "profundidade": 0.9, "frente": "+y"}, {"tipo": "planta", "x": 6.15, "y": 7.45, "largura": 0.45, "profundidade": 0.45, "frente": "+y"}, {"tipo": "mesa", "x": 11.2, "y": 5.55, "largura": 1.6, "profundidade": 0.9, "frente": "+y", "cadeiras": 6}, {"tipo": "aparador", "x": 13.6, "y": 7.5, "largura": 1.2, "profundidade": 0.42, "frente": "-y"}]}, "reforma": {"titulo": "Reforma (térreo)", "descricao": "Proposta de reforma sem primeiro andar. Mesmo sistema de coordenadas de planta.json.", "dimensoes_totais": {"largura": 15, "profundidade": 8}, "comodos": [{"nome": "Quarto", "x": 0, "y": 0, "largura": 4.5, "profundidade": 4, "status": "reformado"}, {"nome": "Banheiro suíte", "x": 4.5, "y": 0, "largura": 3, "profundidade": 1.5, "status": "reformado"}, {"nome": "Closet", "x": 4.5, "y": 1.5, "largura": 1.5, "profundidade": 2.5, "status": "reformado"}, {"nome": "Circulação", "x": 6, "y": 1.5, "largura": 1.5, "profundidade": 2.5, "status": "mantido"}, {"nome": "Escritório", "x": 7.5, "y": 0, "largura": 2.5, "profundidade": 4, "status": "reformado"}, {"nome": "Banheiro", "x": 10, "y": 0, "largura": 1.5, "profundidade": 4, "status": "reformado"}, {"nome": "Despensa", "x": 11.5, "y": 0, "largura": 1.5, "profundidade": 4, "status": "reformado"}, {"nome": "Área de serviço", "x": 13, "y": 0, "largura": 2, "profundidade": 4, "status": "mantido", "externo": true}, {"nome": "Garagem", "x": 0, "y": 4, "largura": 6, "profundidade": 4, "status": "mantido"}, {"nome": "Sala de TV", "x": 6, "y": 4, "largura": 3.5, "profundidade": 4, "status": "reformado"}, {"nome": "Jantar", "x": 9.5, "y": 4, "largura": 2.5, "profundidade": 4, "status": "reformado"}, {"nome": "Cozinha", "x": 12, "y": 4, "largura": 3, "profundidade": 4, "status": "reformado"}], "integracoes": [{"x1": 9.5, "y1": 4, "x2": 9.5, "y2": 8, "nota": "Sala de TV aberta para o Jantar"}, {"x1": 12, "y1": 4, "x2": 12, "y2": 8, "nota": "Cozinha aberta para o Jantar"}], "observacoes": ["Suíte: o Quarto 1 (6 × 4 m) vira Quarto (4,5 × 4 m) + Closet; o banheiro existente cresce para dentro do quarto e vira o banheiro da suíte (3 × 1,5 m).", "Acesso à suíte pela Circulação, entrando pelo Closet (que liga Quarto e Banheiro).", "Antiga Cozinha (3 × 4 m) dividida em Banheiro social e Despensa, ambos abrindo para a área de Cozinha/Jantar.", "Antiga Sala de Jantar vira Cozinha + Jantar, integrada com a Sala de TV (sem paredes entre elas).", "A antiga Cozinha já tem ponto de água e esgoto, o que facilita o novo banheiro; a nova cozinha precisa de ponto novo de água, esgoto e gás.", "Paredes que forem removidas (sala/jantar, quarto) precisam ser liberadas pelo engenheiro, caso sejam estruturais.", "Área de serviço externa junto ao muro dos fundos; na realidade tem formato triangular (desenhada como retângulo de 2 × 4 m), forma final a definir com o engenheiro.", "Térreo sem janelas nas laterais (y = 0 e y = 8), que têm construções vizinhas; janelas laterais só no 1º andar.", "Cômodos sem fachada (banheiros, escritório, sala e jantar) recebem luz por telha de vidro no telhado."], "muros": [{"x1": -1, "y1": 0, "x2": -1, "y2": 8, "nome": "Muro / portão"}], "aberturas": [{"tipo": "janela", "x1": 0, "y1": 1.2, "x2": 0, "y2": 2.8}, {"tipo": "porta", "x1": 4.7, "y1": 1.5, "x2": 5.5, "y2": 1.5}, {"tipo": "passagem", "x1": 4.5, "y1": 2, "x2": 4.5, "y2": 3.5}, {"tipo": "porta", "x1": 6, "y1": 2.6, "x2": 6, "y2": 3.4}, {"tipo": "passagem", "x1": 6.2, "y1": 4, "x2": 7.3, "y2": 4}, {"tipo": "porta", "x1": 7.5, "y1": 2.6, "x2": 7.5, "y2": 3.4}, {"tipo": "porta", "x1": 10.3, "y1": 4, "x2": 11, "y2": 4}, {"tipo": "porta", "x1": 12.2, "y1": 4, "x2": 12.9, "y2": 4}, {"tipo": "janela-alta", "x1": 13, "y1": 1, "x2": 13, "y2": 2}, {"tipo": "portao-garagem", "x1": 0, "y1": 4.6, "x2": 0, "y2": 7.4}, {"tipo": "porta", "x1": 6, "y1": 5, "x2": 6, "y2": 5.9}, {"tipo": "porta", "x1": 13.3, "y1": 4, "x2": 14.1, "y2": 4}, {"tipo": "janela", "x1": 14.2, "y1": 4, "x2": 14.9, "y2": 4}], "telhados": [{"tipo": "duas-aguas", "x": 0, "y": 0, "largura": 15, "profundidade": 8, "cumeeira": "y", "nivel": 0, "inclinacao": 0.3, "beiral": [0.6, 0.3]}], "claraboias": [{"x": 5.6, "y": 0.25, "largura": 0.8, "profundidade": 1.0}, {"x": 8.2, "y": 1.2, "largura": 1, "profundidade": 1.4}, {"x": 10.3, "y": 1.2, "largura": 0.9, "profundidade": 1.2}, {"x": 7.2, "y": 5.3, "largura": 1, "profundidade": 1.4}, {"x": 10.3, "y": 5.3, "largura": 1, "profundidade": 1.4}], "moveis": [{"tipo": "cama", "x": 1.45, "y": 0.05, "largura": 1.6, "profundidade": 2.0, "frente": "+y"}, {"tipo": "tapete", "x": 1.2, "y": 2.2, "largura": 2.1, "profundidade": 1.2, "frente": "+y"}, {"tipo": "poltrona", "x": 0.25, "y": 2.9, "largura": 0.8, "profundidade": 0.8, "frente": "+x"}, {"tipo": "chuveiro", "x": 6.5, "y": 0.05, "largura": 0.95, "profundidade": 1.4, "frente": "+y"}, {"tipo": "vaso", "x": 5.7, "y": 0.05, "largura": 0.45, "profundidade": 0.6, "frente": "+y"}, {"tipo": "pia", "x": 4.55, "y": 0.05, "largura": 0.8, "profundidade": 0.45, "frente": "+y"}, {"tipo": "guarda-roupa", "x": 5.4, "y": 3.35, "largura": 0.55, "profundidade": 0.6, "frente": "-x"}, {"tipo": "escrivaninha", "x": 8.0, "y": 0.05, "largura": 1.6, "profundidade": 0.65, "frente": "+y"}, {"tipo": "estante", "x": 9.55, "y": 1.2, "largura": 0.4, "profundidade": 2.0, "frente": "-x"}, {"tipo": "chuveiro", "x": 10.05, "y": 0.05, "largura": 1.4, "profundidade": 0.95, "frente": "+y"}, {"tipo": "vaso", "x": 10.05, "y": 1.5, "largura": 0.6, "profundidade": 0.45, "frente": "+x"}, {"tipo": "pia", "x": 11.0, "y": 1.5, "largura": 0.45, "profundidade": 0.8, "frente": "-x"}, {"tipo": "estante", "x": 12.55, "y": 0.1, "largura": 0.4, "profundidade": 3.2, "frente": "-x"}, {"tipo": "carro", "x": 0.8, "y": 5.1, "largura": 4.5, "profundidade": 1.8, "frente": "-x"}, {"tipo": "rack", "x": 6.8, "y": 7.5, "largura": 2, "profundidade": 0.45, "frente": "-y"}, {"tipo": "tapete", "x": 6.9, "y": 6.1, "largura": 2, "profundidade": 1.3, "frente": "+y"}, {"tipo": "sofa", "x": 6.9, "y": 5.2, "largura": 2, "profundidade": 0.9, "frente": "+y"}, {"tipo": "planta", "x": 6.15, "y": 7.45, "largura": 0.45, "profundidade": 0.45, "frente": "+y"}, {"tipo": "mesa", "x": 10.0, "y": 5.55, "largura": 1.6, "profundidade": 0.9, "frente": "+y", "cadeiras": 6}, {"tipo": "bancada", "x": 12.3, "y": 7.4, "largura": 2.65, "profundidade": 0.6, "frente": "-y", "pia": true}, {"tipo": "fogao", "x": 14.35, "y": 6.0, "largura": 0.6, "profundidade": 0.6, "frente": "-x"}, {"tipo": "bancada", "x": 14.35, "y": 6.6, "largura": 0.6, "profundidade": 0.8, "frente": "-x"}, {"tipo": "geladeira", "x": 14.25, "y": 4.85, "largura": 0.7, "profundidade": 0.7, "frente": "-x"}]}, "terreo_sobrado": {"titulo": "Sobrado — térreo", "descricao": "Opção com primeiro andar: térreo. Mesmo sistema de coordenadas de planta.json; a frente (portão) fica à esquerda.", "dimensoes_totais": {"largura": 15, "profundidade": 8}, "comodos": [{"nome": "Área gourmet", "x": 0, "y": 0, "largura": 6, "profundidade": 4, "status": "reformado", "externo": true}, {"nome": "Garagem aberta", "x": 0, "y": 4, "largura": 6, "profundidade": 4, "status": "reformado", "externo": true}, {"nome": "Escada em U", "x": 6, "y": 0, "largura": 2.5, "profundidade": 3, "status": "reformado"}, {"nome": "Hall", "x": 6, "y": 3, "largura": 2.5, "profundidade": 1, "status": "reformado"}, {"nome": "Escritório", "x": 8.5, "y": 0, "largura": 2, "profundidade": 4, "status": "reformado"}, {"nome": "Banheiro", "x": 10.5, "y": 0, "largura": 1.5, "profundidade": 4, "status": "reformado"}, {"nome": "Despensa", "x": 12, "y": 0, "largura": 1, "profundidade": 4, "status": "reformado"}, {"nome": "Área de serviço", "x": 13, "y": 0, "largura": 2, "profundidade": 4, "status": "mantido", "externo": true}, {"nome": "Sala de TV", "x": 6, "y": 4, "largura": 3.5, "profundidade": 4, "status": "mantido"}, {"nome": "Jantar", "x": 9.5, "y": 4, "largura": 2.5, "profundidade": 4, "status": "reformado"}, {"nome": "Cozinha", "x": 12, "y": 4, "largura": 3, "profundidade": 4, "status": "reformado"}], "integracoes": [{"x1": 0, "y1": 4, "x2": 6, "y2": 4, "nota": "Quintal: área gourmet e garagem abertas entre si"}, {"x1": 6, "y1": 4, "x2": 8.5, "y2": 4, "nota": "Hall da escada aberto para a Sala de TV"}, {"x1": 9.5, "y1": 4, "x2": 9.5, "y2": 8, "nota": "Sala de TV aberta para o Jantar"}, {"x1": 12, "y1": 4, "x2": 12, "y2": 8, "nota": "Cozinha aberta para o Jantar"}, {"x1": 6, "y1": 3, "x2": 8.5, "y2": 3, "nota": "Início da escada aberto para o hall"}], "muros": [{"x1": -1, "y1": 0, "x2": -1, "y2": 8, "nome": "Muro / portão"}, {"x1": -1, "y1": 0, "x2": 6, "y2": 0, "nome": "Muro lateral em cobogó", "tipo": "cobogo"}, {"x1": -1, "y1": 8, "x2": 6, "y2": 8, "nome": "Muro lateral"}], "pilares": [[3, 0], [3, 4], [3, 8], [15, 0]], "observacoes": ["Portão no muro da frente, 1 m antes da área gourmet/garagem.", "Escada em U (2,5 × 3 m) ocupando o antigo banheiro, a circulação e uma faixa do Quarto 2; hall de 1 m aberto para a Sala de TV.", "Antiga cozinha + faixa do Quarto 2 (x 8,5–13) dividida em Escritório (2 × 4 m), Banheiro (1,5 × 4 m, porta para o Jantar) e Despensa linear (1 × 4 m, porta para a Cozinha).", "Pilares propostos (quadrados pretos): linha x = 3 m na área gourmet/garagem para apoiar a borda da varanda, e um junto ao muro dos fundos para o 1º andar que passa por cima do corredor externo. Posição e quantidade a definir com o engenheiro.", "Área de serviço externa junto ao muro dos fundos; na realidade tem formato triangular (desenhada como retângulo de 2 × 4 m), forma final a definir com o engenheiro.", "Entrada principal pelo hall da escada, vinda do quintal; Sala de TV abre para o quintal com porta de vidro.", "Escada iluminada por painel de cobogó voltado para a área gourmet; muro lateral da área gourmet também em cobogó.", "Área gourmet com bancada e fogão a lenha com chaminé.", "Térreo sem janelas nas laterais (y = 0 e y = 8), que têm construções vizinhas; janelas laterais só no 1º andar.", "Escritório ganha janela interna de vidro para o jantar; banheiro do térreo precisa de exaustor (sem parede para fora)."], "aberturas": [{"tipo": "cobogo", "x1": 6, "y1": 0.4, "x2": 6, "y2": 2.6}, {"tipo": "porta", "x1": 6, "y1": 3.05, "x2": 6, "y2": 3.95, "nota": "entrada principal"}, {"tipo": "porta-vidro", "x1": 6, "y1": 4.6, "x2": 6, "y2": 7.4}, {"tipo": "porta", "x1": 8.7, "y1": 4, "x2": 9.5, "y2": 4}, {"tipo": "porta", "x1": 10.7, "y1": 4, "x2": 11.4, "y2": 4}, {"tipo": "porta", "x1": 12.1, "y1": 4, "x2": 12.8, "y2": 4}, {"tipo": "janela-alta", "x1": 13, "y1": 1, "x2": 13, "y2": 2}, {"tipo": "porta", "x1": 13.2, "y1": 4, "x2": 14, "y2": 4}, {"tipo": "janela", "x1": 14.1, "y1": 4, "x2": 14.9, "y2": 4}, {"tipo": "janela", "x1": 9.7, "y1": 4, "x2": 10.4, "y2": 4, "nota": "janela interna de vidro para o jantar"}], "escadas": [{"tipo": "U", "x": 6, "y": 0, "largura": 2.5, "profundidade": 3}], "elementos": [{"nome": "Bancada gourmet", "x": 0.6, "y": 0.15, "largura": 3.2, "profundidade": 0.65, "altura": 0.9, "material": "bancada"}, {"nome": "Fogão a lenha", "x": 3.8, "y": 0.15, "largura": 1.3, "profundidade": 0.75, "altura": 0.85, "material": "tijolo"}, {"nome": "Chaminé", "x": 4.2, "y": 0.2, "largura": 0.5, "profundidade": 0.45, "altura": 3.4, "base": 0.85, "material": "tijolo"}], "telhados": [], "moveis": [{"tipo": "mesa", "x": 1.1, "y": 1.6, "largura": 2.4, "profundidade": 0.9, "frente": "+y", "cadeiras": 8}, {"tipo": "planta", "x": 0.15, "y": 3.4, "largura": 0.5, "profundidade": 0.5, "frente": "+y"}, {"tipo": "planta", "x": 5.4, "y": 0.15, "largura": 0.5, "profundidade": 0.5, "frente": "+y"}, {"tipo": "carro", "x": 0.8, "y": 5.1, "largura": 4.5, "profundidade": 1.8, "frente": "-x"}, {"tipo": "escrivaninha", "x": 8.6, "y": 0.05, "largura": 1.8, "profundidade": 0.65, "frente": "+y"}, {"tipo": "estante", "x": 8.55, "y": 1.3, "largura": 0.4, "profundidade": 2.0, "frente": "+x"}, {"tipo": "chuveiro", "x": 10.55, "y": 0.05, "largura": 1.4, "profundidade": 1.0, "frente": "+y"}, {"tipo": "vaso", "x": 10.55, "y": 1.5, "largura": 0.6, "profundidade": 0.45, "frente": "+x"}, {"tipo": "pia", "x": 11.5, "y": 1.5, "largura": 0.45, "profundidade": 0.8, "frente": "-x"}, {"tipo": "estante", "x": 12.55, "y": 0.1, "largura": 0.4, "profundidade": 3.2, "frente": "-x"}, {"tipo": "rack", "x": 6.8, "y": 7.5, "largura": 2, "profundidade": 0.45, "frente": "-y"}, {"tipo": "tapete", "x": 6.9, "y": 6.1, "largura": 2, "profundidade": 1.3, "frente": "+y"}, {"tipo": "sofa", "x": 6.9, "y": 5.2, "largura": 2, "profundidade": 0.9, "frente": "+y"}, {"tipo": "planta", "x": 6.15, "y": 7.45, "largura": 0.45, "profundidade": 0.45, "frente": "+y"}, {"tipo": "mesa", "x": 10.0, "y": 5.55, "largura": 1.6, "profundidade": 0.9, "frente": "+y", "cadeiras": 6}, {"tipo": "bancada", "x": 12.3, "y": 7.4, "largura": 2.65, "profundidade": 0.6, "frente": "-y", "pia": true}, {"tipo": "fogao", "x": 14.35, "y": 6.0, "largura": 0.6, "profundidade": 0.6, "frente": "-x"}, {"tipo": "bancada", "x": 14.35, "y": 6.6, "largura": 0.6, "profundidade": 0.8, "frente": "-x"}, {"tipo": "geladeira", "x": 14.25, "y": 4.85, "largura": 0.7, "profundidade": 0.7, "frente": "-x"}]}, "primeiro_andar": {"titulo": "Sobrado — 1º andar", "descricao": "Opção com primeiro andar: pavimento superior. Mesmo sistema de coordenadas de planta.json; o contorno tracejado é o térreo.", "dimensoes_totais": {"largura": 15, "profundidade": 8}, "contorno": true, "comodos": [{"nome": "Varanda", "x": 3, "y": 0, "largura": 3, "profundidade": 8, "status": "reformado", "externo": true}, {"nome": "Escada em U", "x": 6, "y": 0, "largura": 2.5, "profundidade": 3, "status": "reformado"}, {"nome": "Quarto visitas 1", "x": 8.5, "y": 0, "largura": 3.25, "profundidade": 3, "status": "reformado"}, {"nome": "Quarto visitas 2", "x": 11.75, "y": 0, "largura": 3.25, "profundidade": 3, "status": "reformado"}, {"nome": "Corredor", "x": 6, "y": 3, "largura": 9, "profundidade": 1.2, "status": "reformado"}, {"nome": "Suíte", "x": 6, "y": 4.2, "largura": 4, "profundidade": 3.8, "status": "reformado"}, {"nome": "Closet", "x": 10, "y": 4.2, "largura": 1.5, "profundidade": 3.8, "status": "reformado"}, {"nome": "Banho suíte", "x": 11.5, "y": 4.2, "largura": 1.5, "profundidade": 3.8, "status": "reformado"}, {"nome": "Banheiro", "x": 13, "y": 4.2, "largura": 2, "profundidade": 3.8, "status": "reformado"}], "integracoes": [{"x1": 6, "y1": 3, "x2": 8.5, "y2": 3, "nota": "Chegada da escada no corredor"}], "muros": [{"x1": -1, "y1": 0, "x2": -1, "y2": 8, "nome": "Muro / portão"}], "pilares": [[3, 0], [3, 4], [3, 8], [15, 0]], "observacoes": ["Pavimento em retângulo único de 9 × 8 m sobre a parte coberta da casa, inclusive por cima da área de serviço (precisa de pilar junto ao muro dos fundos; a área de serviço é triangular — forma final com o engenheiro).", "Corredor reto de 1,2 m ligando escada, quartos de visitas, suíte e banheiro.", "Suíte: quarto 4 × 3,8 m aberto para a varanda, closet de passagem e banheiro da suíte.", "Banho da suíte e banheiro social lado a lado, sobre a cozinha do térreo, dividindo a mesma prumada de água e esgoto.", "Quartos de visitas com 3,25 × 3 m (9,75 m²) cada.", "Varanda de lateral a lateral (3 × 8 m) sobre a área gourmet e a garagem, com pergolado de madeira e guarda-corpo de cobogó; borda externa apoiada na linha de pilares x = 3 m.", "Telhado colonial de duas águas com cumeeira paralela à rua, oitões nas laterais e beiral sobre a varanda.", "No 1º andar as laterais ficam acima das construções vizinhas, então quartos, banheiros e suíte podem ter janelas laterais.", "Rede de dormir na varanda."], "aberturas": [{"tipo": "cobogo", "x1": 6, "y1": 0.4, "x2": 6, "y2": 2.6}, {"tipo": "porta", "x1": 6, "y1": 3.15, "x2": 6, "y2": 4.05}, {"tipo": "porta-vidro", "x1": 6, "y1": 4.7, "x2": 6, "y2": 7.5}, {"tipo": "janela", "x1": 9.4, "y1": 0, "x2": 10.9, "y2": 0}, {"tipo": "porta", "x1": 9.0, "y1": 3, "x2": 9.8, "y2": 3}, {"tipo": "janela", "x1": 12.6, "y1": 0, "x2": 14.1, "y2": 0}, {"tipo": "porta", "x1": 12.2, "y1": 3, "x2": 13.0, "y2": 3}, {"tipo": "janela-alta", "x1": 15, "y1": 3.2, "x2": 15, "y2": 4.0}, {"tipo": "porta", "x1": 8.8, "y1": 4.2, "x2": 9.6, "y2": 4.2}, {"tipo": "janela", "x1": 7.2, "y1": 8, "x2": 8.8, "y2": 8}, {"tipo": "porta", "x1": 10, "y1": 4.4, "x2": 10, "y2": 5.2}, {"tipo": "janela-alta", "x1": 10.3, "y1": 8, "x2": 11.2, "y2": 8}, {"tipo": "porta", "x1": 11.5, "y1": 4.4, "x2": 11.5, "y2": 5.1}, {"tipo": "janela-alta", "x1": 11.8, "y1": 8, "x2": 12.7, "y2": 8}, {"tipo": "porta", "x1": 13.3, "y1": 4.2, "x2": 14.1, "y2": 4.2}, {"tipo": "janela-alta", "x1": 13.5, "y1": 8, "x2": 14.5, "y2": 8}], "telhados": [{"tipo": "duas-aguas", "x": 6, "y": 0, "largura": 9, "profundidade": 8, "cumeeira": "y", "nivel": 1, "inclinacao": 0.3, "beiral": [0.8, 0.3]}], "pergolados": [{"x": 3, "y": 0, "largura": 3, "profundidade": 8, "nivel": 1, "altura": 2.4, "direcao": "x", "espaco": 0.45}], "moveis": [{"tipo": "rede", "x": 3.8, "y": 0.8, "largura": 0.8, "profundidade": 3.2, "frente": "+x"}, {"tipo": "poltrona", "x": 4.4, "y": 5.0, "largura": 0.8, "profundidade": 0.8, "frente": "+x"}, {"tipo": "poltrona", "x": 4.4, "y": 6.5, "largura": 0.8, "profundidade": 0.8, "frente": "+x"}, {"tipo": "mesinha", "x": 4.55, "y": 5.95, "largura": 0.5, "profundidade": 0.45, "frente": "+y"}, {"tipo": "planta", "x": 3.15, "y": 7.4, "largura": 0.5, "profundidade": 0.5, "frente": "+y"}, {"tipo": "planta", "x": 3.15, "y": 0.15, "largura": 0.5, "profundidade": 0.5, "frente": "+y"}, {"tipo": "cama", "x": 9.85, "y": 0.55, "largura": 1.9, "profundidade": 1.4, "frente": "-x"}, {"tipo": "guarda-roupa", "x": 8.55, "y": 0.1, "largura": 0.6, "profundidade": 1.8, "frente": "+x"}, {"tipo": "cama", "x": 13.05, "y": 0.25, "largura": 1.9, "profundidade": 0.9, "frente": "-x"}, {"tipo": "cama", "x": 13.05, "y": 1.55, "largura": 1.9, "profundidade": 0.9, "frente": "-x"}, {"tipo": "guarda-roupa", "x": 11.8, "y": 0.1, "largura": 0.6, "profundidade": 1.8, "frente": "+x"}, {"tipo": "cama", "x": 8.0, "y": 5.6, "largura": 2.0, "profundidade": 1.6, "frente": "-x"}, {"tipo": "tapete", "x": 7.0, "y": 5.3, "largura": 1.6, "profundidade": 2.2, "frente": "+y"}, {"tipo": "poltrona", "x": 6.3, "y": 7.1, "largura": 0.8, "profundidade": 0.8, "frente": "+x"}, {"tipo": "guarda-roupa", "x": 10.9, "y": 5.3, "largura": 0.6, "profundidade": 2.65, "frente": "-x"}, {"tipo": "chuveiro", "x": 11.55, "y": 6.95, "largura": 1.4, "profundidade": 1.0, "frente": "+y"}, {"tipo": "vaso", "x": 12.4, "y": 5.6, "largura": 0.6, "profundidade": 0.45, "frente": "-x"}, {"tipo": "pia", "x": 11.55, "y": 5.4, "largura": 0.45, "profundidade": 0.9, "frente": "+x"}, {"tipo": "chuveiro", "x": 13.05, "y": 6.95, "largura": 1.9, "profundidade": 1.0, "frente": "+y"}, {"tipo": "vaso", "x": 14.35, "y": 5.6, "largura": 0.6, "profundidade": 0.45, "frente": "-x"}, {"tipo": "pia", "x": 13.05, "y": 5.3, "largura": 0.45, "profundidade": 0.9, "frente": "+x"}]}};
 
 const PE_DIREITO = 2.8, ESPESSURA = 0.15, LAJE = 0.12, PAREDE_BAIXA = 1.2, BARRADO = 0.9;
 const CENARIOS = {
@@ -140,7 +141,7 @@ const COR = {
 };
 const hex = n => "#" + n.toString(16).padStart(6, "0");
 
-const estado = { cenario: "sobrado", andar: "todos", fachada: "olinda", telhado: true, separar: false, baixas: false, rotulos: false, cores: false };
+const estado = { cenario: "sobrado", andar: "todos", fachada: "olinda", telhado: true, moveis: true, separar: false, baixas: false, rotulos: false, cores: false };
 
 // ---------- texturas desenhadas no canvas (1 imagem = 1 metro, salvo indicação) ----------
 function tela(px, desenhar) {
@@ -562,6 +563,243 @@ function escadaU(e, base) {
   caixa(xa + larg, xb - larg, patamar, e.y + e.profundidade, base, base + 8 * r + 0.9, alv);  // mureta entre os lances
 }
 
+// telha de vidro: placa clara sobre a água do telhado, no ponto da claraboia
+function alturaTelhado(t, base, x, y) {
+  const porY = t.cumeeira === "y";
+  const s = porY ? x : y, s0 = porY ? t.x : t.y, vao = porY ? t.largura : t.profundidade;
+  const hb = base + PE_DIREITO + 0.06;
+  return hb + Math.min(s - s0, s0 + vao - s) * t.inclinacao;
+}
+function claraboia(c, t, base) {
+  const P = (x, y) => [x, alturaTelhado(t, base, x, y) + 0.035, y];
+  const x1 = c.x + c.largura, y1 = c.y + c.profundidade;
+  quad([P(c.x, c.y), P(x1, c.y), P(x1, y1), P(c.x, y1)], [[0, 0], [1, 0], [1, 1], [0, 1]],
+       mat(0xdcedf3, { transparent: true, opacity: 0.8, side: THREE.DoubleSide }));
+}
+
+// ---------- móveis ----------
+// cada móvel é montado num referencial próprio: largura em x, frente virada para +z, chão em y = 0
+const MOVEL = {
+  madeira: 0x8a5a32, madeiraEscura: 0x5e3b22, lencol: 0xf3f0e8, sofa: 0xb5543a, poltrona: 0xd29b2e,
+  tapete: 0x8f3a2b, tapeteMiolo: 0xd8b26a, louca: 0xf6f5f1, inox: 0xc9cdd0, preto: 0x24272a, granito: 0x3d3b38,
+  branco: 0xf0eee8, folha: 0x4f7d3a, vaso: 0xb0603d, carro: 0x8c2f24, espelho: 0xcfdde3,
+};
+IMAGENS.chita = { m: 0.6, cv: tela(256, (g, n) => {
+  g.fillStyle = "#c8282e"; g.fillRect(0, 0, n, n);
+  const flor = (x, y, r, petala, miolo) => {
+    g.fillStyle = petala;
+    for (let k = 0; k < 6; k++) { const a = k * Math.PI / 3; g.beginPath(); g.arc(x + Math.cos(a) * r, y + Math.sin(a) * r, r * 0.75, 0, Math.PI * 2); g.fill(); }
+    g.fillStyle = miolo; g.beginPath(); g.arc(x, y, r * 0.6, 0, Math.PI * 2); g.fill();
+  };
+  g.fillStyle = "#2f7d3c";
+  for (const [x, y] of [[40, 90], [150, 30], [200, 160], [90, 210]]) { g.beginPath(); g.ellipse(x, y, 22, 9, 0.6, 0, Math.PI * 2); g.fill(); }
+  flor(64, 64, 22, "#f2c230", "#1f5aa6"); flor(192, 96, 18, "#f6f0e2", "#c8282e"); flor(128, 190, 24, "#1f5aa6", "#f2c230"); flor(230, 230, 14, "#f2c230", "#c8282e"); flor(20, 170, 12, "#f6f0e2", "#1f5aa6");
+}) };
+IMAGENS.listras = { m: 1, cv: tela(256, (g, n) => {
+  const cores = ["#c8282e", "#f2c230", "#1f5aa6", "#2f7d3c", "#f6f0e2", "#e2702b"];
+  for (let k = 0; k < 16; k++) { g.fillStyle = cores[k % cores.length]; g.fillRect(k * n / 16, 0, n / 16, n); }
+}) };
+
+function bx(g, x0, x1, y0, y1, z0, z1, material) {
+  const m = new THREE.Mesh(new THREE.BoxGeometry(x1 - x0, y1 - y0, z1 - z0), material);
+  m.position.set((x0 + x1) / 2, (y0 + y1) / 2, (z0 + z1) / 2);
+  g.add(m);
+  return m;
+}
+function cil(g, r, h, x, y, z, material, deitado) {
+  const m = new THREE.Mesh(new THREE.CylinderGeometry(r, r, h, 18), material);
+  m.position.set(x, y, z);
+  if (deitado) m.rotation.z = Math.PI / 2;
+  g.add(m);
+  return m;
+}
+function cadeira(g, x, z, viradaPara) {
+  const c = new THREE.Group(), m = mat(MOVEL.madeira);
+  bx(c, -0.21, 0.21, 0.42, 0.46, -0.2, 0.2, m);
+  for (const [px, pz] of [[-0.18, -0.17], [0.18, -0.17], [-0.18, 0.17], [0.18, 0.17]]) bx(c, px - 0.02, px + 0.02, 0, 0.42, pz - 0.02, pz + 0.02, m);
+  bx(c, -0.21, 0.21, 0.46, 0.92, -0.21, -0.17, mat(MOVEL.madeiraEscura));
+  c.position.set(x, 0, z);
+  c.rotation.y = viradaPara;  // 0: frente para +z
+  g.add(c);
+}
+
+const MONTAR = {
+  cama(g, W, D) {
+    bx(g, -W / 2, W / 2, 0.08, 0.32, -D / 2, D / 2, mat(MOVEL.madeira));
+    bx(g, -W / 2 + 0.03, W / 2 - 0.03, 0.32, 0.54, -D / 2 + 0.03, D / 2 - 0.03, mat(MOVEL.lencol));
+    bx(g, -W / 2 - 0.02, W / 2 + 0.02, 0.3, 0.57, -D / 2 + 0.55, D / 2 + 0.02, matTex("chita", W, D));
+    const n = W > 1.2 ? 2 : 1, lp = (W - 0.2) / n;
+    for (let k = 0; k < n; k++) bx(g, -W / 2 + 0.1 + k * lp + 0.03, -W / 2 + 0.1 + (k + 1) * lp - 0.03, 0.54, 0.68, -D / 2 + 0.08, -D / 2 + 0.45, mat(MOVEL.branco));
+    bx(g, -W / 2 - 0.03, W / 2 + 0.03, 0.08, 1.05, -D / 2 - 0.06, -D / 2, mat(MOVEL.madeiraEscura));
+    if (W > 1.2) for (const sx of [-1, 1]) bx(g, sx * (W / 2 + 0.06), sx * (W / 2 + 0.5), 0, 0.55, -D / 2, -D / 2 + 0.4, mat(MOVEL.madeira));
+  },
+  sofa(g, W, D, cor = MOVEL.sofa) {
+    const m = mat(cor);
+    bx(g, -W / 2, W / 2, 0.08, 0.42, -D / 2, D / 2, m);
+    bx(g, -W / 2, W / 2, 0.42, 0.86, -D / 2, -D / 2 + 0.22, m);
+    for (const sx of [-1, 1]) bx(g, sx > 0 ? W / 2 - 0.17 : -W / 2, sx > 0 ? W / 2 : -W / 2 + 0.17, 0.42, 0.64, -D / 2, D / 2, m);
+    const n = Math.max(1, Math.round((W - 0.34) / 0.65)), l = (W - 0.34) / n;
+    for (let k = 0; k < n; k++) bx(g, -W / 2 + 0.17 + k * l + 0.01, -W / 2 + 0.17 + (k + 1) * l - 0.01, 0.42, 0.5, -D / 2 + 0.22, D / 2 - 0.02, mat(new THREE.Color(cor).offsetHSL(0, 0, 0.05).getHex()));
+    if (W > 1.2) for (const sx of [-1, 1]) bx(g, sx * (W / 2 - 0.55), sx * (W / 2 - 0.2), 0.5, 0.85, -D / 2 + 0.22, -D / 2 + 0.34, matTex("chita", 0.35, 0.35));
+  },
+  poltrona(g, W, D) { MONTAR.sofa(g, W, D, MOVEL.poltrona); },
+  rack(g, W, D) {
+    bx(g, -W / 2, W / 2, 0.08, 0.5, -D / 2, D / 2, mat(MOVEL.madeira));
+    const tv = Math.min(W - 0.2, 1.3);
+    bx(g, -tv / 2, tv / 2, 0.62, 0.62 + tv * 0.58, -D / 2 + 0.08, -D / 2 + 0.13, mat(MOVEL.preto));
+    bx(g, -0.15, 0.15, 0.5, 0.62, -D / 2 + 0.06, -D / 2 + 0.16, mat(MOVEL.preto));
+  },
+  aparador(g, W, D) {
+    bx(g, -W / 2, W / 2, 0, 0.85, -D / 2, D / 2, mat(MOVEL.madeira));
+    cil(g, 0.1, 0.3, W / 4, 1.0, 0, mat(MOVEL.vaso));
+  },
+  tapete(g, W, D) {
+    bx(g, -W / 2, W / 2, 0, 0.012, -D / 2, D / 2, mat(MOVEL.tapete));
+    bx(g, -W / 2 + 0.15, W / 2 - 0.15, 0, 0.016, -D / 2 + 0.15, D / 2 - 0.15, mat(MOVEL.tapeteMiolo));
+  },
+  mesa(g, W, D, mv) {
+    const m = mat(MOVEL.madeira);
+    bx(g, -W / 2, W / 2, 0.72, 0.76, -D / 2, D / 2, m);
+    for (const sx of [-1, 1]) for (const sz of [-1, 1]) bx(g, sx * (W / 2 - 0.08) - 0.03, sx * (W / 2 - 0.08) + 0.03, 0, 0.72, sz * (D / 2 - 0.08) - 0.03, sz * (D / 2 - 0.08) + 0.03, m);
+    const lado = Math.floor((mv.cadeiras || 0) / 2);
+    for (let k = 0; k < lado; k++) {
+      const x = -W / 2 + W * (k + 0.5) / lado;
+      cadeira(g, x, D / 2 + 0.25, Math.PI);
+      cadeira(g, x, -D / 2 - 0.25, 0);
+    }
+  },
+  mesinha(g, W, D) {
+    bx(g, -W / 2, W / 2, 0.42, 0.46, -D / 2, D / 2, mat(MOVEL.madeira));
+    cil(g, 0.04, 0.42, 0, 0.21, 0, mat(MOVEL.madeiraEscura));
+  },
+  escrivaninha(g, W, D) {
+    const m = mat(MOVEL.madeira);
+    bx(g, -W / 2, W / 2, 0.72, 0.76, -D / 2, D / 2, m);
+    for (const sx of [-1, 1]) bx(g, sx * W / 2 - (sx > 0 ? 0.04 : 0), sx * W / 2 + (sx > 0 ? 0 : 0.04), 0, 0.72, -D / 2, D / 2, m);
+    bx(g, -0.3, 0.3, 0.8, 1.15, -D / 2 + 0.1, -D / 2 + 0.13, mat(MOVEL.preto));
+    bx(g, -0.04, 0.04, 0.76, 0.8, -D / 2 + 0.08, -D / 2 + 0.16, mat(MOVEL.preto));
+    cadeira(g, 0, D / 2 + 0.1, Math.PI);
+  },
+  estante(g, W, D) {
+    const m = mat(MOVEL.madeira), alt = 2.0;
+    bx(g, -W / 2, W / 2, 0, alt, -D / 2, -D / 2 + 0.02, m);
+    for (const sx of [-1, 1]) bx(g, sx > 0 ? W / 2 - 0.03 : -W / 2, sx > 0 ? W / 2 : -W / 2 + 0.03, 0, alt, -D / 2, D / 2, m);
+    const cores = [0x9b2c2c, 0x1f5aa6, 0xd9a441, 0x2f7d3c, 0xe8e2d4, 0x5e3b22];
+    let semente = 11;  // livros sempre iguais entre redesenhos
+    const rnd = () => (semente = (semente * 16807) % 2147483647) / 2147483647;
+    for (let k = 0; k <= 5; k++) {
+      const y = k * alt / 5;
+      bx(g, -W / 2, W / 2, y, y + 0.03, -D / 2, D / 2, m);
+      if (k === 5) break;
+      let x = -W / 2 + 0.05;
+      while (x < W / 2 - 0.12) {
+        const w = 0.03 + rnd() * 0.04, h = 0.18 + rnd() * 0.12;
+        bx(g, x, x + w, y + 0.03, y + 0.03 + h, -D / 2 + 0.04, D / 2 - 0.06, mat(cores[(rnd() * cores.length) | 0]));
+        x += w + 0.005 + (rnd() < 0.15 ? 0.1 : 0);
+      }
+    }
+  },
+  "guarda-roupa"(g, W, D) {
+    bx(g, -W / 2, W / 2, 0, 2.1, -D / 2, D / 2, mat(MOVEL.madeira));
+    const n = Math.max(1, Math.round(W / 0.5));
+    for (let k = 1; k < n; k++) { const x = -W / 2 + W * k / n; bx(g, x - 0.006, x + 0.006, 0.05, 2.05, D / 2, D / 2 + 0.01, mat(MOVEL.madeiraEscura)); }
+    for (let k = 0; k < n; k++) { const x = -W / 2 + W * (k + 0.5) / n + (k % 2 ? -0.18 : 0.18) * W / n; bx(g, x - 0.01, x + 0.01, 0.95, 1.2, D / 2, D / 2 + 0.03, mat(MOVEL.inox)); }
+  },
+  bancada(g, W, D, mv) {
+    bx(g, -W / 2, W / 2, 0.1, 0.86, -D / 2, D / 2 - 0.02, mat(MOVEL.branco));
+    bx(g, -W / 2, W / 2, 0, 0.1, -D / 2, D / 2 - 0.08, mat(MOVEL.preto));
+    bx(g, -W / 2, W / 2, 0.86, 0.9, -D / 2, D / 2, mat(MOVEL.granito));
+    const n = Math.max(1, Math.round(W / 0.6));
+    for (let k = 1; k < n; k++) { const x = -W / 2 + W * k / n; bx(g, x - 0.005, x + 0.005, 0.12, 0.84, D / 2 - 0.02, D / 2 - 0.01, mat(MOVEL.inox)); }
+    if (mv.pia) {
+      bx(g, -0.3, 0.3, 0.88, 0.905, -0.2, 0.2, mat(MOVEL.inox));
+      cil(g, 0.02, 0.3, 0, 1.05, -D / 2 + 0.08, mat(MOVEL.inox));
+    }
+  },
+  fogao(g, W, D) {
+    bx(g, -W / 2, W / 2, 0, 0.88, -D / 2, D / 2, mat(MOVEL.inox));
+    bx(g, -W / 2, W / 2, 0.88, 0.9, -D / 2, D / 2, mat(MOVEL.preto));
+    bx(g, -W / 2 + 0.06, W / 2 - 0.06, 0.2, 0.7, D / 2, D / 2 + 0.01, mat(MOVEL.preto));
+  },
+  geladeira(g, W, D) {
+    bx(g, -W / 2, W / 2, 0, 1.85, -D / 2, D / 2, mat(MOVEL.inox));
+    bx(g, -W / 2, W / 2, 1.2, 1.21, D / 2, D / 2 + 0.005, mat(MOVEL.preto));
+    bx(g, W / 2 - 0.08, W / 2 - 0.05, 0.6, 1.6, D / 2, D / 2 + 0.04, mat(MOVEL.preto));
+  },
+  vaso(g, W, D) {
+    const m = mat(MOVEL.louca);
+    bx(g, -0.17, 0.17, 0, 0.4, -D / 2 + 0.15, D / 2 - 0.02, m);
+    bx(g, -0.2, 0.2, 0.38, 0.75, -D / 2, -D / 2 + 0.17, m);
+  },
+  pia(g, W, D) {
+    bx(g, -W / 2, W / 2, 0.15, 0.8, -D / 2, D / 2, mat(MOVEL.madeira));
+    bx(g, -W / 2, W / 2, 0.8, 0.84, -D / 2, D / 2, mat(MOVEL.louca));
+    bx(g, -Math.min(0.25, W / 2 - 0.05), Math.min(0.25, W / 2 - 0.05), 0.84, 0.86, -D / 2 + 0.1, D / 2 - 0.08, mat(0xdadad6));
+    bx(g, -W / 2 + 0.05, W / 2 - 0.05, 1.05, 1.75, -D / 2 - 0.02, -D / 2, mat(MOVEL.espelho));
+  },
+  chuveiro(g, W, D) {
+    bx(g, -W / 2, W / 2, 0, 0.03, -D / 2, D / 2, mat(MOVEL.louca));
+    bx(g, -W / 2, W / 2 - 0.5, 0.03, 2.0, D / 2 - 0.02, D / 2, vidro());
+    cil(g, 0.1, 0.02, 0, 2.05, -D / 2 + 0.25, mat(MOVEL.inox));
+    cil(g, 0.012, 0.25, 0, 2.15, -D / 2 + 0.12, mat(MOVEL.inox), true);
+  },
+  planta(g, W, D) {
+    const r = Math.min(W, D) / 2;
+    const vaso = new THREE.Mesh(new THREE.CylinderGeometry(r * 0.75, r * 0.55, 0.45, 18), mat(MOVEL.vaso));
+    vaso.position.y = 0.225; g.add(vaso);
+    for (const [dx, dy, dz, s] of [[0, 0.85, 0, 0.42], [0.12, 1.05, 0.08, 0.3], [-0.1, 1.0, -0.1, 0.32]]) {
+      const f = new THREE.Mesh(new THREE.IcosahedronGeometry(s * r * 2.2, 0), mat(MOVEL.folha));
+      f.position.set(dx, dy, dz); g.add(f);
+    }
+  },
+  carro(g, W, D) {
+    const corpo = mat(MOVEL.carro);
+    bx(g, -W / 2, W / 2, 0.28, 0.82, -D / 2, D / 2, corpo);
+    bx(g, -W / 2 + 0.12, W / 2 - 0.12, 0.82, 1.35, -D / 2 + 1.1, D / 2 - 1.3, mat(0x3a4a55));
+    bx(g, -W / 2 + 0.14, W / 2 - 0.14, 1.35, 1.38, -D / 2 + 1.15, D / 2 - 1.35, corpo);
+    for (const sx of [-1, 1]) for (const sz of [-1, 1]) cil(g, 0.32, 0.22, sx * (W / 2 - 0.1), 0.32, sz * (D / 2 - 0.8), mat(MOVEL.preto), true);
+    for (const sx of [-1, 1]) bx(g, sx * (W / 2 - 0.3) - 0.15, sx * (W / 2 - 0.3) + 0.15, 0.6, 0.72, D / 2, D / 2 + 0.01, mat(0xf4e9c8));
+  },
+  // rede de dormir pendurada no pergolado, com tecido listrado
+  rede(g, W, D) {
+    const nx = 28, nz = 8, gancho = 1.9, fundo = 0.5, pos = [], uv = [], idx = [];
+    for (let i = 0; i <= nx; i++) {
+      const u = i / nx, t = 2 * u - 1;
+      const larg = D * (0.12 + 0.88 * Math.sqrt(Math.max(0, 1 - t * t)));
+      for (let j = 0; j <= nz; j++) {
+        const v = j / nz, s = 2 * v - 1;
+        pos.push(t * W / 2, fundo + (gancho - fundo) * t * t + 0.28 * s * s * (1 - t * t), s * larg / 2);
+        uv.push(u * 3, v);
+      }
+    }
+    for (let i = 0; i < nx; i++) for (let j = 0; j < nz; j++) {
+      const a = i * (nz + 1) + j, b = a + nz + 1;
+      idx.push(a, b, a + 1, b, b + 1, a + 1);
+    }
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3));
+    geo.setAttribute("uv", new THREE.Float32BufferAttribute(uv, 2));
+    geo.setIndex(idx);
+    geo.computeVertexNormals();
+    g.add(new THREE.Mesh(geo, matTex("listras", 1, 1, 0xffffff, { side: THREE.DoubleSide })));
+  },
+};
+
+// frente da peça na planta → rotação em torno do eixo vertical
+const GIRO = { "+y": 0, "+x": Math.PI / 2, "-y": Math.PI, "-x": -Math.PI / 2 };
+function movel(mv, base) {
+  const montar = MONTAR[mv.tipo];
+  if (!montar) return;
+  const deitado = mv.frente === "+x" || mv.frente === "-x";
+  const W = deitado ? mv.profundidade : mv.largura, D = deitado ? mv.largura : mv.profundidade;
+  const g = new THREE.Group();
+  montar(g, W, D, mv);
+  g.position.set(mv.x + mv.largura / 2, base + 0.02, mv.y + mv.profundidade / 2);
+  g.rotation.y = GIRO[mv.frente] || 0;
+  g.traverse(o => { if (o.isMesh) { o.castShadow = !o.material.transparent; o.receiveShadow = true; } });
+  grupo.add(g);
+}
+
 function rotulo(texto, sub, x, y, z) {
   const esc = 2, cv = document.createElement("canvas"), g = cv.getContext("2d");
   const f1 = `600 ${26 * esc}px Figtree, system-ui, sans-serif`, f2 = `500 ${20 * esc}px Figtree, system-ui, sans-serif`;
@@ -650,7 +888,11 @@ function construir() {
       caixa(el.x, el.x + el.largura, el.y, el.y + el.profundidade, y0, y0 + el.altura - (el.base || 0), m);
     }
     for (const pg of nivel.pergolados || []) if (!estado.baixas) pergolado(pg, base);
-    if (estado.telhado && !estado.baixas) for (const t of nivel.telhados || []) telhado(t, base);
+    if (estado.moveis) for (const mv of nivel.moveis || []) movel(mv, base);
+    if (estado.telhado && !estado.baixas) {
+      for (const t of nivel.telhados || []) telhado(t, base);
+      if (nivel.telhados && nivel.telhados[0]) for (const c of nivel.claraboias || []) claraboia(c, nivel.telhados[0], base);
+    }
 
     if (i === 0) {
       for (const m of nivel.muros || []) {
@@ -701,9 +943,11 @@ function lista(niveis, visiveis) {
     <div><dt>Barrado de azulejo</dt><dd>Azulejo azul e branco até 90 cm na fachada do térreo.</dd></div>
     <div><dt>Esquadrias de madeira</dt><dd>Janelas com venezianas abertas e portas com bandeira de vidro, pintadas em cor forte.</dd></div>
     <div><dt>Cobogó</dt><dd>Invenção pernambucana: ilumina a escada, faz o guarda-corpo da varanda e o muro da área gourmet.</dd></div>
+    <div><dt>Telha de vidro</dt><dd>Nos cômodos do térreo sem parede para fora, a luz entra pelo telhado, como nas casas antigas do interior.</dd></div>
+    <div><dt>Rede e chita</dt><dd>Rede de dormir na varanda e colchas de chita nos quartos.</dd></div>
     <div><dt>Pisos</dt><dd>Taco de madeira nos quartos e salas, ladrilho hidráulico nas áreas molhadas, tijoleira no quintal e varanda.</dd></div>
   </dl>
-  <p class="nota">Medidas de portas e janelas são estimadas. Janelas nas laterais supõem que a casa não é colada nos vizinhos. A área de serviço aparece retangular, mas é triangular.</p>`;
+  <p class="nota">Medidas de portas, janelas e móveis são estimadas. As laterais têm construções vizinhas: no térreo não há janelas laterais; no 1º andar, sim. A área de serviço aparece retangular, mas é triangular.</p>`;
   el.innerHTML = html;
 }
 
@@ -736,7 +980,7 @@ segFachadas.addEventListener("click", e => {
   const b = e.target.closest("button"); if (!b) return;
   estado.fachada = b.dataset.f; sincronizar();
 });
-for (const id of ["telhado", "separar", "baixas", "rotulos", "cores"]) {
+for (const id of ["telhado", "moveis", "separar", "baixas", "rotulos", "cores"]) {
   const el = document.getElementById(id);
   el.addEventListener("change", () => { estado[id] = el.checked; construir(); });
 }

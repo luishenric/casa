@@ -125,7 +125,8 @@
     "Quartos de visitas com 3,25 × 3 m (9,75 m²) cada.",
     "Varanda de lateral a lateral (3 × 8 m) sobre a área gourmet e a garagem, com pergolado de madeira e guarda-corpo de cobogó; borda externa apoiada na linha de pilares x = 3 m.",
     "Telhado colonial de duas águas com cumeeira paralela à rua, oitões nas laterais e beiral sobre a varanda.",
-    "Janelas nas laterais (y = 0 e y = 8) supõem que a casa não é colada nos vizinhos; confirmar."
+    "No 1º andar as laterais ficam acima das construções vizinhas, então quartos, banheiros e suíte podem ter janelas laterais.",
+    "Rede de dormir na varanda."
   ],
   "aberturas": [
     {
@@ -267,6 +268,176 @@
       "altura": 2.4,
       "direcao": "x",
       "espaco": 0.45
+    }
+  ],
+  "moveis": [
+    {
+      "tipo": "rede",
+      "x": 3.8,
+      "y": 0.8,
+      "largura": 0.8,
+      "profundidade": 3.2,
+      "frente": "+x"
+    },
+    {
+      "tipo": "poltrona",
+      "x": 4.4,
+      "y": 5.0,
+      "largura": 0.8,
+      "profundidade": 0.8,
+      "frente": "+x"
+    },
+    {
+      "tipo": "poltrona",
+      "x": 4.4,
+      "y": 6.5,
+      "largura": 0.8,
+      "profundidade": 0.8,
+      "frente": "+x"
+    },
+    {
+      "tipo": "mesinha",
+      "x": 4.55,
+      "y": 5.95,
+      "largura": 0.5,
+      "profundidade": 0.45,
+      "frente": "+y"
+    },
+    {
+      "tipo": "planta",
+      "x": 3.15,
+      "y": 7.4,
+      "largura": 0.5,
+      "profundidade": 0.5,
+      "frente": "+y"
+    },
+    {
+      "tipo": "planta",
+      "x": 3.15,
+      "y": 0.15,
+      "largura": 0.5,
+      "profundidade": 0.5,
+      "frente": "+y"
+    },
+    {
+      "tipo": "cama",
+      "x": 9.85,
+      "y": 0.55,
+      "largura": 1.9,
+      "profundidade": 1.4,
+      "frente": "-x"
+    },
+    {
+      "tipo": "guarda-roupa",
+      "x": 8.55,
+      "y": 0.1,
+      "largura": 0.6,
+      "profundidade": 1.8,
+      "frente": "+x"
+    },
+    {
+      "tipo": "cama",
+      "x": 13.05,
+      "y": 0.25,
+      "largura": 1.9,
+      "profundidade": 0.9,
+      "frente": "-x"
+    },
+    {
+      "tipo": "cama",
+      "x": 13.05,
+      "y": 1.55,
+      "largura": 1.9,
+      "profundidade": 0.9,
+      "frente": "-x"
+    },
+    {
+      "tipo": "guarda-roupa",
+      "x": 11.8,
+      "y": 0.1,
+      "largura": 0.6,
+      "profundidade": 1.8,
+      "frente": "+x"
+    },
+    {
+      "tipo": "cama",
+      "x": 8.0,
+      "y": 5.6,
+      "largura": 2.0,
+      "profundidade": 1.6,
+      "frente": "-x"
+    },
+    {
+      "tipo": "tapete",
+      "x": 7.0,
+      "y": 5.3,
+      "largura": 1.6,
+      "profundidade": 2.2,
+      "frente": "+y"
+    },
+    {
+      "tipo": "poltrona",
+      "x": 6.3,
+      "y": 7.1,
+      "largura": 0.8,
+      "profundidade": 0.8,
+      "frente": "+x"
+    },
+    {
+      "tipo": "guarda-roupa",
+      "x": 10.9,
+      "y": 5.3,
+      "largura": 0.6,
+      "profundidade": 2.65,
+      "frente": "-x"
+    },
+    {
+      "tipo": "chuveiro",
+      "x": 11.55,
+      "y": 6.95,
+      "largura": 1.4,
+      "profundidade": 1.0,
+      "frente": "+y"
+    },
+    {
+      "tipo": "vaso",
+      "x": 12.4,
+      "y": 5.6,
+      "largura": 0.6,
+      "profundidade": 0.45,
+      "frente": "-x"
+    },
+    {
+      "tipo": "pia",
+      "x": 11.55,
+      "y": 5.4,
+      "largura": 0.45,
+      "profundidade": 0.9,
+      "frente": "+x"
+    },
+    {
+      "tipo": "chuveiro",
+      "x": 13.05,
+      "y": 6.95,
+      "largura": 1.9,
+      "profundidade": 1.0,
+      "frente": "+y"
+    },
+    {
+      "tipo": "vaso",
+      "x": 14.35,
+      "y": 5.6,
+      "largura": 0.6,
+      "profundidade": 0.45,
+      "frente": "-x"
+    },
+    {
+      "tipo": "pia",
+      "x": 13.05,
+      "y": 5.3,
+      "largura": 0.45,
+      "profundidade": 0.9,
+      "frente": "+x"
     }
   ]
 }

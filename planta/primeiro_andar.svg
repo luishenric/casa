@@ -3,37 +3,37 @@
 <text x="70" y="30" font-size="18" font-weight="bold">Sobrado — 1º andar — 15 m × 8 m</text>
 <rect x="70" y="70" width="750" height="400" fill="none" stroke="#bbb" stroke-width="1.5" stroke-dasharray="8 6"/>
 <rect x="220" y="70" width="150" height="400" fill="#eef3e6" stroke="#222" stroke-width="3" stroke-dasharray="6 4"/>
-<text x="295.0" y="264.0" font-size="14" text-anchor="middle" font-weight="bold">Varanda</text>
-<text x="295.0" y="279.0" font-size="13" text-anchor="middle" fill="#555">3×8 m · 24 m²</text>
 <rect x="370" y="70" width="125.0" height="150" fill="#e6eff8" stroke="#222" stroke-width="3"/>
-<text x="432.5" y="139.0" font-size="14" text-anchor="middle" font-weight="bold">Escada em U</text>
-<text x="432.5" y="154.0" font-size="13" text-anchor="middle" fill="#555">2,5×3 m · 7,5 m²</text>
 <rect x="495.0" y="70" width="162.5" height="150" fill="#e6eff8" stroke="#222" stroke-width="3"/>
-<text x="576.25" y="139.0" font-size="14" text-anchor="middle" font-weight="bold">Quarto visitas 1</text>
-<text x="576.25" y="154.0" font-size="13" text-anchor="middle" fill="#555">3,25×3 m · 9,75 m²</text>
 <rect x="657.5" y="70" width="162.5" height="150" fill="#e6eff8" stroke="#222" stroke-width="3"/>
-<text x="738.75" y="139.0" font-size="14" text-anchor="middle" font-weight="bold">Quarto visitas 2</text>
-<text x="738.75" y="154.0" font-size="13" text-anchor="middle" fill="#555">3,25×3 m · 9,75 m²</text>
 <rect x="370" y="220" width="450" height="60.0" fill="#e6eff8" stroke="#222" stroke-width="3"/>
-<text x="595.0" y="244.0" font-size="14" text-anchor="middle" font-weight="bold">Corredor</text>
-<text x="595.0" y="259.0" font-size="13" text-anchor="middle" fill="#555">9×1,2 m · 10,8 m²</text>
 <rect x="370" y="280.0" width="200" height="190.0" fill="#e6eff8" stroke="#222" stroke-width="3"/>
-<text x="470.0" y="369.0" font-size="14" text-anchor="middle" font-weight="bold">Suíte</text>
-<text x="470.0" y="384.0" font-size="13" text-anchor="middle" fill="#555">4×3,8 m · 15,2 m²</text>
 <rect x="570" y="280.0" width="75.0" height="190.0" fill="#e6eff8" stroke="#222" stroke-width="3"/>
-<text x="607.5" y="369.0" font-size="10" text-anchor="middle" font-weight="bold">Closet</text>
-<text x="607.5" y="384.0" font-size="9" text-anchor="middle" fill="#555">1,5×3,8 m</text>
-<text x="607.5" y="396.0" font-size="9" text-anchor="middle" fill="#555">5,7 m²</text>
 <rect x="645.0" y="280.0" width="75.0" height="190.0" fill="#e6eff8" stroke="#222" stroke-width="3"/>
-<text x="682.5" y="369.0" font-size="10" text-anchor="middle" font-weight="bold">Banho suíte</text>
-<text x="682.5" y="384.0" font-size="9" text-anchor="middle" fill="#555">1,5×3,8 m</text>
-<text x="682.5" y="396.0" font-size="9" text-anchor="middle" fill="#555">5,7 m²</text>
 <rect x="720" y="280.0" width="100" height="190.0" fill="#e6eff8" stroke="#222" stroke-width="3"/>
-<text x="770.0" y="369.0" font-size="10" text-anchor="middle" font-weight="bold">Banheiro</text>
-<text x="770.0" y="384.0" font-size="9" text-anchor="middle" fill="#555">2×3,8 m</text>
-<text x="770.0" y="396.0" font-size="9" text-anchor="middle" fill="#555">7,6 m²</text>
 <line x1="372" y1="220" x2="493.0" y2="220" stroke="#e6eff8" stroke-width="5"/>
 <line x1="370" y1="220" x2="495.0" y2="220" stroke="#7a8aa0" stroke-width="1" stroke-dasharray="4 4"/>
+<rect x="260.0" y="110.0" width="40.0" height="160.0" rx="2" fill="none" stroke="#9aa39f" stroke-width="1"/>
+<rect x="290.0" y="320.0" width="40.0" height="40.0" rx="2" fill="none" stroke="#9aa39f" stroke-width="1"/>
+<rect x="290.0" y="395.0" width="40.0" height="40.0" rx="2" fill="none" stroke="#9aa39f" stroke-width="1"/>
+<rect x="297.5" y="367.5" width="25.0" height="22.5" rx="2" fill="none" stroke="#9aa39f" stroke-width="1"/>
+<rect x="227.5" y="440.0" width="25.0" height="25.0" rx="6" fill="none" stroke="#9aa39f" stroke-width="1"/>
+<rect x="227.5" y="77.5" width="25.0" height="25.0" rx="6" fill="none" stroke="#9aa39f" stroke-width="1"/>
+<rect x="562.5" y="97.5" width="95.0" height="70.0" rx="2" fill="none" stroke="#9aa39f" stroke-width="1"/>
+<rect x="497.50000000000006" y="75.0" width="30.0" height="90.0" rx="2" fill="none" stroke="#9aa39f" stroke-width="1"/>
+<rect x="722.5" y="82.5" width="95.0" height="45.0" rx="2" fill="none" stroke="#9aa39f" stroke-width="1"/>
+<rect x="722.5" y="147.5" width="95.0" height="45.0" rx="2" fill="none" stroke="#9aa39f" stroke-width="1"/>
+<rect x="660.0" y="75.0" width="30.0" height="90.0" rx="2" fill="none" stroke="#9aa39f" stroke-width="1"/>
+<rect x="470.0" y="350.0" width="100.0" height="80.0" rx="2" fill="none" stroke="#9aa39f" stroke-width="1"/>
+<rect x="420.0" y="335.0" width="80.0" height="110.00000000000001" rx="2" fill="none" stroke="#9aa39f" stroke-width="1"/>
+<rect x="385.0" y="425.0" width="40.0" height="40.0" rx="2" fill="none" stroke="#9aa39f" stroke-width="1"/>
+<rect x="615.0" y="335.0" width="30.0" height="132.5" rx="2" fill="none" stroke="#9aa39f" stroke-width="1"/>
+<rect x="647.5" y="417.5" width="70.0" height="50.0" rx="2" fill="none" stroke="#9aa39f" stroke-width="1"/>
+<rect x="690.0" y="350.0" width="30.0" height="22.5" rx="6" fill="none" stroke="#9aa39f" stroke-width="1"/>
+<rect x="647.5" y="340.0" width="22.5" height="45.0" rx="6" fill="none" stroke="#9aa39f" stroke-width="1"/>
+<rect x="722.5" y="417.5" width="95.0" height="50.0" rx="2" fill="none" stroke="#9aa39f" stroke-width="1"/>
+<rect x="787.5" y="350.0" width="30.0" height="22.5" rx="6" fill="none" stroke="#9aa39f" stroke-width="1"/>
+<rect x="722.5" y="335.0" width="22.5" height="45.0" rx="6" fill="none" stroke="#9aa39f" stroke-width="1"/>
 <rect x="367" y="90.0" width="6" height="110.0" fill="#fff"/>
 <rect x="367.5" y="91.5" width="5" height="5" fill="none" stroke="#222" stroke-width="1"/>
 <rect x="367.5" y="99.5" width="5" height="5" fill="none" stroke="#222" stroke-width="1"/>
@@ -107,6 +107,27 @@
 <rect x="214" y="264" width="12" height="12" fill="#222"/>
 <rect x="214" y="464" width="12" height="12" fill="#222"/>
 <rect x="814" y="64" width="12" height="12" fill="#222"/>
+<text x="295.0" y="264.0" font-size="14" text-anchor="middle" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3">Varanda</text>
+<text x="295.0" y="279.0" font-size="13" text-anchor="middle" fill="#555" paint-order="stroke" stroke="#fff" stroke-width="3">3×8 m · 24 m²</text>
+<text x="432.5" y="139.0" font-size="14" text-anchor="middle" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3">Escada em U</text>
+<text x="432.5" y="154.0" font-size="13" text-anchor="middle" fill="#555" paint-order="stroke" stroke="#fff" stroke-width="3">2,5×3 m · 7,5 m²</text>
+<text x="576.25" y="139.0" font-size="14" text-anchor="middle" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3">Quarto visitas 1</text>
+<text x="576.25" y="154.0" font-size="13" text-anchor="middle" fill="#555" paint-order="stroke" stroke="#fff" stroke-width="3">3,25×3 m · 9,75 m²</text>
+<text x="738.75" y="139.0" font-size="14" text-anchor="middle" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3">Quarto visitas 2</text>
+<text x="738.75" y="154.0" font-size="13" text-anchor="middle" fill="#555" paint-order="stroke" stroke="#fff" stroke-width="3">3,25×3 m · 9,75 m²</text>
+<text x="595.0" y="244.0" font-size="14" text-anchor="middle" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3">Corredor</text>
+<text x="595.0" y="259.0" font-size="13" text-anchor="middle" fill="#555" paint-order="stroke" stroke="#fff" stroke-width="3">9×1,2 m · 10,8 m²</text>
+<text x="470.0" y="369.0" font-size="14" text-anchor="middle" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3">Suíte</text>
+<text x="470.0" y="384.0" font-size="13" text-anchor="middle" fill="#555" paint-order="stroke" stroke="#fff" stroke-width="3">4×3,8 m · 15,2 m²</text>
+<text x="607.5" y="369.0" font-size="10" text-anchor="middle" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3">Closet</text>
+<text x="607.5" y="384.0" font-size="9" text-anchor="middle" fill="#555" paint-order="stroke" stroke="#fff" stroke-width="3">1,5×3,8 m</text>
+<text x="607.5" y="396.0" font-size="9" text-anchor="middle" fill="#555" paint-order="stroke" stroke="#fff" stroke-width="3">5,7 m²</text>
+<text x="682.5" y="369.0" font-size="10" text-anchor="middle" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3">Banho suíte</text>
+<text x="682.5" y="384.0" font-size="9" text-anchor="middle" fill="#555" paint-order="stroke" stroke="#fff" stroke-width="3">1,5×3,8 m</text>
+<text x="682.5" y="396.0" font-size="9" text-anchor="middle" fill="#555" paint-order="stroke" stroke="#fff" stroke-width="3">5,7 m²</text>
+<text x="770.0" y="369.0" font-size="10" text-anchor="middle" font-weight="bold" paint-order="stroke" stroke="#fff" stroke-width="3">Banheiro</text>
+<text x="770.0" y="384.0" font-size="9" text-anchor="middle" fill="#555" paint-order="stroke" stroke="#fff" stroke-width="3">2×3,8 m</text>
+<text x="770.0" y="396.0" font-size="9" text-anchor="middle" fill="#555" paint-order="stroke" stroke="#fff" stroke-width="3">7,6 m²</text>
 <line x1="220" y1="55" x2="370" y2="55" stroke="#888"/>
 <line x1="220" y1="50" x2="220" y2="60" stroke="#888"/>
 <line x1="370" y1="50" x2="370" y2="60" stroke="#888"/>

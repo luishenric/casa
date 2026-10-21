@@ -30,6 +30,7 @@ o = [
     '<rect width="100%" height="100%" fill="#fff"/>',
     f'<text x="{M}" y="30" font-size="18" font-weight="bold">{d.get("titulo", "Planta baixa")} — {fmt(W)} m × {fmt(H)} m</text>',
 ]
+textos = []  # rótulos dos cômodos vão por último, por cima dos móveis
 if d.get("contorno"):
     o.append(f'<rect x="{M}" y="{M}" width="{W*S}" height="{H*S}" fill="none" stroke="#bbb" stroke-width="1.5" stroke-dasharray="8 6"/>')
 for c in d["comodos"]:
@@ -50,9 +51,10 @@ for c in d["comodos"]:
     area = fmt(round(c["largura"] * c["profundidade"], 2))
     dims = f'{fmt(c["largura"])}×{fmt(c["profundidade"])}'
     linhas = [dims + " m", area + " m²"] if estreito else [f"{dims} m · {area} m²"]
-    o.append(f'<text x="{cx}" y="{cy-6}" font-size="{fs}" text-anchor="middle" font-weight="bold">{c["nome"]}</text>')
+    halo = 'paint-order="stroke" stroke="#fff" stroke-width="3"'
+    textos.append(f'<text x="{cx}" y="{cy-6}" font-size="{fs}" text-anchor="middle" font-weight="bold" {halo}>{c["nome"]}</text>')
     for i, ln in enumerate(linhas):
-        o.append(f'<text x="{cx}" y="{cy+9+i*12}" font-size="{fs-1}" text-anchor="middle" fill="#555">{ln}</text>')
+        textos.append(f'<text x="{cx}" y="{cy+9+i*12}" font-size="{fs-1}" text-anchor="middle" fill="#555" {halo}>{ln}</text>')
 
 # paredes removidas: cobre a linha e marca tracejado fino
 for i in d.get("integracoes", []):
@@ -64,6 +66,15 @@ for i in d.get("integracoes", []):
     a, b = (0, 2) if vert else (2, 0)
     o.append(f'<line x1="{x1+a}" y1="{y1+b}" x2="{x2-a}" y2="{y2-b}" stroke="{"#eef3e6" if externo else "#e6eff8"}" stroke-width="5"/>')
     o.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#7a8aa0" stroke-width="1" stroke-dasharray="4 4"/>')
+
+# móveis em contorno fino, embaixo de paredes e rótulos
+for mv in d.get("moveis", []):
+    x, y, w, h = M + mv["x"] * S, M + mv["y"] * S, mv["largura"] * S, mv["profundidade"] * S
+    r = 6 if mv["tipo"] in ("vaso", "pia", "planta", "carro") else 2
+    o.append(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="{r}" fill="none" stroke="#9aa39f" stroke-width="1"/>')
+for c in d.get("claraboias", []):
+    x, y, w, h = M + c["x"] * S, M + c["y"] * S, c["largura"] * S, c["profundidade"] * S
+    o.append(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" fill="none" stroke="#3a7ca5" stroke-width="1" stroke-dasharray="4 3"/>')
 
 # portas e janelas: abre a parede e desenha o símbolo
 for ab in d.get("aberturas", []):
@@ -107,6 +118,8 @@ for m in d.get("muros", []):
         o.append(f'<text x="{tx}" y="{ty}" font-size="11" fill="#555" text-anchor="middle" transform="rotate(-90 {tx} {ty})">{m["nome"]}</text>')
 for px, py in d.get("pilares", []):
     o.append(f'<rect x="{M+px*S-6}" y="{M+py*S-6}" width="12" height="12" fill="#222"/>')
+
+o += textos
 
 for c in d["comodos"]:
     if c["y"] == 0:
